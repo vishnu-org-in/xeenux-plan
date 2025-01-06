@@ -14,14 +14,14 @@ export function SwapSettings({ slippage, onSlippageChange }: SwapSettingsProps) 
     <div className="flex items-center justify-between text-sm text-gray-400">
       <div className="flex items-center gap-2">
         <span>Slippage Tolerance</span>
-        <Tooltip content="Your transaction will revert if the price changes unfavorably by more than this percentage.">
+        {/* <Tooltip content="Your transaction will revert if the price changes unfavorably by more than this percentage.">
           <Info className="w-4 h-4" />
-        </Tooltip>
+        </Tooltip> */}
       </div>
       
       <div className="flex items-center gap-2">
         <input
-          type="number"
+          type="text"
           value={slippage}
           onChange={(e) => onSlippageChange(e.target.value)}
           className="w-16 bg-black/20 rounded px-2 py-1 text-right"

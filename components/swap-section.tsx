@@ -10,13 +10,13 @@ import { SwapDetails } from './swap/swap-details'
 export function SwapSection() {
   const [fromToken, setFromToken] = useState({
     symbol: 'USDT',
-    icon: '/usdt-logo.png',
+    icon: '/images/tether.svg',
     balance: '1000.00'
   })
   const [toToken, setToToken] = useState({
     symbol: 'XEE',
-    icon: '/logo.png',
-    isRounded: true,
+    icon: '/images/xeenux.png',
+    // isRounded: true,
     balance: '0.00'
   })
   const [fromAmount, setFromAmount] = useState('')

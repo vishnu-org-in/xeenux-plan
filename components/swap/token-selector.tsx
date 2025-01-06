@@ -8,7 +8,7 @@ interface TokenSelectorProps {
   token: {
     symbol: string
     icon: string
-    isRounded?: boolean
+    // isRounded?: boolean
   }
   amount: string
   onAmountChange: (value: string) => void
@@ -26,7 +26,7 @@ export function TokenSelector({ token, amount, onAmountChange, onTokenSelect, ba
       
       <div className="flex gap-2">
         <input
-          type="number"
+          type="text"
           value={amount}
           onChange={(e) => onAmountChange(e.target.value)}
           placeholder="0.0"
@@ -43,7 +43,7 @@ export function TokenSelector({ token, amount, onAmountChange, onTokenSelect, ba
             alt={token.symbol}
             width={24}
             height={24}
-            className={token.isRounded ? 'rounded-full' : ''}
+            className={'rounded-full'}
           />
           <span className="font-semibold">{token.symbol}</span>
           {onTokenSelect && <ChevronDown className="w-4 h-4" />}

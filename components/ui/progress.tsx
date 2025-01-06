@@ -8,8 +8,8 @@ const Progress = React.forwardRef<
   React.ElementRef<typeof ProgressPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> & {
     indicatorClassName?: string;
-    tokensSold: number;
-    totalTokens: number;
+    Earanings: number;
+    earningsCompleted: number;
   }
 >(
   (
@@ -17,14 +17,14 @@ const Progress = React.forwardRef<
       className,
       value,
       indicatorClassName,
-      tokensSold,
-      totalTokens,
+      Earanings,
+      earningsCompleted,
       ...props
     },
     ref
   ) => {
     const progressPercentage = 50;
-    const dynamicTokensSold = Math.round(tokensSold);
+    const dynamicEaranings = Math.round(Earanings);
 
     return (
       <div className="relative w-full">
@@ -49,7 +49,7 @@ const Progress = React.forwardRef<
         </ProgressPrimitive.Root>
 
         {/* White dot */}
-        {tokensSold !== undefined && (
+        {Earanings !== undefined && (
           <div
             className="absolute top-1/2 -translate-y-1/2 bg-white rounded-full"
             style={{
@@ -61,7 +61,7 @@ const Progress = React.forwardRef<
         )}
 
         {/* Tooltip */}
-        {tokensSold !== undefined && (
+        {Earanings !== undefined && (
           <div
             className="absolute top-8 ml-8 break-words flex-wrap transform"
             style={{
@@ -71,7 +71,7 @@ const Progress = React.forwardRef<
             <div className="bg-[#1E1E2E] border border-[#4B51FF] border-opacity-40 rounded-xl py-1 px-2 shadow-lg">
               <div className="text-center">
                 <div className="text-xs md:text-sm font-bold text-[#4B51FF]">
-                  {dynamicTokensSold.toLocaleString()} XEE
+                  {dynamicEaranings.toLocaleString()} XEE
                 </div>
                 <div className="text-[8px] md:text-xs text-[#B951FF]">
                   TOKENS SOLD
