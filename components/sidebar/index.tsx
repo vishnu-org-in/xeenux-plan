@@ -59,7 +59,7 @@ export function Sidebar() {
             <span className="text-gray-200">0</span>
           </div>
         </div>
-      </SidebarDropdown>                      s
+      </SidebarDropdown>
       {/*  */}
     </div>
   )

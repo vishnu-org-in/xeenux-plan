@@ -10,7 +10,7 @@ import { Hero } from '@/components/hero'
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       <Header />
       <div className="container mx-auto px-4 py-8">
         <Hero />
@@ -18,7 +18,7 @@ export default function DashboardPage() {
           <Sidebar />
           <div className="flex-1 space-y-8">
             <MainContent />
-            <SwapSection />
+            {/* <SwapSection /> */}
           </div>
         </div>
       </div>
