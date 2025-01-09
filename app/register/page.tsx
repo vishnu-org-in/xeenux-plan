@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label'
 import { Check } from 'lucide-react'
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '@/components/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import SelectPackage from '@/components/ui/select-package'
 
 // Country codes data
 const countryCodes = [
@@ -162,7 +163,7 @@ export default function RegisterPage() {
             </div>
 
             {/* Right Column */}
-            <div>
+            {/* <div>
               <Label className="mb-4 block">Select Package</Label>
               <div className="grid grid-cols-2 gap-4">
                 {[
@@ -197,7 +198,8 @@ export default function RegisterPage() {
                   </button>
                 ))}
               </div>
-            </div>
+            </div> */}
+            <SelectPackage />
           </div>
 
           <Button 

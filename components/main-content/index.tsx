@@ -4,8 +4,8 @@ import { Card } from '@/components/ui/card'
 import { MainContentSection } from './main-content-section'
 import { SearchBar } from './search-bar'
 import { ProgressBar } from '../ui/progress-bar'
-import { Progress } from '../ui/progress'
-import SelectPackage from '../ui/select-package'
+import { Progress } from '@/components/ui/progress'
+import SelectPackage from '@/components/ui/select-package'
 
 export function MainContent() {
   return (
