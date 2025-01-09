@@ -14,7 +14,7 @@ export function Header() {
 
   return (
     <header className="glass-card border-b sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Image 
@@ -45,6 +45,17 @@ export function Header() {
                 'Connect Wallet'
               } */}
               Connect Wallet
+            </Button>
+
+            <Button 
+              onClick={() => open()}
+              className="glass-button"
+            >
+              {/* {isConnected ? 
+                `${address?.slice(0, 6)}...${address?.slice(-4)}` : 
+                'Connect Wallet'
+              } */}
+              Log out
             </Button>
           </div>
         </div>

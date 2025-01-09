@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark">
           <TooltipProvider>
-            <main className="min-h-screen">
+            <main className="min-h-screen p-2">
               {children}
             </main>
             <Footer />

@@ -7,21 +7,13 @@ import { Sidebar } from '@/components/sidebar'
 import { SwapSection } from '@/components/swap-section'
 import { MainContent } from '@/components/main-content'
 import { Hero } from '@/components/hero'
+import RegisterPage from './register/page'
 
 export default function DashboardPage() {
   return (
     <div className="min-h-screen overflow-x-hidden">
       <Header />
-      <div className="container mx-auto px-4 py-8">
-        <Hero />
-        <div className="flex flex-col lg:flex-row gap-8">
-          <Sidebar />
-          <div className="flex-1 space-y-8">
-            <MainContent />
-            <SwapSection />
-          </div>
-        </div>
-      </div>
+      <RegisterPage />
     </div>
   )
 }

@@ -3,6 +3,9 @@
 import { ArrowUpRight, DollarSign, Wallet } from "lucide-react"
 import { ReferralLinks } from "./referral-links"
 import { Button } from "./ui/button"
+import Image from "next/image"
+import { Input } from "./ui/input"
+import { CountdownTimer } from "./ui/countdown-timer"
 // import { Card } from "./ui/card"
 
 export function Hero() {
@@ -17,12 +20,41 @@ export function Hero() {
                 </div>
             </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="flex w-full flex-colx glass-card items-center gap-4 px-4 py-2 rounded-xl">
+                    <div className="lg:p-2 p-2 rounded-full bg-blue-500/20">
+                        <Image src="/images/xeenux.png" alt="theter" width={20} height={20} />
+                    </div>
+                    <div className="w-full">
+                        <p className="text-sm lg:text-sm font-bold">0.0000</p>
+                        <p className="text-[10px] md:text-xs text-gray-400">Xeenux tokens to be burned</p>
+                    </div>
+                </div>
+                <div className="flex w-full flex-colx glass-card items-center gap-4 px-4 py-2 rounded-xl">
+                    <div className="lg:p-2 p-2 rounded-full bg-blue-500/20">
+                        <Image src="/images/xeenux.png" alt="theter" width={20} height={20} />
+                    </div>
+                    <div className="w-full">
+                        <p className="text-sm lg:text-sm font-bold">0.0000</p>
+                        <p className="text-[10px] md:text-xs text-gray-400">Upcoming Xeenux price</p>
+                    </div>
+                </div>
+
+                <div className="flex w-full flex-col glass-card items-center gap-4 px-2 py-2 rounded-xl">
+                    <p className="text-[10px] md:text-xs text-gray-400">Burning date timer</p>
+                    <div className="w-full">
+                        <CountdownTimer targetDate={new Date("2025-02-04")} />
+                    </div>
+
+                </div>
+            </div>
+
             <div className="flex gap-2 items-center w-full">
                 <ReferralLinks />
             </div>
 
-            <div className="p-4 md:p-10 w-full bg-[#4c51ff]/20  rounded-xl flex md:flex-row flex-col overflow-x-auto gap-3">
-                <div className=" md:border-r border-r-gray-400/50 w-full p-6">
+            <div className="p-4 md:p-10 w-full bg-[#4c51ff]/20  rounded-xl grid grid-cols-1 justify-start items-centerx md:grid-cols-2 overflow-x-auto">
+                <div className="md:border-r border-b border-gray-400/50 w-full p-6">
                     <div className="flex items-center gap-4">
                         <div className="p-3 rounded-full bg-purple-500/20">
                             <Wallet className="lg:w-6 lg:h-6 w-4 h-4 text-purple-500" />
@@ -34,47 +66,95 @@ export function Hero() {
                     </div>
                 </div>
 
-                <div className="md:border-r border-r-gray-400/50 w-full p-4 lg:p-6">
-                    <div className="flex items-start  lg:items-center gap-4">
-                        <div className="lg:p-3 p-3 rounded-full bg-blue-500/20">
-                            <DollarSign className="lg:w-6 lg:h-6 w-4 h-4 text-blue-500" />
-                        </div>
-                        <div>
+                <div className="md:border-b md:border-r-0 border-b border-gray-400/50 w-full p-4  lg:p-4">
+                    <div className="flex md:flex-col items-start  lg:items-center gap-4">
 
-                            <p className="text-sm lg:text-2xl font-bold">$ 0.0000</p>
-                            <p className="text-xs text-gray-400">Received Balance</p>
+                        <div className="flex w-full flex-colx glass-card items-center gap-4 px-4 py-2 rounded-xl">
+                            <div className="lg:p-2 p-2 rounded-full bg-blue-500/20">
+                                <DollarSign className="lg:w-3 lg:h-3 w-2 h-2 text-blue-500" />
+                            </div>
+                            <div className="w-full">
+                                <p className="text-sm lg:text-sm font-bold">$ 0.0000</p>
+                                <p className="text-[10px] md:text-xs text-gray-400">Total Earnings</p>
+                            </div>
+                            {/* <p className="text-sm lg:text-sm font-bold">$ 0.0000</p>
+                            <p className="text-xs text-gray-400">Total income</p> */}
                         </div>
+
+                        <div className="flex w-full flex-colx glass-card items-center gap-4 px-4 py-2 rounded-xl">
+                            <div className="lg:p-2 p-2 rounded-full bg-blue-500/20">
+                                <DollarSign className="lg:w-3 lg:h-3 w-2 h-2 text-blue-500" />
+                            </div>
+                            <div className="w-full">
+                                <p className="text-sm lg:text-sm font-bold">$ 0.0000</p>
+                                <p className="text-[10px] md:text-xs text-gray-400">Total Investment</p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <div className="md:border-r border-r-gray-400/50 flex gap-3 w-full p-6">
-                    <div className="p-3 rounded-full h-fit bg-green-500/20">
-                        <ArrowUpRight className="lg:w-6 lg:h-6 w-4 h-4 text-green-500" />
-                    </div>
-                    <div className="flex flex-col items-center  gap-2">
+                <div className="flex-col md:border-r md:border-b-0 border-b border-r-gray-400/50 flex gap-3 w-full p-6">
+                    <div className="flex flex-col items-start lg:items-center gap-4">
 
-                        <div>
+                        <div className="flex  px-2 w-full flex-colx glass-card items-center gap-2 py-2 rounded-xl overflow-hidden">
+                            <div className="flex gap-2 items-center px-2 w-full">
+                                <Image src="/images/tether.svg" alt="theter" width={20} height={20} />
+                                <p className="text-[10px] md:text-xs ">USDT</p>
+                            </div>
 
-                            <p className="text-sm lg:text-2xl font-bold">$ 0.0000</p>
-                            <p className="text-xs text-gray-400">Total Withdraw</p>
+                            <div className="w-full">
+                                <p className="text-xs lg:text-sm font-bold">$ 0.00</p>
+                            </div>
                         </div>
-                        <Button className="glass-button mx-auto my-" >
-                            Withdraw
-                        </Button>
+
+                        <div className="flex  px-2 w-full flex-colx glass-card items-center gap-2 py-2 rounded-xl overflow-hidden">
+                            <div className="flex gap-2 items-center px-2 w-full">
+                                <Image src="/images/xeenux.png" alt="theter" width={20} height={20} />
+                                <p className="text-[10px] md:text-xs ">XEENUX</p>
+                            </div>
+
+                            <div className="w-full">
+                                <p className="text-xs lg:text-sm font-bold">0.00</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className="flex flex-col gap-2 mt-1">
+                        <Input
+                            placeholder="amount"
+                            className="glass-input"
+                        />
+                        <Button className="w-full glass-button" >Withdraw</Button>
                     </div>
 
                 </div>
 
-                <div className="w-full p-6">
-                    <div className="flex items-center gap-4">
-                        <div className="p-3 rounded-full bg-green-500/20">
-                            <ArrowUpRight className="lg:w-6 lg:h-6 w-4 h-4 text-green-500" />
-                        </div>
-                        <div>
+                <div className=" w-full p-4  lg:p-4">
+                    <div className="flex md:flex-col items-start  lg:items-center gap-4">
 
-                            <p className="text-sm lg:text-2xl font-bold">$ 0.0000</p>
-                            <p className="text-xs text-gray-400">Withdraw $</p>
+                        <div className="flex w-full flex-colx glass-card items-center gap-4 px-4 py-2 rounded-xl">
+                            <div className="lg:p-2 p-2 rounded-full bg-blue-500/20">
+                                <DollarSign className="lg:w-3 lg:h-3 w-2 h-2 text-blue-500" />
+                            </div>
+                            <div className="w-full">
+                                <p className="text-sm lg:text-sm font-bold">$ 0.0000</p>
+                                <p className="text-[10px] md:text-xs text-gray-400">Available Withdraw</p>
+                            </div>
+
                         </div>
+
+                        <div className="flex w-full flex-colx glass-card items-center gap-4 px-4 py-2 rounded-xl">
+                            <div className="lg:p-2 p-2 rounded-full bg-blue-500/20">
+                                <DollarSign className="lg:w-3 lg:h-3 w-2 h-2 text-blue-500" />
+                            </div>
+                            <div className="w-full">
+                                <p className="text-sm lg:text-sm font-bold">$ 0.0000</p>
+                                <p className="text-[10px] md:text-xs text-gray-400">Total Withdraw</p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
