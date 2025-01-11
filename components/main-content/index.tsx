@@ -6,6 +6,45 @@ import { SearchBar } from './search-bar'
 import { ProgressBar } from '../ui/progress-bar'
 import { Progress } from '@/components/ui/progress'
 import SelectPackage from '@/components/ui/select-package'
+import { BinaryTree } from '../binary-tree'
+
+const treeData = {
+  id: 'XEE001',
+  name: 'XEENUX',
+  leftValue: 1013400,
+  rightValue: 858000,
+  left: {
+    id: 'XEE002',
+    name: 'John Doe',
+    leftValue: 1012300,
+    rightValue: 0,
+    left: {
+      id: 'XEE003',
+      name: 'Alice Smith',
+      leftValue: 1011200,
+      rightValue: 0
+    }
+  },
+  right: {
+    id: 'XEE004',
+    name: 'Jane Smith',
+    leftValue: 253000,
+    rightValue: 55000,
+    left: {
+      id: 'XEE005',
+      name: 'Bob Johnson',
+      leftValue: 165000,
+      rightValue: 77000
+    },
+    right: {
+      id: 'XEE006',
+      name: 'Sarah Wilson',
+      leftValue: 0,
+      rightValue: 0
+    }
+  }
+}
+
 
 export function MainContent() {
   return (
@@ -45,7 +84,7 @@ export function MainContent() {
 
       <MainContentSection
         title="My Tree"
-        content={<SearchBar />}
+        content={<BinaryTree data={treeData} />}
       />
 
 
