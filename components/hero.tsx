@@ -217,8 +217,7 @@ export function Hero({ }: HeroProps) {
                                 <p className="text-sm lg:text-sm font-bold">$ 0.0000</p>
                                 <p className="text-[10px] md:text-xs text-gray-400">Available withdraw</p>
                             </div>
-                            {/* <p className="text-sm lg:text-sm font-bold">$ 0.0000</p>
-                            <p className="text-xs text-gray-400">Total income</p> */}
+                           
                         </div>
 
                         <div className="flex w-full flex-colx glass-card items-center gap-4 px-4 py-2 rounded-xl">
