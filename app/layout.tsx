@@ -20,8 +20,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const headersObj = headers();
-  // const cookies = headersObj.get("cookie");
   const cookies = null;
   return (
     <html lang="en" suppressHydrationWarning>
