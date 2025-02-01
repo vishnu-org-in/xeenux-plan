@@ -8,26 +8,25 @@ interface TokenSelectorProps {
   token: {
     symbol: string
     icon: string
-    // isRounded?: boolean
+    balance: string;
+    amount: string;
   }
-  amount: string
   onAmountChange: (value: string) => void
   onTokenSelect?: () => void
-  balance?: string
 }
 
-export function TokenSelector({ token, amount, onAmountChange, onTokenSelect, balance }: TokenSelectorProps) {
+export function TokenSelector({ token, onAmountChange, onTokenSelect }: TokenSelectorProps) {
   return (
     <div className="glass-card p-4 space-y-3">
       <div className="flex justify-between text-sm text-gray-400">
         <span>Amount</span>
-        {balance && <span>Balance: {balance}</span>}
+        {token.balance && <span>Balance: {token.balance}</span>}
       </div>
       
       <div className="flex gap-2">
         <input
           type="text"
-          value={amount}
+          value={token.amount}
           onChange={(e) => onAmountChange(e.target.value)}
           placeholder="0.0"
           className="bg-transparent w-full outline-none text-2xl text-gray-200"

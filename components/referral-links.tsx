@@ -5,10 +5,10 @@ import { Button } from '@/components/ui/button'
 import { Copy, Share2 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
-export function ReferralLinks() {
+export function ReferralLinks({userId}: {userId: number}) {
   const { toast } = useToast()
-  const leftLink = 'https://xeenux.com/join-now/1'
-  const rightLink = 'https://xeenux.com/join-now/2'
+  const leftLink = `${window.location.origin}?ref=${userId}&position=left`
+  const rightLink = `${window.location.origin}?ref=${userId}&position=right`
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)

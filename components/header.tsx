@@ -6,10 +6,10 @@ import { Button } from '@/components/ui/button'
 import { LogOut, MoonIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
+import { useAppKit } from '@reown/appkit/react'
 
 export function Header() {
-  // const { open } = useWeb3Modal()
-  // const { isConnected, address } = useAccount()
+  const { open } = useAppKit()
   const { theme, setTheme } = useTheme()
 
   return (
@@ -29,27 +29,28 @@ export function Header() {
           
           <div className="flex items-center gap-4">
             
-            <Button 
+            {/* <Button 
               onClick={() => open()}
               className="glass-button text-[8px] sm:text-sm"
             >
-              {/* {isConnected ? 
+              {isConnected ? 
                 `${address?.slice(0, 6)}...${address?.slice(-4)}` : 
                 'Connect Wallet'
-              } */}
+              }
               Connect Wallet
-            </Button>
+            </Button> */}
 
-            <Button 
+            {/* <Button 
               onClick={() => open()}
               className="glass-button"
             >
-              {/* {isConnected ? 
+              {isConnected ? 
                 `${address?.slice(0, 6)}...${address?.slice(-4)}` : 
                 'Connect Wallet'
-              } */}
-              <LogOut className='w-4 h-4' />
-            </Button>
+              }
+              Log out
+            </Button> */}
+            <appkit-button balance='hide' />
           </div>
         </div>
       </div>
