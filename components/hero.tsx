@@ -74,7 +74,9 @@ export function Hero({}: HeroProps) {
             />
           </div>
           <div className="w-full">
-            <p className="text-sm lg:text-sm font-bold">0.0000</p>
+            <p className="text-sm lg:text-sm font-bold">
+              {b2f(tokensToBeBurnt, Number(tokenInfo?.decimals || 0))}
+            </p>
             <p className="text-[10px] md:text-xs text-gray-400">
               Xeenux tokens to be burned
             </p>
@@ -119,7 +121,9 @@ export function Hero({}: HeroProps) {
             </div>
             <div>
               <p className="text-sm text-gray-400">My ID</p>
-              <p className="text-sm opacity-50 font-bold">0x1234...5678</p>
+              <p className="text-sm opacity-50 font-bold">
+                {Number(userInfo?.id || 0).toString()}
+              </p>
             </div>
           </div>
         </div>

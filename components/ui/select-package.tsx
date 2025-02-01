@@ -1,6 +1,6 @@
 import React from 'react'
 import { Label } from '@/components/ui/label'
-import { Check } from 'lucide-react';
+import { Check } from 'lucide-react'
 import { Button } from './button';
 
 interface SelectPackageProps {

@@ -59,7 +59,7 @@ export function MainContent() {
 
       <MainContentSection
         title="Invest or Buy Packages"
-        content={<SelectPackage />}
+        content={<SelectPackage value={0} onChange={() => {}} />}
       />
 
       <MainContentSection
