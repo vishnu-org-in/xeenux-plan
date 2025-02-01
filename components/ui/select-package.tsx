@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { Label } from '@/components/ui/label'
 import { Check } from 'lucide-react';
+import { Button } from './button';
 
 function selectPackage() {
   const [selectedPackage, setSelectedPackage] = useState('10')
   return (
-    <div>
+    <div id="select-package">
       <Label className="mb-4 block">Select Package</Label>
       <div className="grid grid-cols-2 gap-4">
         {[
@@ -39,6 +40,8 @@ function selectPackage() {
             )}
           </button>
         ))}
+
+        <Button className="mt-4 w-full glass-button" >Buy package</Button>
       </div>
     </div>
   )

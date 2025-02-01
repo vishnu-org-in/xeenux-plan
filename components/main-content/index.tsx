@@ -58,7 +58,7 @@ export function MainContent() {
 
 
       <MainContentSection
-        title="Packages"
+        title="Invest or Buy Packages"
         content={<SelectPackage />}
       />
 

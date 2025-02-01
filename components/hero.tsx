@@ -15,6 +15,15 @@ export function Hero({ }: HeroProps) {
     const [amount, setAmount] = useState<string>('');
     const [transactionType, setTransactionType] = useState<'deposit' | 'withdraw' | null>(null);
 
+    const scrollToPackage = () => {
+        const packageElement = document.querySelector('#select-package');
+        if (packageElement) {
+            packageElement.scrollIntoView({ behavior: 'smooth' });
+            const toggleDropdown = packageElement.querySelector('button');
+            toggleDropdown?.click();
+        }
+    };
+
     const showDepositInput = (currency: string) => {
         setSelectedCurrency(currency);
         setTransactionType('deposit');
@@ -36,25 +45,25 @@ export function Hero({ }: HeroProps) {
             <div className="flex md:flex-row flex-col justify-between md:items-center">
                 <h1 className="text-2xl">Dashboard</h1>
                 <div className="flex gap-2 py-2 md:px-4 rounded-full">
-                    <span className="text-gray-500">
+                    <span className="text-gray-500 text-xs sm:text-sm">
                         Time of Registration: <span className="text-white font-bold">December 29th 2024, 5:24pm</span>
                     </span>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="flex w-full flex-col glass-card items-center gap-4 px-4 py-2 rounded-xl">
+                <div className="flex w-full flex-colx glass-card items-center gap-4 px-4 py-2 rounded-xl">
                     <div className="lg:p-2 p-2 rounded-full bg-blue-500/20">
-                        <Image src="/images/xeenux.png" alt="xeenux" width={20} height={20} />
+                        <Image src="/images/xeenux.png" alt="theter" width={20} height={20} />
                     </div>
                     <div className="w-full">
                         <p className="text-sm lg:text-sm font-bold">0.0000</p>
                         <p className="text-[10px] md:text-xs text-gray-400">Xeenux tokens to be burned</p>
                     </div>
                 </div>
-                <div className="flex w-full flex-col glass-card items-center gap-4 px-4 py-2 rounded-xl">
+                <div className="flex w-full flex-colx glass-card items-center gap-4 px-4 py-2 rounded-xl">
                     <div className="lg:p-2 p-2 rounded-full bg-blue-500/20">
-                        <Image src="/images/xeenux.png" alt="xeenux" width={20} height={20} />
+                        <Image src="/images/xeenux.png" alt="theter" width={20} height={20} />
                     </div>
                     <div className="w-full">
                         <p className="text-sm lg:text-sm font-bold">0.0000</p>
@@ -67,6 +76,7 @@ export function Hero({ }: HeroProps) {
                     <div className="w-full">
                         <CountdownTimer targetDate={new Date("2025-02-04")} />
                     </div>
+
                 </div>
             </div>
 
@@ -116,6 +126,9 @@ export function Hero({ }: HeroProps) {
                 </div>
 
                 <div className="flex flex-col md:border-r border-b border-gray-400/50 gap-3 w-full p-6">
+                    <Button onClick={scrollToPackage} className="glass-button w-full">
+                        Invest or Buy package
+                    </Button>
                     <div className="flex flex-col items-start lg:items-center gap-4">
                         {/* USDT Section */}
                         <div className="flex px-2 w-full flex-col glass-card items-center gap-2 py-2 rounded-xl overflow-hidden">
@@ -217,7 +230,7 @@ export function Hero({ }: HeroProps) {
                                 <p className="text-sm lg:text-sm font-bold">$ 0.0000</p>
                                 <p className="text-[10px] md:text-xs text-gray-400">Available withdraw</p>
                             </div>
-                           
+
                         </div>
 
                         <div className="flex w-full flex-colx glass-card items-center gap-4 px-4 py-2 rounded-xl">
