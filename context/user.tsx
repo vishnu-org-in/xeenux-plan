@@ -28,7 +28,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   } = useUserInfo(address as Address);
 
   useEffect(() => {
-    console.log({ userInfo, isLoading, isConnected });
+    // console.log({ userInfo, isLoading, isConnected });
     if (!isLoading && isConnected) {
       // @ts-ignore
       if (!userInfo || Number(userInfo.id) === 0) {

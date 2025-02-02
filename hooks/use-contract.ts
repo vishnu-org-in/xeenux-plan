@@ -89,7 +89,7 @@ export const useRegister = ({
         address: xeenuxContractAddress,
         abi: xeenuxContractAbi,
         functionName: 'getPackagePrice',
-        args: [BigInt(packageIndex || 0)],
+        args: [packageIndex || 0],
         query: {
             enabled: packageIndex !== undefined,
         },
