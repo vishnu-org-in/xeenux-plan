@@ -21,10 +21,9 @@ if (!projectId) {
 const metadata = {
   name: "XeeNux",
   description: "Decentralized Investment Platform",
-  url: window?.location?.origin || "https://xeenux.com",
+  url: process.env.NEXT_PUBLIC_APP_URL || "https://xeenux.com",
   icons: ["https://avatars.githubusercontent.com/u/179229932"],
 };
-console.log(metadata);
 // Create the modal
 export const modal = createAppKit({
   adapters: [wagmiAdapter],

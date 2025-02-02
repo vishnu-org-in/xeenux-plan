@@ -1,6 +1,6 @@
 import React from 'react'
 import { Label } from '@/components/ui/label'
-import { Check } from 'lucide-react'
+import { Check, Wallet } from 'lucide-react'
 import { Button } from './button';
 
 interface SelectPackageProps {
@@ -50,7 +50,7 @@ function SelectPackage({ value, onChange, disabled = false, isReg = true }: Sele
           </button>
         ))}
 
-        {!isReg && <Button className="mt-4 w-full glass-button" >Buy package</Button>}
+        {!isReg && <Button className="py-4 w-full rounded-xl h-11 bg-purple-500 flex justify-center items-center" > <Wallet className="h-4" /> Buy package</Button>}
       </div>
     </div>
   )

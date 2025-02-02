@@ -17,7 +17,7 @@ interface HeroProps {}
 export function Hero({}: HeroProps) {
   const { tokensToBeBurnt, tokenInfo } = useContractData();
   const { address } = useAppKitAccount();
-  const { data: userInfo } = useUserInfo(address as Address);
+  const { data: userInfo }: any = useUserInfo(address as Address);
   const [selectedCurrency, setSelectedCurrency] = useState<string | null>(null);
   const [amount, setAmount] = useState<string>("");
   const [transactionType, setTransactionType] = useState<

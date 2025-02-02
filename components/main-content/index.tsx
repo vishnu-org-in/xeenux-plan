@@ -1,9 +1,6 @@
 'use client'
 
-import { Card } from '@/components/ui/card'
 import { MainContentSection } from './main-content-section'
-import { SearchBar } from './search-bar'
-import { ProgressBar } from '../ui/progress-bar'
 import { Progress } from '@/components/ui/progress'
 import SelectPackage from '@/components/ui/select-package'
 import { BinaryTree } from '../binary-tree'
@@ -59,7 +56,7 @@ export function MainContent() {
 
       <MainContentSection
         title="Invest or Buy Packages"
-        content={<SelectPackage value={0} onChange={() => {}} />}
+        content={<SelectPackage value={0} onChange={() => {}} isReg={false} />}
       />
 
       <MainContentSection

@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { Header } from "@/components/header";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -23,7 +22,6 @@ import {
 import SelectPackage from "@/components/ui/select-package";
 import toast from "react-hot-toast";
 import { useRegister, useXeeBalance } from "@/hooks/use-contract";
-import { WalletNotConnectedException } from "@/lib/exceptions";
 import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
 import {
   Dialog,
@@ -120,17 +118,27 @@ function CountryCodeSelect({
 }
 
 export default function RegisterPage() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const _ref = parseInt(urlParams.get("ref") || "0") || 0;
-  const _position = urlParams.get("position") || "left";
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phoneNumber: "",
     countryCode: "+1",
-    position: _position as "left" | "right",
+    position: "left" as "left" | "right",
     package: 0,
+    ref: 0,
   });
+  useEffect(() => {
+    // Access window object only after component mounts
+    const params = new URLSearchParams(window.location.search);
+    const _ref = parseInt(params.get("ref") || "0") || 0;
+    const position = params.get("position") || "left";
+
+    setFormData((prev) => ({
+      ...prev,
+      position: position as "left" | "right",
+      ref: _ref,
+    }));
+  }, []);
   const {
     registerUser,
     isPriceLoading,
@@ -186,14 +194,14 @@ export default function RegisterPage() {
         _phone: fullPhoneNumber,
         _position: formData.position === "left" ? 0 : 1,
         _package: formData.package,
-        _ref: _ref,
+        _ref: formData.ref,
       });
       toast.success("Registered successfully");
       window.location.reload();
     } catch (error: any) {
       console.error("Registration failed:", error);
       toast.error(
-        "Registration failed: " + error?.message ?? error ?? "Unknown error"
+        "Registration failed: " + error?.message || error || "Unknown error"
       );
     }
   };

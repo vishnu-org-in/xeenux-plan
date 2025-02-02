@@ -12,6 +12,7 @@ import { useContractData } from "@/context/contract";
 import toast from "react-hot-toast";
 import { useSwapUsdtToXee, useSwapXeeToUsdt } from "@/hooks/use-swap";
 import { useBalance } from "wagmi";
+import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
 interface Token {
   symbol: string;
   icon: string;
@@ -99,6 +100,8 @@ function calculateXeeToUsdt(
 }
 
 export function SwapSection() {
+  const { open } = useAppKit();
+  const { isConnected } = useAppKitAccount();
   const [fromToken, setFromToken] = useState({ ...usdtToken });
   const [toToken, setToToken] = useState({ ...xeeToken });
   const [slippage, setSlippage] = useState("0.5");
@@ -323,10 +326,11 @@ export function SwapSection() {
 
         <Button
           className="w-full glass-button py-6 text-lg font-semibold"
-          disabled={!canSwap}
-          onClick={handleSwap}
+          disabled={isConnected && !canSwap}
+          onClick={isConnected ? handleSwap : () => open()}
         >
           {(() => {
+            if (!isConnected) return "Connect Wallet";
             if (swapStatus === "approving") return "Approving...";
             if (swapStatus === "swapping") return "Swapping...";
             if (fromToken.isBalanceLoading || toToken.isBalanceLoading)
