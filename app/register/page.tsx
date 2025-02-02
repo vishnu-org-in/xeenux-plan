@@ -32,6 +32,7 @@ import {
 import { SwapSection } from "@/components/swap-section";
 import { b2f } from "@/lib/utils";
 import { useContractData } from "@/context/contract";
+import { useUser } from "@/context/user";
 
 // Country codes data
 const countryCodes = [
@@ -118,6 +119,7 @@ function CountryCodeSelect({
 }
 
 export default function RegisterPage() {
+  const {invalidate: invalidateUser} = useUser();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -197,7 +199,8 @@ export default function RegisterPage() {
         _ref: formData.ref,
       });
       toast.success("Registered successfully");
-      window.location.reload();
+      invalidateUser()
+      // window.location.reload();
     } catch (error: any) {
       console.error("Registration failed:", error);
       toast.error(
