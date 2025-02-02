@@ -30,7 +30,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { SwapSection } from "@/components/swap-section";
-import { b2f } from "@/lib/utils";
+import { b2f, strictEmailRegex } from "@/lib/utils";
 import { useContractData } from "@/context/contract";
 import { useUser } from "@/context/user";
 
@@ -119,7 +119,7 @@ function CountryCodeSelect({
 }
 
 export default function RegisterPage() {
-  const {invalidate: invalidateUser} = useUser();
+  const { invalidate: invalidateUser } = useUser();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -155,8 +155,8 @@ export default function RegisterPage() {
   });
   const { tokenInfo } = useContractData();
   useEffect(() => {
-    console.log({ packagePrice });
-  }, [packagePrice]);
+    console.log({ packagePrice, tokenInfo });
+  }, [packagePrice, tokenInfo]);
   const { isConnected } = useAppKitAccount();
   const { open } = useAppKit();
   const { data: xeeBalanceData } = useXeeBalance();
@@ -175,6 +175,35 @@ export default function RegisterPage() {
       open();
       return;
     }
+    // Format phone number with country code
+    const fullPhoneNumber = `${
+      formData.countryCode
+    }${formData.phoneNumber.replace(/\D/g, "")}`;
+    // Validate input lengths
+    if (formData.name.length > 30) {
+      toast.error("Name must be 30 characters or less");
+      return;
+    }
+    if (formData.email.length > 50) {
+      toast.error("Email must be 50 characters or less");
+      return;
+    }
+    if (!strictEmailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    if (fullPhoneNumber.length > 15) {
+      toast.error("Phone number must be 15 characters or less");
+      return;
+    }
+    if (formData.name.trim().length === 0) {
+      toast.error("Name is required");
+      return;
+    }
+    if (fullPhoneNumber.trim().length === 0) {
+      toast.error("Phone number is required");
+      return;
+    }
     if (!isPriceReady) {
       toast.error("Please wait for the package price to load");
       return;
@@ -183,12 +212,8 @@ export default function RegisterPage() {
       toast.error("Error loading package price");
       return;
     }
+
     try {
-      // Format phone number with country code
-      const fullPhoneNumber = `${
-        formData.countryCode
-      }${formData.phoneNumber.replace(/\D/g, "")}`;
-      console.log({ formData, fullPhoneNumber });
       // Call contract register function
       await registerUser({
         _name: formData.name,
@@ -199,7 +224,7 @@ export default function RegisterPage() {
         _ref: formData.ref,
       });
       toast.success("Registered successfully");
-      invalidateUser()
+      invalidateUser();
       // window.location.reload();
     } catch (error: any) {
       console.error("Registration failed:", error);
@@ -309,28 +334,45 @@ export default function RegisterPage() {
                 disabled={status !== "idle"}
               />
             </div>
-            <div className="text-center mt-5">
-              <p>
-                selected package price:{" "}
-                {packagePrice.usdt > 0 ? Number(b2f(packagePrice.usdt)) : 0.0}{" "}
-                USDT
-              </p>
-              <p>
-                amount to pay:{" "}
-                {packagePrice.xee > 0
-                  ? Number(
-                      b2f(packagePrice.xee, Number(tokenInfo?.decimals || 0))
-                    )
-                  : 0.0}{" "}
-                XEE{" "}
-              </p>
-              <p>
-                your current balance:{" "}
-                {b2f(xeeBalanceData || 0, Number(tokenInfo?.decimals || 0))} XEE
-              </p>
+            <div className="text-center mt-5 border border-purple-500/30 py-3 px-5 rounded-xl">
+              <div className="flex justify-between items-center">
+                <span className="text-gray-400">Selected package:</span>
+                <span>
+                  {packagePrice.usdt > 0 ? Number(b2f(packagePrice.usdt)) : 0.0}{" "}
+                  USDT
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-400">Amount to pay:</span>
+                <span>
+                  {Number(packagePrice.xee) > 0
+                    ? Number(
+                        b2f(packagePrice.xee, Number(tokenInfo?.decimals || 0))
+                      )
+                    : 0.0}{" "}
+                  {tokenInfo?.symbol}{" "}
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-400">Your {"XEE"} balance:</span>
+                <span>
+                  {b2f(
+                    xeeBalanceData || BigInt(0),
+                    Number(tokenInfo?.decimals || 0)
+                  )}{" "}
+                  XEE
+                </span>
+              </div>
+            </div>
+            <div className="flex justify-center items-center gap-5 mt-5">
               <Dialog>
-                <DialogTrigger className="glass-button px-4 mt-5">
+                <DialogTrigger className="bg-transparent border border-purple-500/80 text-purple-500/80 rounded-xl w- h-12 font-semibold mx-auto w-48">
+                  {/* <Button
+                    className="bg-transparent border border-purple-500/80 text-purple-500/80 rounded-xl w- h-12 font-semibold mx-auto w-48"
+                    type="button"
+                  > */}
                   swap usdt to xee
+                  {/* </Button> */}
                 </DialogTrigger>
                 <DialogContent className="p-0 border-none">
                   {/* <VisuallyHidden> */}
@@ -341,20 +383,21 @@ export default function RegisterPage() {
                   <SwapSection />
                 </DialogContent>
               </Dialog>
-            </div>
 
-            <Button
-              type="submit"
-              className={`${
-                isConnected ? "bg-purple-500 " : "glass-button "
-              }rounded-xl w-48 h-12 mt-5 font-semibold mx-auto block`}
-              disabled={status !== "idle"}
-            >
-              {status === "idle" && <>Register</>}
-              {status === "approving" && <>Approving...</>}
-              {status === "registering" && <>Processing...</>}
-              {status === "reading-price" && <>Processing...</>}
-            </Button>
+              <Button
+                type={isConnected ? "submit" : "button"}
+                className={`bg-purple-500 rounded-xl h-12 font-semibold w-48 hover:bg-purple-500/80`}
+                disabled={status !== "idle"}
+                onClick={isConnected ? undefined : () => open()}
+              >
+                {status === "idle" && (
+                  <>{isConnected ? "Register" : "Connect wallet"}</>
+                )}
+                {status === "approving" && <>Approving...</>}
+                {status === "registering" && <>Processing...</>}
+                {status === "reading-price" && <>Processing...</>}
+              </Button>
+            </div>
           </form>
         </Card>
       </div>

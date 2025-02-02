@@ -6,11 +6,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function b2i(amt: any, decimals: number = 18): number {
+export function b2i(amt: bigint, decimals: number = 18): number {
   return parseInt(formatUnits(amt, decimals));
 }
 
-export function b2f(amt: any, decimals: number = 18): number {
+export function b2f(amt: bigint, decimals: number = 18): number {
   return parseFloat(formatUnits(amt, decimals));
 }
 
@@ -50,3 +50,6 @@ export const formatAmount = (amount: string): string => {
   
   return cleaned;
 };
+
+export const strictEmailRegex =
+    /^[a-zA-Z0-9](?:[a-zA-Z0-9._-]*[a-zA-Z0-9])?@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/;

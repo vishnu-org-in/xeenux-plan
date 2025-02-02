@@ -1,7 +1,11 @@
 // contexts/ContractContext.tsx
-import { createContext, useContext } from 'react';
-import { Address } from 'viem';
-import { useSwapPrice, useTokenInfo, useTokensToBeBurnt } from '@/hooks/use-contract';
+import { createContext, useContext, useEffect } from "react";
+import { Address } from "viem";
+import {
+  useSwapPrice,
+  useTokenInfo,
+  useTokensToBeBurnt,
+} from "@/hooks/use-contract";
 
 interface TokenInfo {
   name: string;
@@ -19,25 +23,35 @@ interface ContractContextType {
   error: Error | null;
 }
 
-const ContractContext = createContext<ContractContextType | undefined>(undefined);
+const ContractContext = createContext<ContractContextType | undefined>(
+  undefined
+);
 
 export function ContractProvider({ children }: { children: React.ReactNode }) {
   // Fetch token info
   const {
-    data: tokenInfo, isLoading: isLoadingToken, error: tokenError
+    data: tokenInfo,
+    isLoading: isLoadingTokenInfo,
+    error: tokenError,
   } = useTokenInfo();
 
-  const { data: swapPrice, isLoading: isLoadingSwapPrice, error: swapPriceError } = useSwapPrice();
+  const {
+    data: swapPrice,
+    isLoading: isLoadingSwapPrice,
+    error: swapPriceError,
+  } = useSwapPrice();
 
   const {
-    data: tokensToBeBurnt, isLoading: isLoadingTokensToBeBurnt, error: tokensToBeBurntError
+    data: tokensToBeBurnt,
+    isLoading: isLoadingTokensToBeBurnt,
+    error: tokensToBeBurntError,
   } = useTokensToBeBurnt();
 
-  // Fetch total users
-
-  const isLoading = isLoadingToken || isLoadingTokensToBeBurnt;
+  const isLoading = isLoadingTokenInfo || isLoadingTokensToBeBurnt;
   const error = tokenError || tokensToBeBurntError;
-
+  useEffect(() => {
+    console.log({ tokenInfo, swapPrice, tokensToBeBurnt, isLoading, error });
+  }, [tokenInfo, swapPrice, tokensToBeBurnt, isLoading, error]);
   const value = {
     tokenInfo,
     swapPrice,
@@ -57,7 +71,7 @@ export function ContractProvider({ children }: { children: React.ReactNode }) {
 export function useContractData() {
   const context = useContext(ContractContext);
   if (context === undefined) {
-    throw new Error('useContract must be used within a ContractProvider');
+    throw new Error("useContract must be used within a ContractProvider");
   }
   return context;
 }
