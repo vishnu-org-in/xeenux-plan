@@ -1,24 +1,26 @@
 'use client'
 
+import { useUser } from '@/context/user';
 import { SidebarDropdown } from './sidebar-dropdown'
 import {
   HourglassIcon,
   Users,
   DollarSign,
-  History,
   Package,
-  Crown,
-  Clock
 } from 'lucide-react'
+import { ranks } from '@/lib/data/rank';
 
 export function Sidebar() {
+  const {userInfo} = useUser();
+  const rankName = ranks[Number(userInfo?.rank)] || 'UNKNOWN';
+  // const package = packages.find(p => p.value === Number(userInfo?.package));
   return (
     <div className="w-full lg:w-72 space-y-4">
       <SidebarDropdown
         title="Rank"
         icon={<HourglassIcon className="w-5 h-5 text-purple-400" />}
       >
-        <p className="text-sm text-gray-400 uppercase pt-4 font-bold">Silver</p>
+        <p className="text-sm text-gray-400 uppercase pt-4 font-bold">{rankName}</p>
       </SidebarDropdown>
       
       

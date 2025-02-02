@@ -2,6 +2,7 @@ import React from 'react'
 import { Label } from '@/components/ui/label'
 import { Check, Wallet } from 'lucide-react'
 import { Button } from './button';
+import { packages } from '@/lib/data/packages';
 
 interface SelectPackageProps {
   value: number;
@@ -11,17 +12,7 @@ interface SelectPackageProps {
 }
 
 function SelectPackage({ value, onChange, disabled = false, isReg = true }: SelectPackageProps) {
-  const packages = [
-    { value: 0, label: '$2.5' },
-    { value: 1, label: '$5' },
-    { value: 2, label: '$10' },
-    { value: 3, label: '$25' },
-    { value: 4, label: '$50' },
-    { value: 5, label: '$100' },
-    { value: 6, label: '$250' },
-    { value: 7, label: '$500' },
-    { value: 8, label: '$1,000' },
-  ];
+  
 
   return (
     <div id="select-package">
