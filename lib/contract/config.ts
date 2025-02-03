@@ -1603,27 +1603,28 @@ export const xeenuxContractAbi =
 
 export const tokenAbi = [{ "inputs": [{ "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "approve", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "account", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }] as const;
 
-export const tokens: Tokens = {
-    "eip155:31337": {
-        address: '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0',
-        image: 'token_image_url' //optional
-    },
-    "eip155:137": {
-        address: '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0',
-        image: 'token_image_url' //optional
-    }
-}
 export type Addresses = { [key: string]: Address }
 export const xeenuxContractAddresses = {
-    '31337': '0xB0D4afd8879eD9F52b28595d31B441D079B2Ca07', // local chain
+    '31337': '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0', // local chain
     '97': '0xeA810FC6bc78E23D3aA35a2cffbD1EE0138dEacA', // testnet
 } as Addresses;
 export const usdtAddresses = {
-    '31337': '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9', // local chain
+    '31337': '0x5FbDB2315678afecb367f032d93F642f64180aa3', // local chain
     '97': '0x25ed48E0f7B9Be6024866A4eF4a3882333181517', // testnet
 } as Addresses;
 
 export const xeenuxTokenAddresses = {
-    '31337': '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0',
-    '97': '0x8445361C73Eda7EdD481905907fF4434401a0e35',
+    '31337': '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512', // local chain
+    '97': '0x8445361C73Eda7EdD481905907fF4434401a0e35', // testnet
 } as Addresses;
+
+export const tokens: Tokens = {
+    "eip155:31337": {
+        address: xeenuxTokenAddresses['31337'],
+        image: 'token_image_url' //optional
+    },
+    "eip155:97": {
+        address: xeenuxTokenAddresses['97'],
+        image: 'token_image_url' //optional
+    }
+}

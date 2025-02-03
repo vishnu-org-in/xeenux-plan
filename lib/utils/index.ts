@@ -38,18 +38,22 @@ export const stringToBigInt = (amount: string, decimals: number = 18): bigint =>
 export const formatAmount = (amount: string): string => {
   // Remove non-numeric characters except decimal point
   let cleaned = amount.replace(/[^\d.]/g, '');
-  
+
   // Ensure only one decimal point
   const parts = cleaned.split('.');
   if (parts.length > 2) cleaned = parts[0] + '.' + parts.slice(1).join('');
-  
+
   // Limit decimal places to 18 (or your token's decimals)
   if (parts.length === 2 && parts[1].length > 18) {
     cleaned = parts[0] + '.' + parts[1].slice(0, 18);
   }
-  
+
   return cleaned;
 };
 
 export const strictEmailRegex =
-    /^[a-zA-Z0-9](?:[a-zA-Z0-9._-]*[a-zA-Z0-9])?@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/;
+  /^[a-zA-Z0-9](?:[a-zA-Z0-9._-]*[a-zA-Z0-9])?@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/;
+
+export function shortenAddress(address: string): string {
+  return address.length > 10 ? `${address.slice(0, 4)}...${address.slice(-4)}` : address;
+}

@@ -7,11 +7,10 @@ import { TokenSelector } from "./swap/token-selector";
 import { SwapSettings } from "./swap/swap-settings";
 import { SwapDetails } from "./swap/swap-details";
 import { useUsdtBalance, useXeeBalance } from "@/hooks/use-contract";
-import { b2f, bigIntToString, formatAmount, stringToBigInt } from "@/lib/utils";
+import { bigIntToString, formatAmount, stringToBigInt } from "@/lib/utils";
 import { useContractData } from "@/context/contract";
 import toast from "react-hot-toast";
 import { useSwapUsdtToXee, useSwapXeeToUsdt } from "@/hooks/use-swap";
-import { useBalance } from "wagmi";
 import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
 interface Token {
   symbol: string;

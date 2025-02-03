@@ -6,14 +6,15 @@ import { ReactNode, useState } from 'react'
 
 interface MainContentSectionProps {
   title: string
-  content: ReactNode
+  content: ReactNode,
+  id?: string
 }
 
-export function MainContentSection({ title, content }: MainContentSectionProps) {
+export function MainContentSection({ title, content, id = "" }: MainContentSectionProps) {
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
-    <Card className="glass-card overflow-hidden">
+    <Card className="glass-card overflow-hidden" id={id}>
       <button
         className="w-full p-4 flex items-center justify-between text-left"
         onClick={() => setIsExpanded(!isExpanded)}

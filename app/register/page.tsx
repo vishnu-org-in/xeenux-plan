@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/popover";
 import SelectPackage from "@/components/ui/select-package";
 import toast from "react-hot-toast";
-import { useRegister, useXeeBalance } from "@/hooks/use-contract";
+import { useXeeBalance } from "@/hooks/use-contract";
 import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
 import {
   Dialog,
@@ -33,6 +33,7 @@ import { SwapSection } from "@/components/swap-section";
 import { b2f, strictEmailRegex } from "@/lib/utils";
 import { useContractData } from "@/context/contract";
 import { useUser } from "@/context/user";
+import { useRegister } from "@/hooks/use-register";
 
 // Country codes data
 const countryCodes = [
@@ -365,24 +366,26 @@ export default function RegisterPage() {
               </div>
             </div>
             <div className="flex justify-center items-center gap-5 mt-5">
-              <Dialog>
-                <DialogTrigger className="bg-transparent border border-purple-500/80 text-purple-500/80 rounded-xl w- h-12 font-semibold mx-auto w-48">
-                  {/* <Button
-                    className="bg-transparent border border-purple-500/80 text-purple-500/80 rounded-xl w- h-12 font-semibold mx-auto w-48"
-                    type="button"
-                  > */}
-                  swap usdt to xee
-                  {/* </Button> */}
-                </DialogTrigger>
-                <DialogContent className="p-0 border-none">
-                  {/* <VisuallyHidden> */}
-                  <DialogTitle className="text-xl font-bold sr-only">
-                    Swap USDT to XEE
-                  </DialogTitle>
-                  {/* </VisuallyHidden> */}
-                  <SwapSection />
-                </DialogContent>
-              </Dialog>
+              <div>
+                <Dialog>
+                  <DialogTrigger className="bg-transparent border border-purple-500/80 text-purple-500/80 rounded-xl w- h-12 font-semibold mx-auto w-48">
+                    {/* <Button
+                      className="bg-transparent border border-purple-500/80 text-purple-500/80 rounded-xl w- h-12 font-semibold mx-auto w-48"
+                      type="button"
+                    > */}
+                    swap usdt to xee
+                    {/* </Button> */}
+                  </DialogTrigger>
+                  <DialogContent className="p-0 border-none">
+                    {/* <VisuallyHidden> */}
+                    <DialogTitle className="text-xl font-bold sr-only">
+                      Swap USDT to XEE
+                    </DialogTitle>
+                    {/* </VisuallyHidden> */}
+                    <SwapSection />
+                  </DialogContent>
+                </Dialog>
+              </div>
 
               <Button
                 type={isConnected ? "submit" : "button"}

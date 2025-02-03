@@ -8,44 +8,32 @@ import { Input } from "./ui/input";
 import { CountdownTimer } from "./ui/countdown-timer";
 import { useState } from "react";
 import { useContractData } from "@/context/contract";
-import { b2f } from "@/lib/utils";
+import { b2f, shortenAddress } from "@/lib/utils";
 import { useUserInfo } from "@/hooks/use-contract";
 import { useAppKitAccount } from "@reown/appkit/react";
 import { Address } from "viem";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
+import { SwapSection } from "./swap-section";
 interface HeroProps {}
 
 export function Hero({}: HeroProps) {
   const { tokensToBeBurnt, tokenInfo } = useContractData();
   const { address } = useAppKitAccount();
   const { data: userInfo }: any = useUserInfo(address as Address);
-  const [selectedCurrency, setSelectedCurrency] = useState<string | null>(null);
-  const [amount, setAmount] = useState<string>("");
-  const [transactionType, setTransactionType] = useState<
-    "deposit" | "withdraw" | null
-  >(null);
+  const [amount, setAmount] = useState<number>(0);
 
   const scrollToPackage = () => {
-    const packageElement = document.querySelector("#select-package");
+    const packageElement = document.querySelector("#select-package-section");
     if (packageElement) {
       packageElement.scrollIntoView({ behavior: "smooth" });
       const toggleDropdown = packageElement.querySelector("button");
       toggleDropdown?.click();
     }
   };
-
-  const showDepositInput = (currency: string) => {
-    setSelectedCurrency(currency);
-    setTransactionType("deposit");
-  };
-
-  const showWithdrawInput = (currency: string) => {
-    setSelectedCurrency(currency);
-    setTransactionType("withdraw");
-  };
-
-  const handleTransaction = () => {
-    // Handle deposit or withdraw logic here
-    console.log(`${transactionType} ${amount} ${selectedCurrency}`);
+  const handleWithdraw = async () => {
+    if (amount === 0) return;
+    // Handle withdraw logic here
+    console.log(`${amount} XEENUX to withdraw`);
   };
 
   return (
@@ -68,7 +56,7 @@ export function Hero({}: HeroProps) {
           <div className="lg:p-2 p-2 rounded-full bg-blue-500/20">
             <Image
               src="/images/xeenux.png"
-              alt="theter"
+              alt="tether"
               width={20}
               height={20}
             />
@@ -115,15 +103,31 @@ export function Hero({}: HeroProps) {
 
       <div className="p-4 md:p-10 w-full bg-[#4c51ff]/20 rounded-xl grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="md:border-r border-b border-gray-400/50 w-full p-6">
-          <div className="flex items-center gap-4">
-            <div className="p-3 rounded-full bg-purple-500/20">
-              <Wallet className="lg:w-6 lg:h-6 w-4 h-4 text-purple-500" />
+          <div className="flex flex-col ">
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-full bg-purple-500/20">
+                <Wallet className="lg:w-6 lg:h-6 w-4 h-4 text-purple-500" />
+              </div>
+              <p className="text-sm text-gray-200">My ID</p>
             </div>
             <div>
-              <p className="text-sm text-gray-400">My ID</p>
-              <p className="text-sm opacity-50 font-bold">
+              {/* <p className="text-sm opacity-50 font-bold">
                 {Number(userInfo?.id || 0).toString()}
-              </p>
+              </p> */}
+              <div className="text-center mt-5 border border-purple-500/30 py-3 px-5 rounded-xl w-full">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-400">Name:</span>
+                  <span>{userInfo?.name}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-400">Email ID:</span>
+                  <span>{userInfo?.email}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-400">Your {"XEE"} balance:</span>
+                  <span>{shortenAddress(userInfo?.acct)}</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -159,11 +163,29 @@ export function Hero({}: HeroProps) {
         </div>
 
         <div className="flex flex-col md:border-r border-b border-gray-400/50 gap-3 w-full p-6">
+          <div className="flex flex-col gap-2 mt-2">
+            <div className="flex justify-between items-center">
+              <span>Available Income:</span>{" "}
+              <span className="text-sm font-bold">0.0000 XEE</span>
+            </div>
+            <Input
+              placeholder="Enter amount of XEENUX to withdraw"
+              className="glass-input"
+              value={amount}
+              onChange={(e) => setAmount(Number(e.target.value))}
+            />
+            <Button
+              className="w-full glass-button"
+              onClick={handleWithdraw}
+              disabled={amount === 0}
+            >
+              Withdraw XEENUX
+            </Button>
+          </div>
           <Button onClick={scrollToPackage} className="glass-button w-full">
             Invest or Buy package
           </Button>
-          <div className="flex flex-col items-start lg:items-center gap-4">
-            {/* USDT Section */}
+          {/* <div className="flex flex-col items-start lg:items-center gap-4">
             <div className="flex px-2 w-full flex-col glass-card items-center gap-2 py-2 rounded-xl overflow-hidden">
               <div className="flex gap-2 items-center px-2 w-full">
                 <Image
@@ -193,7 +215,6 @@ export function Hero({}: HeroProps) {
               </div>
             </div>
 
-            {/* XEENUX Section */}
             <div className="flex px-2 w-full flex-col glass-card items-center gap-2 py-2 rounded-xl overflow-hidden">
               <div className="flex gap-2 items-center px-2 w-full">
                 <Image
@@ -222,10 +243,10 @@ export function Hero({}: HeroProps) {
                 </Button>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Dynamic Input Section */}
-          {selectedCurrency && (
+          {/* {selectedCurrency && (
             <div className="flex flex-col gap-2 mt-1">
               <Input
                 placeholder={`Enter amount of ${selectedCurrency}`}
@@ -242,7 +263,7 @@ export function Hero({}: HeroProps) {
                   : `Withdraw ${selectedCurrency}`}
               </Button>
             </div>
-          )}
+          )} */}
           {/* Buy XEENUX Section */}
           {/* <div className="flex flex-col items-center gap-4 mt-6">
                 <div className="flex gap-2 items-center w-full">
@@ -264,17 +285,6 @@ export function Hero({}: HeroProps) {
                     </div>
                 )}
             </div> */}
-          <div className="flex flex-col gap-2 mt-2">
-            <Input
-              placeholder="Enter amount of XEENUX to buy"
-              className="glass-input"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-            />
-            <Button className="w-full glass-button" onClick={handleTransaction}>
-              Buy XEENUX
-            </Button>
-          </div>
         </div>
 
         <div className="md:border-b md:border-r-0 border-b border-gray-400/50 w-full p-4  lg:p-4">
@@ -302,6 +312,24 @@ export function Hero({}: HeroProps) {
                 </p>
               </div>
             </div>
+            <Dialog>
+              <DialogTrigger className="bg-transparent border border-purple-500/80 text-purple-500/80 rounded-xl w- h-12 font-semibold mx-auto w-full">
+                {/* <Button
+                      className="bg-transparent border border-purple-500/80 text-purple-500/80 rounded-xl w- h-12 font-semibold mx-auto w-48"
+                      type="button"
+                    > */}
+                swap usdt to xee
+                {/* </Button> */}
+              </DialogTrigger>
+              <DialogContent className="p-0 border-none">
+                {/* <VisuallyHidden> */}
+                <DialogTitle className="text-xl font-bold sr-only">
+                  Swap USDT to XEE
+                </DialogTitle>
+                {/* </VisuallyHidden> */}
+                <SwapSection />
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </div>

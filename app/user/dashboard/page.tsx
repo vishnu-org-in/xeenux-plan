@@ -1,8 +1,6 @@
 'use client'
 
 import { Header } from '@/components/header'
-import { DashboardStats } from '@/components/dashboard-stats'
-import { ReferralLinks } from '@/components/referral-links'
 import { Sidebar } from '@/components/sidebar'
 import { SwapSection } from '@/components/swap-section'
 import { MainContent } from '@/components/main-content'
@@ -18,7 +16,7 @@ export default function DashboardPage() {
           <Sidebar />
           <div className="flex-1 space-y-8">
             <MainContent />
-            <SwapSection />
+            {/* <SwapSection /> */}
           </div>
         </div>
       </div>
