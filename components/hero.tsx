@@ -182,7 +182,10 @@ export function Hero({}: HeroProps) {
               Withdraw XEENUX
             </Button>
           </div>
-          <Button onClick={scrollToPackage} className="glass-button w-full">
+          <Button
+            onClick={scrollToPackage}
+            className="bg-transparent border border-purple-500/80 text-purple-500/80 rounded-xl w- h-12 font-semibold mx-auto w-full"
+          >
             Invest or Buy package
           </Button>
           {/* <div className="flex flex-col items-start lg:items-center gap-4">
