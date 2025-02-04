@@ -21,16 +21,6 @@ export function useUserId(userAddress: Address) {
 }
 
 // Hook for 'getUserInfo' function
-export function useUserInfo(_address: Address) {
-    return useReadContract({
-        address: xeenuxContractAddress,
-        abi: xeenuxContractAbi,
-        functionName: 'getUserInfo',
-        args: [_address],
-    });
-}
-
-// Hook for 'getUserInfo' function
 // export function useUserInfo(_id: BigInt) {
 //     return useReadContract({
 //         address: xeenuxContractAddress,

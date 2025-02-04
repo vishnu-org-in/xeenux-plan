@@ -9,17 +9,17 @@ import { CountdownTimer } from "./ui/countdown-timer";
 import { useState } from "react";
 import { useContractData } from "@/context/contract";
 import { b2f, shortenAddress } from "@/lib/utils";
-import { useUserInfo } from "@/hooks/use-contract";
 import { useAppKitAccount } from "@reown/appkit/react";
 import { Address } from "viem";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { SwapSection } from "./swap-section";
+import { useUser } from "@/context/user";
 interface HeroProps {}
 
 export function Hero({}: HeroProps) {
   const { tokensToBeBurnt, tokenInfo } = useContractData();
   const { address } = useAppKitAccount();
-  const { data: userInfo }: any = useUserInfo(address as Address);
+  const { userInfo } = useUser();
   const [amount, setAmount] = useState<number>(0);
 
   const scrollToPackage = () => {
@@ -125,7 +125,7 @@ export function Hero({}: HeroProps) {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-400">Your {"XEE"} balance:</span>
-                  <span>{shortenAddress(userInfo?.acct)}</span>
+                  <span>{shortenAddress(userInfo?.acct || "")}</span>
                 </div>
               </div>
             </div>

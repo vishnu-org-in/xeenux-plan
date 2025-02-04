@@ -2,12 +2,13 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 import { Address } from "viem";
-import { useUserInfo } from "@/hooks/use-contract";
 import { UserInfo } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
+import { useUserDirectRefNo, useUserInfo } from "@/hooks/use-user";
 
 interface UserContextType {
   userInfo: UserInfo | undefined;
+  userDirectRefNo: bigint | undefined;
   isLoading: boolean;
   error: Error | null;
   invalidate: () => void;
@@ -27,6 +28,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     queryKey,
   } = useUserInfo(address as Address);
 
+  const { data: userDirectRefNo, isLoading: isLoadingDirectRefNo, isError: isErrorDirectRefNo } = useUserDirectRefNo(userInfo?.id || BigInt(0));
+
   useEffect(() => {
     // console.log({ userInfo, isLoading, isConnected });
     if (!isLoading && isConnected) {
@@ -43,6 +46,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     <UserContext.Provider
       value={{
         userInfo,
+        userDirectRefNo,
         isLoading,
         error,
         invalidate: () => queryClient.invalidateQueries({ queryKey }),

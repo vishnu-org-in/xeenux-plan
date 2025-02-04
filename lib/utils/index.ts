@@ -15,7 +15,8 @@ export function b2f(amt: bigint, decimals: number = 18): number {
 }
 
 // Convert BigInt to formatted string
-export const bigIntToString = (amount: bigint, decimals: number = 18): string => {
+export const bigIntToString = (amount: bigint, d: number | bigint= 18): string => {
+  const decimals = typeof d === 'number' ? d : Number(d);
   const amountStr = amount.toString().padStart(decimals + 1, '0');
   const decimalIndex = amountStr.length - decimals;
   const whole = amountStr.slice(0, decimalIndex);
@@ -55,5 +56,5 @@ export const strictEmailRegex =
   /^[a-zA-Z0-9](?:[a-zA-Z0-9._-]*[a-zA-Z0-9])?@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/;
 
 export function shortenAddress(address: string): string {
-  return address.length > 10 ? `${address.slice(0, 4)}...${address.slice(-4)}` : address;
+  return address?.length > 10 ? `${address.slice(0, 4)}...${address.slice(-4)}` : address;
 }
