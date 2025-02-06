@@ -1,21 +1,33 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 import { Address } from "viem";
-import { UserInfo, UserPackageInfo, UserTeamStats } from "@/types";
+import {
+  UserClaims,
+  UserInfo,
+  UserPackageInfo,
+  UserTeamStats,
+  UserVolumes,
+} from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import {
+  useUserClaims,
   useUserDirectRefNo,
   useUserInfo,
   useUserPackages,
   useUserTeamStats,
+  useUserVolumes,
 } from "@/hooks/use-user";
 
 interface UserContextType {
   userInfo: UserInfo | undefined;
   userDirectRefNo: bigint | undefined;
+  userTotalEarnings: bigint;
+  userAvailableWithdraw: bigint;
   userPackages: readonly UserPackageInfo[] | undefined;
   userTeamStats: UserTeamStats | undefined;
+  userVolumes: UserVolumes | undefined;
+  userClaims: UserClaims | undefined;
   isLoadingUserInfo: boolean;
   userInfoError: Error | null;
   refreshUserData: (keys?: UserDataKeys[]) => void;
@@ -25,6 +37,8 @@ export enum UserDataKeys {
   USER_DIRECT_REF_NO = "USER_DIRECT_REF_NO",
   USER_PACKAGES = "USER_PACKAGES",
   USER_TEAM_STATS = "USER_TEAM_STATS",
+  USER_VOLUMES = "USER_VOLUMES",
+  USER_CLAIMS = "USER_CLAIMS",
 }
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
@@ -58,6 +72,13 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     isError: isErrorUserTeamStats,
     queryKey: userTeamStatsQueryKey,
   } = useUserTeamStats(userInfo?.id || BigInt(0));
+
+  const {
+    data: userVolumes,
+    isLoading: isLoadingUserVolumes,
+    isError: isErrorUserVolumes,
+    queryKey: userVolumesQueryKey,
+  } = useUserVolumes(userInfo?.id || BigInt(0));
   useEffect(() => {
     // console.log({ userInfo, isLoading, isConnected });
     if (!isLoadingUserInfo && isConnected) {
@@ -68,6 +89,31 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       }
     }
   }, [userInfo, isLoadingUserInfo, isConnected, router]);
+  const userTotalEarnings = useMemo(() => {
+    if (!userInfo) return BigInt(0);
+    return (
+      userInfo.levelIncome +
+      userInfo.rewardIncome +
+      userInfo.autopoolIncome +
+      userInfo.binaryIncome
+    );
+  }, [userInfo]);
+  const {
+    data: userClaims,
+    isLoading: isLoadingUserClaims,
+    isError: isErrorUserClaims,
+    queryKey: userClaimsQueryKey,
+  } = useUserClaims(userInfo?.id || BigInt(0));
+  const userAvailableWithdraw = useMemo(() => {
+    if (!userClaims) return BigInt(0);
+    return (
+      userClaims.roiIncome +
+      userClaims.levelIncome +
+      userClaims.autopoolIncome +
+      userClaims.rewardIncome +
+      userClaims.binaryIncome
+    );
+  }, [userClaims]);
 
   const refreshUserData = (keys?: UserDataKeys[]) => {
     if (!keys || keys.length === 0) {
@@ -76,6 +122,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       queryClient.invalidateQueries({ queryKey: userDirectRefNoQueryKey });
       queryClient.invalidateQueries({ queryKey: userPackagesQueryKey });
       queryClient.invalidateQueries({ queryKey: userTeamStatsQueryKey });
+      queryClient.invalidateQueries({ queryKey: userVolumesQueryKey });
+      queryClient.invalidateQueries({ queryKey: userClaimsQueryKey });
     } else {
       keys.forEach((key) => {
         switch (key) {
@@ -93,6 +141,12 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
           case UserDataKeys.USER_TEAM_STATS:
             queryClient.invalidateQueries({ queryKey: userTeamStatsQueryKey });
             break;
+          case UserDataKeys.USER_VOLUMES:
+            queryClient.invalidateQueries({ queryKey: userVolumesQueryKey });
+            break;
+          case UserDataKeys.USER_CLAIMS:
+            queryClient.invalidateQueries({ queryKey: userClaimsQueryKey });
+            break;
         }
       });
     }
@@ -108,6 +162,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         isLoadingUserInfo,
         userInfoError,
         refreshUserData,
+        userVolumes,
+        userTotalEarnings,
+        userClaims,
+        userAvailableWithdraw
       }}
     >
       {children}

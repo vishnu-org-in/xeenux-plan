@@ -355,7 +355,7 @@ export default function RegisterPage() {
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-400">Your {"XEE"} balance:</span>
+                <span className="text-gray-400">Your {tokenInfo?.symbol} balance:</span>
                 <span>
                   {b2f(
                     xeeBalanceData || BigInt(0),

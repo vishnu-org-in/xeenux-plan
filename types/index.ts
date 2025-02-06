@@ -55,3 +55,19 @@ export interface UserTeamStats {
   directBusiness: bigint;
   totalBusiness: bigint;
 }
+
+export interface UserVolumes {
+  selfVolume: bigint;
+  directVolume: bigint;
+  leftVolume: bigint;
+  rightVolume: bigint;
+  levelIncome: bigint;
+}
+
+export interface UserClaims {
+  roiIncome: bigint;
+  levelIncome: bigint;
+  autopoolIncome: bigint;
+  rewardIncome: bigint;
+  binaryIncome: bigint;
+}

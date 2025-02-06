@@ -7,17 +7,17 @@ import { useUser } from "@/context/user";
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { isConnected } = useAccount();
-  const { userInfo, isLoading } = useUser();
+  const { userInfo, isLoadingUserInfo } = useUser();
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoadingUserInfo) {
       if (!isConnected || !userInfo || Number(userInfo.id) === 0) {
         router.push("/");
       }
     }
-  }, [isConnected, userInfo, isLoading, router]);
+  }, [isConnected, userInfo, isLoadingUserInfo, router]);
 
-  if (isLoading) {
+  if (isLoadingUserInfo) {
     return <div>Loading...</div>;
   }
 

@@ -9,7 +9,7 @@ import { useContractData } from "@/context/contract";
 import UserPackages from "@/app/user/dashboard/components/user-packages";
 
 export function Sidebar() {
-  const { userInfo, userDirectRefNo, userPackages, userTeamStats } = useUser();
+  const { userInfo, userPackages, userTeamStats, userVolumes } = useUser();
   const { tokenInfo } = useContractData();
   const rankName = ranks[Number(userInfo?.rank)] || "UNKNOWN";
   // const package = packages.find(p => p.value === Number(userInfo?.package));
@@ -36,8 +36,10 @@ export function Sidebar() {
                 (userInfo?.roiIncome || BigInt(0)) +
                   (userInfo?.binaryIncome || BigInt(0)) +
                   (userInfo?.rewardIncome || BigInt(0)) +
+                  (userInfo?.levelIncome || BigInt(0)) +
                   (userInfo?.autopoolIncome || BigInt(0)),
-                tokenInfo?.decimals || 0
+                tokenInfo?.decimals || 0,
+                0
               )}{" "}
               {tokenInfo?.symbol}
             </span>
@@ -47,7 +49,8 @@ export function Sidebar() {
             <span className="text-gray-200">
               {bigIntToString(
                 userInfo?.roiIncome || BigInt(0),
-                tokenInfo?.decimals || 0
+                tokenInfo?.decimals || 0,
+                5
               )}{" "}
               {tokenInfo?.symbol}
             </span>
@@ -57,17 +60,30 @@ export function Sidebar() {
             <span className="text-gray-200">
               {bigIntToString(
                 userInfo?.binaryIncome || BigInt(0),
-                tokenInfo?.decimals || 0
+                tokenInfo?.decimals || 0,
+                5
               )}{" "}
               {tokenInfo?.symbol}
             </span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-gray-400">BOOSTER Bonus</span>
+            <span className="text-gray-400">Level Income</span>
+            <span className="text-gray-200">
+              {bigIntToString(
+                userInfo?.levelIncome || BigInt(0),
+                tokenInfo?.decimals || 0,
+                5
+              )}{" "}
+              {tokenInfo?.symbol}
+            </span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-gray-400">Autopool Income</span>
             <span className="text-gray-200">
               {bigIntToString(
                 userInfo?.autopoolIncome || BigInt(0),
-                tokenInfo?.decimals || 0
+                tokenInfo?.decimals || 0,
+                5
               )}{" "}
               {tokenInfo?.symbol}
             </span>
@@ -77,7 +93,8 @@ export function Sidebar() {
             <span className="text-gray-200">
               {bigIntToString(
                 userInfo?.rewardIncome || BigInt(0),
-                tokenInfo?.decimals || 0
+                tokenInfo?.decimals || 0,
+                5
               )}{" "}
               {tokenInfo?.symbol}
             </span>
@@ -116,9 +133,9 @@ export function Sidebar() {
             <span className="text-gray-400">Direct Business</span>
             <span className="text-gray-200">
               {bigIntToString(
-                userTeamStats?.directBusiness || BigInt(0),
+                userVolumes?.directVolume || BigInt(0),
                 Number(tokenInfo?.decimals || 0),
-                3
+                5
               )}{" "}
               {tokenInfo?.symbol}
             </span>
@@ -127,15 +144,16 @@ export function Sidebar() {
             <span className="text-gray-400">Total Business</span>
             <span className="text-gray-200">
               {bigIntToString(
-                userTeamStats?.totalBusiness || BigInt(0),
-                Number(tokenInfo?.decimals || 0)
+                (userVolumes?.leftVolume || BigInt(0)) +
+                  (userVolumes?.rightVolume || BigInt(0)),
+                Number(tokenInfo?.decimals || 0),
+                5
               )}{" "}
               {tokenInfo?.symbol}
             </span>
           </div>
         </div>
       </SidebarDropdown>
-      {/*  */}
     </div>
   );
 }

@@ -18,7 +18,7 @@ interface HeroProps {}
 export function Hero({}: HeroProps) {
   const { tokensToBeBurnt, tokenInfo, nextPrice } = useContractData();
   const { address } = useAppKitAccount();
-  const { userInfo } = useUser();
+  const { userInfo, userTotalEarnings, userVolumes, userAvailableWithdraw } = useUser();
   const [amount, setAmount] = useState<number>(0);
 
   const scrollToPackage = () => {
@@ -63,7 +63,7 @@ export function Hero({}: HeroProps) {
           <div className="w-full">
             <p className="text-sm lg:text-sm font-bold">
               {bigIntToString(
-                (tokensToBeBurnt|| BigInt(0)),
+                tokensToBeBurnt || BigInt(0),
                 Number(tokenInfo?.decimals || 0),
                 0
               )}
@@ -84,7 +84,7 @@ export function Hero({}: HeroProps) {
           </div>
           <div className="w-full">
             <p className="text-sm lg:text-sm font-bold">
-              {bigIntToString(nextPrice||BigInt(0), 18, 5)}
+              {bigIntToString(nextPrice || BigInt(0), 18, 5)}
             </p>
             <p className="text-[10px] md:text-xs text-gray-400">
               Upcoming Xeenux price
@@ -129,7 +129,7 @@ export function Hero({}: HeroProps) {
                   <span>{userInfo?.email}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-400">Your {"XEE"} balance:</span>
+                  <span className="text-gray-400">Wallet Address</span>
                   <span>{shortenAddress(userInfo?.acct || "")}</span>
                 </div>
               </div>
@@ -144,7 +144,14 @@ export function Hero({}: HeroProps) {
                 <DollarSign className="lg:w-3 lg:h-3 w-2 h-2 text-blue-500" />
               </div>
               <div className="w-full">
-                <p className="text-sm lg:text-sm font-bold">$ 0.0000</p>
+                <p className="text-sm lg:text-sm font-bold">
+                  {bigIntToString(
+                    userTotalEarnings,
+                    tokenInfo?.decimals || 0,
+                    5
+                  )}{" "}
+                  {tokenInfo?.symbol}
+                </p>
                 <p className="text-[10px] md:text-xs text-gray-400">
                   Total Earnings
                 </p>
@@ -158,7 +165,14 @@ export function Hero({}: HeroProps) {
                 <DollarSign className="lg:w-3 lg:h-3 w-2 h-2 text-blue-500" />
               </div>
               <div className="w-full">
-                <p className="text-sm lg:text-sm font-bold">$ 0.0000</p>
+                <p className="text-sm lg:text-sm font-bold">
+                  {bigIntToString(
+                    userVolumes?.selfVolume || BigInt(0),
+                    tokenInfo?.decimals || 0,
+                    5
+                  )}{" "}
+                  {tokenInfo?.symbol}
+                </p>
                 <p className="text-[10px] md:text-xs text-gray-400">
                   Total Investment
                 </p>
@@ -171,7 +185,7 @@ export function Hero({}: HeroProps) {
           <div className="flex flex-col gap-2 mt-2">
             <div className="flex justify-between items-center">
               <span>Available Income:</span>{" "}
-              <span className="text-sm font-bold">0.0000 XEE</span>
+              <span className="text-sm font-bold">{bigIntToString(userAvailableWithdraw, tokenInfo?.decimals || 0, 5)}{" "}{tokenInfo?.symbol}</span>
             </div>
             <Input
               placeholder="Enter amount of XEENUX to withdraw"
@@ -302,7 +316,7 @@ export function Hero({}: HeroProps) {
                 <DollarSign className="lg:w-3 lg:h-3 w-2 h-2 text-blue-500" />
               </div>
               <div className="w-full">
-                <p className="text-sm lg:text-sm font-bold">$ 0.0000</p>
+                <p className="text-sm lg:text-sm font-bold">{bigIntToString(userAvailableWithdraw, tokenInfo?.decimals || 0, 5)}{" "}{tokenInfo?.symbol}</p>
                 <p className="text-[10px] md:text-xs text-gray-400">
                   Available withdraw
                 </p>
@@ -314,7 +328,7 @@ export function Hero({}: HeroProps) {
                 <DollarSign className="lg:w-3 lg:h-3 w-2 h-2 text-blue-500" />
               </div>
               <div className="w-full">
-                <p className="text-sm lg:text-sm font-bold">$ 0.0000</p>
+                <p className="text-sm lg:text-sm font-bold">{bigIntToString(userAvailableWithdraw, tokenInfo?.decimals || 0, 5)}{" "}{tokenInfo?.symbol}</p>
                 <p className="text-[10px] md:text-xs text-gray-400">
                   Total Withdraw
                 </p>

@@ -39,3 +39,21 @@ export function useUserTeamStats(_id: bigint) {
     args: [_id],
   });
 }
+
+export function useUserClaims(_id: bigint) {
+  return useReadContract({
+    address: xeenuxContractAddress,
+    abi: xeenuxContractAbi,
+    functionName: "getUserClaims",
+    args: [_id],
+  });
+}
+
+export function useUserVolumes(_id: bigint) {
+  return useReadContract({
+    address: xeenuxContractAddress,
+    abi: xeenuxContractAbi,
+    functionName: "getUserVolumes",
+    args: [_id],
+  });
+}

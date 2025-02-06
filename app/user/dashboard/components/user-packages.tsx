@@ -16,11 +16,13 @@ import { packages } from "@/lib/data/packages";
 interface UserPackagesProps {
   userPackages: readonly UserPackageInfo[] | undefined;
   withInactive?: boolean;
+  toReversed?: boolean;
 }
 
 const UserPackages: React.FC<UserPackagesProps> = ({
   userPackages,
   withInactive = false,
+  toReversed = false,
 }) => {
   // const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -31,6 +33,9 @@ const UserPackages: React.FC<UserPackagesProps> = ({
   // const inactivePackages = userPackages.filter(
   //   (pkg) => pkg.earned >= pkg.ceilingLimit
   // );
+  if(toReversed) {
+    userPackages = userPackages?.toReversed();
+  }
   const { tokenInfo } = useContractData();
   return (
     <div className="space-y-4">

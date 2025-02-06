@@ -197,7 +197,7 @@ export function MainContent() {
       <MainContentSection
         title="Package History"
         content={
-          <UserPackages userPackages={userPackages} withInactive />
+          <UserPackages userPackages={userPackages} withInactive toReversed />
         }
       />
 
