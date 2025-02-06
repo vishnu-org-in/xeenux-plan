@@ -120,7 +120,7 @@ function CountryCodeSelect({
 }
 
 export default function RegisterPage() {
-  const { invalidate: invalidateUser } = useUser();
+  const { refreshUserData } = useUser();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -225,7 +225,7 @@ export default function RegisterPage() {
         _ref: formData.ref,
       });
       toast.success("Registered successfully");
-      invalidateUser();
+      refreshUserData();
       // window.location.reload();
     } catch (error: any) {
       console.error("Registration failed:", error);

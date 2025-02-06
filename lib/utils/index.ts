@@ -15,12 +15,16 @@ export function b2f(amt: bigint, decimals: number = 18): number {
 }
 
 // Convert BigInt to formatted string
-export const bigIntToString = (amount: bigint, d: number | bigint= 18): string => {
+export const bigIntToString = (amount: bigint, d: number | bigint = 18, decimalPlaces?: number): string => {
+  // amount = typeof amount === 'number' ? BigInt(amount) : amount;
   const decimals = typeof d === 'number' ? d : Number(d);
   const amountStr = amount.toString().padStart(decimals + 1, '0');
   const decimalIndex = amountStr.length - decimals;
   const whole = amountStr.slice(0, decimalIndex);
-  const fraction = amountStr.slice(decimalIndex).replace(/0+$/, '');
+  let fraction = amountStr.slice(decimalIndex).replace(/0+$/, '');
+  if (decimalPlaces !== undefined && decimalPlaces >= 0) {
+    fraction = fraction.slice(0, decimalPlaces); // Apply decimal place limit
+  }
   return fraction ? `${whole}.${fraction}` : whole;
 };
 

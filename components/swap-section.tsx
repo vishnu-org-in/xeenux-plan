@@ -97,6 +97,29 @@ function calculateXeeToUsdt(
     return "0";
   }
 }
+function calculatePriceImpact(
+  originalPrice: number,
+  swapAmount: number,
+  swapUSDTLiquidity: number,
+  swapXeenuxLiquidity: number,
+  isBuying: boolean
+): number {
+  // Simulate the new liquidity state after swap
+  let newUSDTLiquidity = isBuying
+    ? swapUSDTLiquidity + swapAmount
+    : swapUSDTLiquidity - (swapAmount * originalPrice) / 1e18;
+  let newXeenuxLiquidity = isBuying
+    ? swapXeenuxLiquidity - (swapAmount * 1e18) / originalPrice
+    : swapXeenuxLiquidity + swapAmount;
+
+  // Calculate new price after the swap
+  let newPrice = (newUSDTLiquidity * 1e18) / newXeenuxLiquidity;
+
+  // Compute price impact %
+  let priceImpact = (1 - newPrice / originalPrice) * 100;
+
+  return Math.abs(priceImpact); // Ensure positive value
+}
 
 export function SwapSection() {
   const { open } = useAppKit();

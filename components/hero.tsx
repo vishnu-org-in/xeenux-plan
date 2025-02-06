@@ -8,16 +8,15 @@ import { Input } from "./ui/input";
 import { CountdownTimer } from "./ui/countdown-timer";
 import { useState } from "react";
 import { useContractData } from "@/context/contract";
-import { b2f, shortenAddress } from "@/lib/utils";
+import { bigIntToString, shortenAddress } from "@/lib/utils";
 import { useAppKitAccount } from "@reown/appkit/react";
-import { Address } from "viem";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { SwapSection } from "./swap-section";
 import { useUser } from "@/context/user";
 interface HeroProps {}
 
 export function Hero({}: HeroProps) {
-  const { tokensToBeBurnt, tokenInfo } = useContractData();
+  const { tokensToBeBurnt, tokenInfo, nextPrice } = useContractData();
   const { address } = useAppKitAccount();
   const { userInfo } = useUser();
   const [amount, setAmount] = useState<number>(0);
@@ -45,7 +44,7 @@ export function Hero({}: HeroProps) {
           <span className="text-gray-500 text-xs sm:text-sm">
             Time of Registration:{" "}
             <span className="text-white font-bold">
-              December 29th 2024, 5:24pm
+              {new Date(Number(userInfo?.registeredAt) * 1000).toLocaleString()}
             </span>
           </span>
         </div>
@@ -63,7 +62,11 @@ export function Hero({}: HeroProps) {
           </div>
           <div className="w-full">
             <p className="text-sm lg:text-sm font-bold">
-              {b2f(tokensToBeBurnt, Number(tokenInfo?.decimals || 0))}
+              {bigIntToString(
+                (tokensToBeBurnt|| BigInt(0)),
+                Number(tokenInfo?.decimals || 0),
+                0
+              )}
             </p>
             <p className="text-[10px] md:text-xs text-gray-400">
               Xeenux tokens to be burned
@@ -80,7 +83,9 @@ export function Hero({}: HeroProps) {
             />
           </div>
           <div className="w-full">
-            <p className="text-sm lg:text-sm font-bold">0.0000</p>
+            <p className="text-sm lg:text-sm font-bold">
+              {bigIntToString(nextPrice||BigInt(0), 18, 5)}
+            </p>
             <p className="text-[10px] md:text-xs text-gray-400">
               Upcoming Xeenux price
             </p>

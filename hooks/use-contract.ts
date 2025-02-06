@@ -71,3 +71,11 @@ export function useUsdtBalance() {
         args: [address as Address],
     });
 }
+
+export function useNextPrice() {
+    return useReadContract({
+        address: xeenuxContractAddress,
+        abi: xeenuxContractAbi,
+        functionName: 'nextPrice',
+    });
+}

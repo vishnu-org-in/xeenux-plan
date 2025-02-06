@@ -5,6 +5,126 @@ export const xeenuxContractAbi = [
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "_liq",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_xeenux",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_usdt",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amt",
+				"type": "uint256"
+			}
+		],
+		"name": "USDTtoXEENUX",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "activity",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "mode",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "allIncomeLastDist",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "autoPoolFee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "autoPoolMaxMembers",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "amt",
 				"type": "uint256"
@@ -121,207 +241,6 @@ export const xeenuxContractAbi = [
 	},
 	{
 		"inputs": [],
-		"name": "distributeIncome",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_level",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_fee",
-				"type": "uint256"
-			}
-		],
-		"name": "setLevelFee",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_level",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_fee",
-				"type": "uint256"
-			}
-		],
-		"name": "setPackageFee",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_level",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_fee",
-				"type": "uint256"
-			}
-		],
-		"name": "setPoolFee",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_amt",
-				"type": "uint256"
-			}
-		],
-		"name": "setPrice",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "amt",
-				"type": "uint256"
-			}
-		],
-		"name": "swapUSDTToXeenux",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "amt",
-				"type": "uint256"
-			}
-		],
-		"name": "swapXeenuxToUSDT",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_liq",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_xeenux",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_usdt",
-				"type": "address"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "activity",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "mode",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "allIncomeLastDist",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "autoPoolFee",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "autoPoolMaxMembers",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "currentDay",
 		"outputs": [
 			{
@@ -344,6 +263,13 @@ export const xeenuxContractAbi = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "distributeIncome",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -399,6 +325,11 @@ export const xeenuxContractAbi = [
 					},
 					{
 						"internalType": "uint256",
+						"name": "currentIncome",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
 						"name": "refCount",
 						"type": "uint256"
 					},
@@ -426,6 +357,11 @@ export const xeenuxContractAbi = [
 						"internalType": "string",
 						"name": "phone",
 						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "registeredAt",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct xeenuxInvestment.User[]",
@@ -645,6 +581,11 @@ export const xeenuxContractAbi = [
 					},
 					{
 						"internalType": "uint256",
+						"name": "currentIncome",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
 						"name": "refCount",
 						"type": "uint256"
 					},
@@ -672,6 +613,11 @@ export const xeenuxContractAbi = [
 						"internalType": "string",
 						"name": "phone",
 						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "registeredAt",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct xeenuxInvestment.User",
@@ -741,6 +687,11 @@ export const xeenuxContractAbi = [
 					},
 					{
 						"internalType": "uint256",
+						"name": "currentIncome",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
 						"name": "refCount",
 						"type": "uint256"
 					},
@@ -768,6 +719,11 @@ export const xeenuxContractAbi = [
 						"internalType": "string",
 						"name": "phone",
 						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "registeredAt",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct xeenuxInvestment.User",
@@ -837,6 +793,11 @@ export const xeenuxContractAbi = [
 					},
 					{
 						"internalType": "uint256",
+						"name": "currentIncome",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
 						"name": "refCount",
 						"type": "uint256"
 					},
@@ -864,6 +825,11 @@ export const xeenuxContractAbi = [
 						"internalType": "string",
 						"name": "phone",
 						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "registeredAt",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct xeenuxInvestment.User",
@@ -893,6 +859,98 @@ export const xeenuxContractAbi = [
 				"internalType": "uint256[]",
 				"name": "",
 				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "userId",
+				"type": "uint256"
+			}
+		],
+		"name": "getUserPackages",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "package",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ceilingLimit",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "earned",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isActive",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct xeenuxInvestment.UserPackageInfo[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_userId",
+				"type": "uint256"
+			}
+		],
+		"name": "getUserTeamStats",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "directTeam",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalTeam",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "directBusiness",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalBusiness",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct xeenuxInvestment.TeamStats",
+				"name": "",
+				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",
@@ -970,6 +1028,19 @@ export const xeenuxContractAbi = [
 	},
 	{
 		"inputs": [],
+		"name": "nextPrice",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "owner",
 		"outputs": [
 			{
@@ -1033,6 +1104,125 @@ export const xeenuxContractAbi = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_level",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_fee",
+				"type": "uint256"
+			}
+		],
+		"name": "setLevelFee",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_level",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_fee",
+				"type": "uint256"
+			}
+		],
+		"name": "setPackageFee",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_level",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_fee",
+				"type": "uint256"
+			}
+		],
+		"name": "setPoolFee",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amt",
+				"type": "uint256"
+			}
+		],
+		"name": "setPrice",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_newRate",
+				"type": "uint256"
+			}
+		],
+		"name": "setSwapBurnRate",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_fee",
+				"type": "uint256"
+			}
+		],
+		"name": "setSwapFee",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "swapBurnRate",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "swapFee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "swapPrice",
 		"outputs": [
@@ -1059,6 +1249,19 @@ export const xeenuxContractAbi = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amt",
+				"type": "uint256"
+			}
+		],
+		"name": "swapUSDTToXeenux",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "swapXeenuxLiquidity",
 		"outputs": [
@@ -1069,6 +1272,19 @@ export const xeenuxContractAbi = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amt",
+				"type": "uint256"
+			}
+		],
+		"name": "swapXeenuxToUSDT",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1090,6 +1306,30 @@ export const xeenuxContractAbi = [
 			}
 		],
 		"name": "teams",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "teamsBiz",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1201,11 +1441,16 @@ export const xeenuxContractAbi = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "amt",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
 				"type": "uint256"
 			}
 		],
-		"name": "USDTtoXEENUX",
+		"name": "userActivities",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1229,12 +1474,37 @@ export const xeenuxContractAbi = [
 				"type": "uint256"
 			}
 		],
-		"name": "userActivities",
+		"name": "userPackages",
 		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "package",
 				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "ceilingLimit",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "earned",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isActive",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -1408,6 +1678,11 @@ export const xeenuxContractAbi = [
 			},
 			{
 				"internalType": "uint256",
+				"name": "currentIncome",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
 				"name": "refCount",
 				"type": "uint256"
 			},
@@ -1435,6 +1710,11 @@ export const xeenuxContractAbi = [
 				"internalType": "string",
 				"name": "phone",
 				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "registeredAt",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -1600,11 +1880,9 @@ export const xeenuxContractAbi = [
 	}
 ] as const;
 
-export const tokenAbi = [{ "inputs": [{ "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "approve", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "account", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }] as const;
-
 export type Addresses = { [key: string]: Address }
 export const xeenuxContractAddresses = {
-	'31337': '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0', // local chain
+	'31337': '0x09635F643e140090A9A8Dcd712eD6285858ceBef', // local chain
 	'97': '0xeA810FC6bc78E23D3aA35a2cffbD1EE0138dEacA', // testnet
 } as Addresses;
 export const usdtAddresses = {

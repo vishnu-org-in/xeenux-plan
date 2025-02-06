@@ -6,14 +6,15 @@ import { HourglassIcon, Users, DollarSign, Package } from "lucide-react";
 import { ranks } from "@/lib/data/rank";
 import { bigIntToString } from "@/lib/utils";
 import { useContractData } from "@/context/contract";
+import UserPackages from "@/app/user/dashboard/components/user-packages";
 
 export function Sidebar() {
-  const { userInfo, userDirectRefNo } = useUser();
+  const { userInfo, userDirectRefNo, userPackages, userTeamStats } = useUser();
   const { tokenInfo } = useContractData();
   const rankName = ranks[Number(userInfo?.rank)] || "UNKNOWN";
   // const package = packages.find(p => p.value === Number(userInfo?.package));
   return (
-    <div className="w-full lg:w-72 space-y-4">
+    <div className="w-full lg:w-96 space-y-4">
       <SidebarDropdown
         title="Rank"
         icon={<HourglassIcon className="w-5 h-5 text-purple-400" />}
@@ -88,7 +89,11 @@ export function Sidebar() {
         title="Active Packages"
         icon={<Package className="w-5 h-5 text-purple-400" />}
       >
-        <p className="text-sm text-gray-400">No active packages</p>
+        {userPackages && userPackages?.length > 0 ? (
+          <UserPackages userPackages={userPackages} />
+        ) : (
+          <p className="text-sm text-gray-400">No active packages</p>
+        )}
       </SidebarDropdown>
       <SidebarDropdown
         title="My Team"
@@ -97,19 +102,36 @@ export function Sidebar() {
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
             <span className="text-gray-400">Direct Team</span>
-            <span className="text-gray-200">{Number(userDirectRefNo)}</span>
+            <span className="text-gray-200">
+              {Number(userTeamStats?.directTeam || 0)}
+            </span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-gray-400">Total Team</span>
-            <span className="text-gray-200">0</span>
+            <span className="text-gray-200">
+              {Number(userTeamStats?.totalTeam || 0)}
+            </span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-gray-400">Direct Business</span>
-            <span className="text-gray-200">0</span>
+            <span className="text-gray-200">
+              {bigIntToString(
+                userTeamStats?.directBusiness || BigInt(0),
+                Number(tokenInfo?.decimals || 0),
+                3
+              )}{" "}
+              {tokenInfo?.symbol}
+            </span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-gray-400">Total Business</span>
-            <span className="text-gray-200">0</span>
+            <span className="text-gray-200">
+              {bigIntToString(
+                userTeamStats?.totalBusiness || BigInt(0),
+                Number(tokenInfo?.decimals || 0)
+              )}{" "}
+              {tokenInfo?.symbol}
+            </span>
           </div>
         </div>
       </SidebarDropdown>

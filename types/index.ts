@@ -37,4 +37,21 @@ export interface UserInfo {
   name: string;
   email: string;
   phone: string;
+  registeredAt: bigint;
+}
+
+export interface UserPackageInfo {
+  package: bigint;
+  ceilingLimit: bigint;
+  amount: bigint;
+  earned: bigint;
+  timestamp: bigint;
+  isActive: boolean;
+};
+
+export interface UserTeamStats {
+  directTeam: bigint;
+  totalTeam: bigint;
+  directBusiness: bigint;
+  totalBusiness: bigint;
 }
