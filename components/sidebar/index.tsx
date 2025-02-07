@@ -6,7 +6,7 @@ import { HourglassIcon, Users, DollarSign, Package } from "lucide-react";
 import { ranks } from "@/lib/data/rank";
 import { bigIntToString } from "@/lib/utils";
 import { useContractData } from "@/context/contract";
-import UserPackages from "@/app/user/dashboard/components/user-packages";
+import UserPackages from "../dashboard/user-packages";
 
 export function Sidebar() {
   const { userInfo, userPackages, userTeamStats, userVolumes } = useUser();

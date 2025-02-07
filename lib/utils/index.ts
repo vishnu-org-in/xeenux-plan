@@ -29,7 +29,8 @@ export const bigIntToString = (amount: bigint, d: number | bigint = 18, decimalP
 };
 
 // Convert string amount to BigInt (multiply by 10^decimals)
-export const stringToBigInt = (amount: string, decimals: number = 18): bigint => {
+export const stringToBigInt = (amount: string, d: number | bigint = 18): bigint => {
+  const decimals = typeof d === 'number' ? d : Number(d);
   try {
     const [whole, fraction = ''] = amount.split('.');
     const paddedFraction = fraction.padEnd(decimals, '0');

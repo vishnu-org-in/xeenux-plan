@@ -11,7 +11,8 @@ import { Wallet } from "lucide-react";
 import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
 import toast from "react-hot-toast";
 import { Progress } from "../ui/progress";
-import UserPackages from "@/app/user/dashboard/components/user-packages";
+import UserPackages from "../dashboard/user-packages";
+import UserWithdrawals from "../dashboard/user-withdrawals";
 
 const treeData = {
   id: "XEE001",
@@ -204,7 +205,7 @@ export function MainContent() {
       <MainContentSection
         title="Withdraw History"
         content={
-          <p className="text-gray-400">There are no records to display</p>
+          <UserWithdrawals />
         }
       />
     </div>

@@ -38,6 +38,7 @@ export interface UserInfo {
   email: string;
   phone: string;
   registeredAt: bigint;
+  purchaseWallet: bigint;
 }
 
 export interface UserPackageInfo {

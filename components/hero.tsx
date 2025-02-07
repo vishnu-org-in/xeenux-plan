@@ -8,19 +8,32 @@ import { Input } from "./ui/input";
 import { CountdownTimer } from "./ui/countdown-timer";
 import { useState } from "react";
 import { useContractData } from "@/context/contract";
-import { bigIntToString, shortenAddress } from "@/lib/utils";
+import { bigIntToString, shortenAddress, stringToBigInt } from "@/lib/utils";
 import { useAppKitAccount } from "@reown/appkit/react";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { SwapSection } from "./swap-section";
-import { useUser } from "@/context/user";
+import { UserDataKeys, useUser } from "@/context/user";
+import { useWithdraw } from "@/hooks/use-user";
+import toast from "react-hot-toast";
 interface HeroProps {}
 
 export function Hero({}: HeroProps) {
+  const { withdraw, status, error } = useWithdraw();
   const { tokensToBeBurnt, tokenInfo, nextPrice } = useContractData();
   const { address } = useAppKitAccount();
-  const { userInfo, userTotalEarnings, userVolumes, userAvailableWithdraw } = useUser();
-  const [amount, setAmount] = useState<number>(0);
-
+  const {
+    userInfo,
+    userTotalEarnings,
+    userVolumes,
+    userAvailableWithdraw,
+    refreshUserData,
+  } = useUser();
+  const [amount, setAmount] = useState<string>("");
+  const handleAmountChange = (value: string) => {
+    if (value === "" || /^\d*\.?\d*$/.test(value)) {
+      setAmount(value);
+    }
+  };
   const scrollToPackage = () => {
     const packageElement = document.querySelector("#select-package-section");
     if (packageElement) {
@@ -30,9 +43,13 @@ export function Hero({}: HeroProps) {
     }
   };
   const handleWithdraw = async () => {
-    if (amount === 0) return;
-    // Handle withdraw logic here
-    console.log(`${amount} XEENUX to withdraw`);
+    if (parseFloat(amount) <= 0) return;
+    const txhash = await withdraw(
+      stringToBigInt(amount, tokenInfo?.decimals || 0)
+    );
+    refreshUserData([UserDataKeys.USER_CLAIMS, UserDataKeys.USER_INFO]);
+    toast.success("Withdrawal successful");
+    console.log({ txhash });
   };
 
   return (
@@ -178,6 +195,24 @@ export function Hero({}: HeroProps) {
                 </p>
               </div>
             </div>
+            <div className="flex w-full flex-colx glass-card items-center gap-4 px-4 py-2 rounded-xl">
+              <div className="lg:p-2 p-2 rounded-full bg-blue-500/20">
+                <DollarSign className="lg:w-3 lg:h-3 w-2 h-2 text-blue-500" />
+              </div>
+              <div className="w-full">
+                <p className="text-sm lg:text-sm font-bold">
+                  {bigIntToString(
+                    userInfo?.purchaseWallet || BigInt(0),
+                    tokenInfo?.decimals || 0,
+                    5
+                  )}{" "}
+                  {tokenInfo?.symbol}
+                </p>
+                <p className="text-[10px] md:text-xs text-gray-400">
+                  Purchase Wallet
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -185,18 +220,26 @@ export function Hero({}: HeroProps) {
           <div className="flex flex-col gap-2 mt-2">
             <div className="flex justify-between items-center">
               <span>Available Income:</span>{" "}
-              <span className="text-sm font-bold">{bigIntToString(userAvailableWithdraw, tokenInfo?.decimals || 0, 5)}{" "}{tokenInfo?.symbol}</span>
+              <span className="text-sm font-bold">
+                {bigIntToString(
+                  userAvailableWithdraw,
+                  tokenInfo?.decimals || 0,
+                  5
+                )}{" "}
+                {tokenInfo?.symbol}
+              </span>
             </div>
             <Input
-              placeholder="Enter amount of XEENUX to withdraw"
+              type="text"
+              placeholder="Enter amount to withdraw"
               className="glass-input"
               value={amount}
-              onChange={(e) => setAmount(Number(e.target.value))}
+              onChange={(e) => handleAmountChange(e.target.value)}
             />
             <Button
               className="w-full glass-button"
               onClick={handleWithdraw}
-              disabled={amount === 0}
+              disabled={parseFloat(amount) === 0}
             >
               Withdraw XEENUX
             </Button>
@@ -207,106 +250,6 @@ export function Hero({}: HeroProps) {
           >
             Invest or Buy package
           </Button>
-          {/* <div className="flex flex-col items-start lg:items-center gap-4">
-            <div className="flex px-2 w-full flex-col glass-card items-center gap-2 py-2 rounded-xl overflow-hidden">
-              <div className="flex gap-2 items-center px-2 w-full">
-                <Image
-                  src="/images/tether.svg"
-                  alt="usdt"
-                  width={20}
-                  height={20}
-                />
-                <p className="text-[10px] md:text-xs">USDT</p>
-              </div>
-              <div className="w-full">
-                <p className="text-xs lg:text-sm font-bold">$ 0.00</p>
-              </div>
-              <div className="flex gap-2 w-full">
-                <Button
-                  onClick={() => showDepositInput("USDT")}
-                  className="glass-button w-full"
-                >
-                  Deposit
-                </Button>
-                <Button
-                  onClick={() => showWithdrawInput("USDT")}
-                  className="glass-button w-full"
-                >
-                  Withdraw
-                </Button>
-              </div>
-            </div>
-
-            <div className="flex px-2 w-full flex-col glass-card items-center gap-2 py-2 rounded-xl overflow-hidden">
-              <div className="flex gap-2 items-center px-2 w-full">
-                <Image
-                  src="/images/xeenux.png"
-                  alt="xeenux"
-                  width={20}
-                  height={20}
-                />
-                <p className="text-[10px] md:text-xs">XEENUX</p>
-              </div>
-              <div className="w-full">
-                <p className="text-xs lg:text-sm font-bold">0.00</p>
-              </div>
-              <div className="flex gap-2 w-full">
-                <Button
-                  onClick={() => showDepositInput("XEENUX")}
-                  className="glass-button w-full"
-                >
-                  Deposit
-                </Button>
-                <Button
-                  onClick={() => showWithdrawInput("XEENUX")}
-                  className="glass-button w-full"
-                >
-                  Withdraw
-                </Button>
-              </div>
-            </div>
-          </div> */}
-
-          {/* Dynamic Input Section */}
-          {/* {selectedCurrency && (
-            <div className="flex flex-col gap-2 mt-1">
-              <Input
-                placeholder={`Enter amount of ${selectedCurrency}`}
-                className="glass-input"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-              />
-              <Button
-                className="w-full glass-button"
-                onClick={handleTransaction}
-              >
-                {transactionType === "deposit"
-                  ? `Deposit ${selectedCurrency}`
-                  : `Withdraw ${selectedCurrency}`}
-              </Button>
-            </div>
-          )} */}
-          {/* Buy XEENUX Section */}
-          {/* <div className="flex flex-col items-center gap-4 mt-6">
-                <div className="flex gap-2 items-center w-full">
-                    <Button onClick={() => showDepositInput('XEENUX')} className="glass-button w-full">
-                        Buy XEENUX
-                    </Button>
-                </div>
-                {selectedCurrency === 'XEENUX' && transactionType === 'deposit' && (
-                    <div className="flex flex-col gap-2 mt-2">
-                        <Input
-                            placeholder="Enter amount of XEENUX to buy"
-                            className="glass-input"
-                            value={amount}
-                            onChange={(e) => setAmount(e.target.value)}
-                        />
-                        <Button className="w-full glass-button" onClick={handleTransaction}>
-                            Buy XEENUX
-                        </Button>
-                    </div>
-                )}
-            </div> */}
         </div>
 
         <div className="md:border-b md:border-r-0 border-b border-gray-400/50 w-full p-4  lg:p-4">
@@ -316,7 +259,14 @@ export function Hero({}: HeroProps) {
                 <DollarSign className="lg:w-3 lg:h-3 w-2 h-2 text-blue-500" />
               </div>
               <div className="w-full">
-                <p className="text-sm lg:text-sm font-bold">{bigIntToString(userAvailableWithdraw, tokenInfo?.decimals || 0, 5)}{" "}{tokenInfo?.symbol}</p>
+                <p className="text-sm lg:text-sm font-bold">
+                  {bigIntToString(
+                    userAvailableWithdraw,
+                    tokenInfo?.decimals || 0,
+                    5
+                  )}{" "}
+                  {tokenInfo?.symbol}
+                </p>
                 <p className="text-[10px] md:text-xs text-gray-400">
                   Available withdraw
                 </p>
@@ -328,7 +278,14 @@ export function Hero({}: HeroProps) {
                 <DollarSign className="lg:w-3 lg:h-3 w-2 h-2 text-blue-500" />
               </div>
               <div className="w-full">
-                <p className="text-sm lg:text-sm font-bold">{bigIntToString(userAvailableWithdraw, tokenInfo?.decimals || 0, 5)}{" "}{tokenInfo?.symbol}</p>
+                <p className="text-sm lg:text-sm font-bold">
+                  {bigIntToString(
+                    userAvailableWithdraw,
+                    tokenInfo?.decimals || 0,
+                    5
+                  )}{" "}
+                  {tokenInfo?.symbol}
+                </p>
                 <p className="text-[10px] md:text-xs text-gray-400">
                   Total Withdraw
                 </p>

@@ -270,6 +270,19 @@ export const xeenuxContractAbi = [
 		"inputs": [
 			{
 				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
 			}
@@ -462,6 +475,11 @@ export const xeenuxContractAbi = [
 						"internalType": "uint256",
 						"name": "registeredAt",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "purchaseWallet",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct xeenuxInvestment.User[]",
@@ -486,6 +504,52 @@ export const xeenuxContractAbi = [
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_userId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_incomeType",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_page",
+				"type": "uint256"
+			}
+		],
+		"name": "getFilteredIncomeHistory",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "incomeType",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct xeenuxInvestment.IncomeRecord[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -764,6 +828,11 @@ export const xeenuxContractAbi = [
 						"internalType": "uint256",
 						"name": "registeredAt",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "purchaseWallet",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct xeenuxInvestment.User",
@@ -870,6 +939,11 @@ export const xeenuxContractAbi = [
 						"internalType": "uint256",
 						"name": "registeredAt",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "purchaseWallet",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct xeenuxInvestment.User",
@@ -975,6 +1049,11 @@ export const xeenuxContractAbi = [
 					{
 						"internalType": "uint256",
 						"name": "registeredAt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "purchaseWallet",
 						"type": "uint256"
 					}
 				],
@@ -1092,6 +1171,16 @@ export const xeenuxContractAbi = [
 						"internalType": "uint256",
 						"name": "totalBusiness",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "leftBusiness",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "rightBusiness",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct xeenuxInvestment.TeamStats",
@@ -1143,6 +1232,42 @@ export const xeenuxContractAbi = [
 				"internalType": "struct xeenuxInvestment.UserVolume",
 				"name": "",
 				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_userId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_page",
+				"type": "uint256"
+			}
+		],
+		"name": "getWithdrawalHistory",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct xeenuxInvestment.WithdrawalRecord[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -1400,30 +1525,6 @@ export const xeenuxContractAbi = [
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
-			}
-		],
-		"name": "teamsBiz",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
@@ -1548,6 +1649,40 @@ export const xeenuxContractAbi = [
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "userIncomeHistory",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "incomeType",
+				"type": "uint8"
 			}
 		],
 		"stateMutability": "view",
@@ -1807,6 +1942,11 @@ export const xeenuxContractAbi = [
 				"internalType": "uint256",
 				"name": "registeredAt",
 				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "purchaseWallet",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -1919,6 +2059,35 @@ export const xeenuxContractAbi = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "userWithdrawalHistory",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "weeklyLastDist",
 		"outputs": [
@@ -1974,9 +2143,10 @@ export const xeenuxContractAbi = [
 
 export type Addresses = { [key: string]: Address }
 export const xeenuxContractAddresses = {
-	'31337': '0x2bdCC0de6bE1f7D2ee689a0342D76F52E8EFABa3', // local chain
-	'97': '0xeA810FC6bc78E23D3aA35a2cffbD1EE0138dEacA', // testnet
+	'31337': '0x525C7063E7C20997BaaE9bDa922159152D0e8417', // local chain
+	'97': '0xB49c66839372F4Fb998189cc73ca9354E71A365B', // testnet
 } as Addresses;
+
 export const usdtAddresses = {
 	'31337': '0x5FbDB2315678afecb367f032d93F642f64180aa3', // local chain
 	'97': '0x25ed48E0f7B9Be6024866A4eF4a3882333181517', // testnet
@@ -1987,6 +2157,7 @@ export const xeenuxTokenAddresses = {
 	'97': '0x8445361C73Eda7EdD481905907fF4434401a0e35', // testnet
 } as Addresses;
 
+// TOKENS
 export const tokens: Tokens = {
 	"eip155:31337": {
 		address: xeenuxTokenAddresses['31337'],
