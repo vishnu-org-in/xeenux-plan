@@ -2,7 +2,7 @@
 
 export function Loader() {
   return (
-    <div className="flex items-center justify-center min-h-[400px]">
+    <div className="flex items-center justify-center bg-black/20 backdrop-blur-md h-screen">
       <div className="relative">
         {/* Outer ring */}
         <div className="w-16 h-16 rounded-full border-4 border-purple-500/20 animate-[spin_3s_linear_infinite]" />
