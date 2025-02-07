@@ -31,7 +31,7 @@ export default function AdminDashboard() {
         <h1 className="text-4xl font-bold mb-8 gradient-text">
           Admin Dashboard
         </h1>
-
+        
         <AdminOverview />
         <AdminControls onAction={handleAction} isLoading={isLoading} />
       </div>

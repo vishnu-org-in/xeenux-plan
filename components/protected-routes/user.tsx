@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/context/user";
+import { Loader } from "../ui/loader";
 
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -18,7 +19,9 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   }, [isConnected, userInfo, isLoadingUserInfo, router]);
 
   if (isLoadingUserInfo) {
-    return <div>Loading...</div>;
+    return <div>
+      <Loader />
+    </div>;
   }
 
   return <>{children}</>;
