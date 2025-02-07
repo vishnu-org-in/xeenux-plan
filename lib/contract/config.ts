@@ -2144,7 +2144,7 @@ export const xeenuxContractAbi = [
 export type Addresses = { [key: string]: Address }
 export const xeenuxContractAddresses = {
 	'31337': '0x525C7063E7C20997BaaE9bDa922159152D0e8417', // local chain
-	'97': '0xB49c66839372F4Fb998189cc73ca9354E71A365B', // testnet
+	'97': '0x7412B0b36fc227019AD14B4ed28Ad515a794B971', // testnet
 } as Addresses;
 
 export const usdtAddresses = {

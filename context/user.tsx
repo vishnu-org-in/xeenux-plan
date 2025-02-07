@@ -80,7 +80,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     queryKey: userVolumesQueryKey,
   } = useUserVolumes(userInfo?.id || BigInt(0));
   useEffect(() => {
-    console.log({ userInfo, isConnected });
+    console.log({ userInfo, isConnected, isLoadingUserInfo });
     if (!isLoadingUserInfo && isConnected) {
       // @ts-ignore
       if (!userInfo || Number(userInfo.id) === 0) {
