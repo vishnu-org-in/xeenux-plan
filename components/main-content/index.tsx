@@ -2,7 +2,6 @@
 
 import { MainContentSection } from "./main-content-section";
 import SelectPackage from "@/components/ui/select-package";
-import { BinaryTree } from "../binary-tree";
 import { FormEvent, useMemo, useState } from "react";
 import { UserDataKeys, useUser } from "@/context/user";
 import { useRegister } from "@/hooks/use-register";
@@ -13,6 +12,9 @@ import toast from "react-hot-toast";
 import { Progress } from "../ui/progress";
 import UserPackages from "../dashboard/user-packages";
 import UserWithdrawals from "../dashboard/user-withdrawals";
+import { BinaryTree } from "../dashboard/binary-tree";
+import { BinaryTree as BinaryTreeX } from "@/components/binary-tree";
+import { UserIncomes } from "../dashboard/use-income";
 
 const treeData = {
   id: "XEE001",
@@ -121,7 +123,9 @@ export function MainContent() {
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#4c51ff]/20 rounded-full blur-3xl" />
       <MainContentSection
         title="Ceiling Limit(4X)"
-        content={<Progress value={ceilingProgress || 1} className="h-2 bg-gray-700" />}
+        content={
+          <Progress value={ceilingProgress || 1} className="h-2 bg-gray-700" />
+        }
       />
 
       <MainContentSection
@@ -165,34 +169,30 @@ export function MainContent() {
 
       <MainContentSection
         title="ROI Income"
-        content={
-          <p className="text-gray-400">There are no records to display</p>
-        }
+        content={<UserIncomes _type={0} />}
       />
 
       <MainContentSection
         title="Level Income"
-        content={
-          <p className="text-gray-400">There are no records to display</p>
-        }
+        content={<UserIncomes _type={2} />}
       />
 
       <MainContentSection
         title="Booster Bonus"
-        content={
-          <p className="text-gray-400">There are no records to display</p>
-        }
+        content={<UserIncomes _type={1} />}
       />
       <MainContentSection
         title="Weekly Bonus"
-        content={
-          <p className="text-gray-400">There are no records to display</p>
-        }
+        content={<UserIncomes _type={4} />}
       />
 
+      {/* <MainContentSection
+        title="My Tree"
+        content={<BinaryTreeX data={treeData} />}
+      /> */}
       <MainContentSection
         title="My Tree"
-        content={<BinaryTree data={treeData} />}
+        content={<BinaryTree userId={userInfo?.id || BigInt(0)} isYou />}
       />
 
       <MainContentSection
@@ -204,9 +204,7 @@ export function MainContent() {
 
       <MainContentSection
         title="Withdraw History"
-        content={
-          <UserWithdrawals />
-        }
+        content={<UserWithdrawals />}
       />
     </div>
   );

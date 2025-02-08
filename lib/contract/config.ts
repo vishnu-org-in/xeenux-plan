@@ -386,6 +386,42 @@ export const xeenuxContractAbi = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_userId",
+				"type": "uint256"
+			}
+		],
+		"name": "getAllLevelDetails",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "level",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "userCount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalAmount",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct xeenuxInvestment.LevelDetail[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "getAllUsers",
 		"outputs": [
@@ -438,7 +474,7 @@ export const xeenuxContractAbi = [
 					},
 					{
 						"internalType": "uint256",
-						"name": "currentIncome",
+						"name": "totalWithdraw",
 						"type": "uint256"
 					},
 					{
@@ -515,6 +551,182 @@ export const xeenuxContractAbi = [
 				"internalType": "uint256",
 				"name": "_userId",
 				"type": "uint256"
+			}
+		],
+		"name": "getBinaryTree",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "directTeam",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "totalTeam",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "directBusiness",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "totalBusiness",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "leftBusiness",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "rightBusiness",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct xeenuxInvestment.TeamStats",
+						"name": "team",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "directTeam",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "totalTeam",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "directBusiness",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "totalBusiness",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "leftBusiness",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "rightBusiness",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct xeenuxInvestment.TeamStats",
+								"name": "team",
+								"type": "tuple"
+							}
+						],
+						"internalType": "struct xeenuxInvestment.TreeNode[]",
+						"name": "leftTree",
+						"type": "tuple[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "directTeam",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "totalTeam",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "directBusiness",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "totalBusiness",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "leftBusiness",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "rightBusiness",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct xeenuxInvestment.TeamStats",
+								"name": "team",
+								"type": "tuple"
+							}
+						],
+						"internalType": "struct xeenuxInvestment.TreeNode[]",
+						"name": "rightTree",
+						"type": "tuple[]"
+					}
+				],
+				"internalType": "struct xeenuxInvestment.UserTree",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_userId",
+				"type": "uint256"
 			},
 			{
 				"internalType": "uint8",
@@ -548,6 +760,57 @@ export const xeenuxContractAbi = [
 					}
 				],
 				"internalType": "struct xeenuxInvestment.IncomeRecord[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_userId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_level",
+				"type": "uint256"
+			}
+		],
+		"name": "getLevelDetails",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "userId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountEarned",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "userDeposit",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "userEmail",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "userAddress",
+						"type": "address"
+					}
+				],
+				"internalType": "struct xeenuxInvestment.UserLevelDetail[]",
 				"name": "",
 				"type": "tuple[]"
 			}
@@ -791,7 +1054,7 @@ export const xeenuxContractAbi = [
 					},
 					{
 						"internalType": "uint256",
-						"name": "currentIncome",
+						"name": "totalWithdraw",
 						"type": "uint256"
 					},
 					{
@@ -902,7 +1165,7 @@ export const xeenuxContractAbi = [
 					},
 					{
 						"internalType": "uint256",
-						"name": "currentIncome",
+						"name": "totalWithdraw",
 						"type": "uint256"
 					},
 					{
@@ -1013,7 +1276,7 @@ export const xeenuxContractAbi = [
 					},
 					{
 						"internalType": "uint256",
-						"name": "currentIncome",
+						"name": "totalWithdraw",
 						"type": "uint256"
 					},
 					{
@@ -1301,6 +1564,19 @@ export const xeenuxContractAbi = [
 			}
 		],
 		"name": "id",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "lastBurnTimestamp",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1905,7 +2181,7 @@ export const xeenuxContractAbi = [
 			},
 			{
 				"internalType": "uint256",
-				"name": "currentIncome",
+				"name": "totalWithdraw",
 				"type": "uint256"
 			},
 			{
@@ -2143,8 +2419,8 @@ export const xeenuxContractAbi = [
 
 export type Addresses = { [key: string]: Address }
 export const xeenuxContractAddresses = {
-	'31337': '0x525C7063E7C20997BaaE9bDa922159152D0e8417', // local chain
-	'97': '0x7412B0b36fc227019AD14B4ed28Ad515a794B971', // testnet
+	'31337': '0x99dBE4AEa58E518C50a1c04aE9b48C9F6354612f', // local chain
+	'97': '0x4EEcE44aC9c8C6C10e95d1d661C047543508D41a', // testnet
 } as Addresses;
 
 export const usdtAddresses = {

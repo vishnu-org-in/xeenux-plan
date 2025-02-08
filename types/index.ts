@@ -72,3 +72,26 @@ export interface UserClaims {
   rewardIncome: bigint;
   binaryIncome: bigint;
 }
+
+export interface TeamStats {
+  directTeam: bigint;
+  totalTeam: bigint;
+  directBusiness: bigint;
+  totalBusiness: bigint;
+  leftBusiness: bigint;
+  rightBusiness: bigint;
+}
+
+export interface TreeNode {
+  id: bigint;
+  name: string;
+  team: TeamStats;
+}
+
+export interface UserTree {
+  id: bigint;
+  name: string;
+  team: TeamStats;
+  leftTree: TreeNode[];
+  rightTree: TreeNode[];
+}

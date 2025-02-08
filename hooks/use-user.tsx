@@ -116,3 +116,23 @@ export function useWithdrawalHistory(_userId: bigint) {
 
   return { ...query, page, setPage };
 }
+
+export function useBinaryTree(_userId: bigint) {
+  return useReadContract({
+    address: xeenuxContractAddress,
+    abi: xeenuxContractAbi,
+    functionName: "getBinaryTree",
+    args: [_userId],
+  });
+}
+
+export function useIncomeHistory(_userId: bigint, _type: number) {
+  const [page, setPage] = useState(BigInt(1));
+  const query = useReadContract({
+    address: xeenuxContractAddress,
+    abi: xeenuxContractAbi,
+    functionName: "getFilteredIncomeHistory",
+    args: [_userId, _type, page],
+  });
+  return { ...query, page, setPage };
+}

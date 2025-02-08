@@ -152,7 +152,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     }
   };
   return (
-    // @ts-ignore
     <UserContext.Provider
       value={{
         userInfo,
