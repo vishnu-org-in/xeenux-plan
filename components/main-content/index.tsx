@@ -171,6 +171,10 @@ export function MainContent() {
         title="ROI Income"
         content={<UserIncomes _type={0} />}
       />
+      <MainContentSection
+        title="Binary Income"
+        content={<UserIncomes _type={1} />}
+      />
 
       <MainContentSection
         title="Level Income"
@@ -178,9 +182,10 @@ export function MainContent() {
       />
 
       <MainContentSection
-        title="Booster Bonus"
-        content={<UserIncomes _type={1} />}
+        title="AutoPool Income"
+        content={<UserIncomes _type={3} />}
       />
+
       <MainContentSection
         title="Weekly Bonus"
         content={<UserIncomes _type={4} />}
@@ -197,9 +202,7 @@ export function MainContent() {
 
       <MainContentSection
         title="Package History"
-        content={
-          <UserPackages userPackages={userPackages} withInactive />
-        }
+        content={<UserPackages userPackages={userPackages} withInactive />}
       />
 
       <MainContentSection
