@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 import Image from "next/image";
 import { Input } from "./ui/input";
 import { CountdownTimer } from "./ui/countdown-timer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useContractData } from "@/context/contract";
 import { bigIntToString, shortenAddress, stringToBigInt } from "@/lib/utils";
 import { useAppKitAccount } from "@reown/appkit/react";
@@ -15,6 +15,7 @@ import { SwapSection } from "./swap-section";
 import { UserDataKeys, useUser } from "@/context/user";
 import { useWithdraw } from "@/hooks/use-user";
 import toast from "react-hot-toast";
+import { useLastBurnDate } from "@/hooks/use-contract";
 interface HeroProps {}
 
 export function Hero({}: HeroProps) {
@@ -28,6 +29,10 @@ export function Hero({}: HeroProps) {
     userAvailableWithdraw,
     refreshUserData,
   } = useUser();
+  const { data: lastBurnTimestamp } = useLastBurnDate();
+  useEffect(() => {
+    console.log({ lastBurnTimestamp });
+  }, [lastBurnTimestamp]);
   const [amount, setAmount] = useState<string>("");
   const handleAmountChange = (value: string) => {
     if (value === "" || /^\d*\.?\d*$/.test(value)) {
@@ -114,7 +119,17 @@ export function Hero({}: HeroProps) {
             Burning date timer
           </p>
           <div className="w-full">
-            <CountdownTimer targetDate={new Date("2025-02-04")} />
+            {/* <CountdownTimer targetDate={new Date("2025-02-04")} /> */}
+            {lastBurnTimestamp && (
+              <CountdownTimer
+                targetDate={
+                  new Date(
+                    (Number(lastBurnTimestamp) || 0) * 1000 +
+                      1000 * 60 * 60 * 24 * 30
+                  )
+                }
+              />
+            )}
           </div>
         </div>
       </div>
@@ -280,7 +295,7 @@ export function Hero({}: HeroProps) {
               <div className="w-full">
                 <p className="text-sm lg:text-sm font-bold">
                   {bigIntToString(
-                    userAvailableWithdraw,
+                    userInfo?.totalWithdraw || BigInt(0),
                     tokenInfo?.decimals || 0,
                     5
                   )}{" "}

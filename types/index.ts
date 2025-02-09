@@ -39,6 +39,7 @@ export interface UserInfo {
   phone: string;
   registeredAt: bigint;
   purchaseWallet: bigint;
+  totalWithdraw: bigint;
 }
 
 export interface UserPackageInfo {

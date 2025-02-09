@@ -79,3 +79,11 @@ export function useNextPrice() {
         functionName: 'nextPrice',
     });
 }
+
+export function useLastBurnDate() {
+    return useReadContract({
+        address: xeenuxContractAddress,
+        abi: xeenuxContractAbi,
+        functionName: 'lastBurnTimestamp',
+    });
+}
