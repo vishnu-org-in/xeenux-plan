@@ -312,7 +312,7 @@ export function Hero({}: HeroProps) {
                       className="bg-transparent border border-purple-500/80 text-purple-500/80 rounded-xl w- h-12 font-semibold mx-auto w-48"
                       type="button"
                     > */}
-                swap usdt to xee
+                Swap USDT to XEE
                 {/* </Button> */}
               </DialogTrigger>
               <DialogContent className="p-0 border-none">
