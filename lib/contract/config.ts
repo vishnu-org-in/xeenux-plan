@@ -2260,7 +2260,7 @@ export const xeenuxContractAbi = [
 export type Addresses = { [key: string]: Address }
 export const xeenuxContractAddresses = {
 	'31337': '0xAD523115cd35a8d4E60B3C0953E0E0ac10418309', // local chain
-	'97': '0x4EEcE44aC9c8C6C10e95d1d661C047543508D41a', // testnet
+	'97': '0xFA02E3EAb90b6E523515Ab70b6456F13485E450D', // testnet
 } as Addresses;
 
 export const usdtAddresses = {
