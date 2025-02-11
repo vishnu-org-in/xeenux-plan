@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { useContractData } from "@/context/contract";
 import { cn, bigIntToString } from "@/lib/utils";
-import Image from "next/image";
+// import Image from "next/image";
 import { ChevronDown, User, Star } from "lucide-react";
 import { useGetUserBinaryTree } from "@/hooks/use-user";
 
@@ -29,9 +29,9 @@ const BinaryTreeNode = ({
   if (userId === BigInt(0)) {
     return (
       <div className="flex flex-col items-center gap-4 py-4 w-full justify-center">
-        <Card className="py-4 border border-gray-600 bg-gray-800 shadow-md flex flex-col items-center gap-1 min-w-56 rounded-full">
+        <Card className="py-4 border border-gray-600 bg-gray-800 shadow-md flex flex-col items-center gap-1 min-w-36 rounded-xl">
           <h2 className="text-xs text-gray-400 font-semibold flex items-center gap-2">
-            <User size={16} /> Empty Node
+            <User size={12} /> Empty Node
           </h2>
           <h3 className="text-sm text-gray-500 font-bold">No User</h3>
           <button className="text-xs text-purple-200 mt-2 flex items-center gap-1 rounded px-2 py-1">
@@ -45,6 +45,9 @@ const BinaryTreeNode = ({
   const [expanded, setExpanded] = useState(false);
   const { data: treeData, isLoading, error } = useGetUserBinaryTree(userId);
   const { tokenInfo } = useContractData();
+  useEffect(() => {
+    console.log({ treeData });
+  }, [treeData]);
 
   if (isLoading) return <p className="text-gray-400">Loading...</p>;
   if (error) return <p className="text-red-500 text-sm">Failed to load tree</p>;
@@ -53,10 +56,10 @@ const BinaryTreeNode = ({
   return (
     <div className=" flex flex-col items-center gap-0 py-4 w-full justify-center rounded-full">
       {/* User Card */}
-      <Card className="relative py-4 border border-purple-500 bg-primary-900 shadow-md flex flex-col items-center gap-1 min-w-56 rounded-full">
+      <Card className="relative py-4 border border-purple-500 bg-primary-900 shadow-md flex flex-col items-center gap-1 min-w-36 rounded-xl">
         {/* <Image src="/images/xeenux.png" alt="Icon" width={30} height={30} /> */}
         <h2 className="text-xs text-purple-300 font-semibold flex items-center gap-2">
-          <User size={16} />
+          <User size={12} />
           USER{Number(treeData.id)}
         </h2>
         <h3 className="text-sm text-purple-400 font-bold">
@@ -66,7 +69,7 @@ const BinaryTreeNode = ({
           className="text-xs text-purple-200 mt-2 flex items-center gap-1 bg-purple-500/50 rounded px-2 py-1"
           onClick={() => setExpanded(!expanded)}
         >
-          Team: {bigIntToString(treeData.leftCount + treeData.rightCount, 0, 0)}
+          Left: {bigIntToString(treeData.leftVolume, tokenInfo?.decimals, 0)} / Right: {bigIntToString(treeData.rightCount, tokenInfo?.decimals, 0)}
           <ChevronDown
             className={cn(
               "w-4 h-4 transition-transform",
@@ -74,29 +77,29 @@ const BinaryTreeNode = ({
             )}
           />
         </button>
+      </Card>
         {expanded && (
-          <div className="relative w-full top-4 h-0">
-            <div className="w-full border border-purple-500 z-50 absolute top-0  flex flex-col items-left px-2 gap-2 py-2 justify-center rounded-none bg-gray-900">
+          <div className="relative min-w-56 top-4 h-0 text-xs">
+            <div className="w-full border border-purple-500 z-50 absolute -top-5  flex flex-col items-center px-2 gap-2 py-2 justify-center rounded-none bg-gray-900">
               <div className="flex gap-1 items-center">
-                <Star size={16} />
+                <Star size={12} />
                 Left Count: {treeData.leftCount.toString()}
               </div>
               <div className="flex gap-1 items-center">
-                <Star size={16} />
+                <Star size={12} />
                 Right COUNT: {treeData.rightCount.toString()}
               </div>
-              <div className="flex gap-1 items-center">
-                <Star size={16} />
-                Left CarryForward: {treeData.leftCaryForward.toString()}
+              <div className="flex gap-1 items-center tracking-tighter">
+                <Star size={12} />
+                Left Carryforward: {bigIntToString(treeData.leftCaryForward, tokenInfo?.decimals, 0)} {tokenInfo?.symbol}
               </div>
-              <div className="flex gap-1 items-center">
-                <Star size={16} />
-                Right CarryForward: {treeData.rightCaryForward.toString()}
+              <div className="flex gap-1 items-center tracking-tighter">
+                <Star size={12} />
+                Right Carryforward: {bigIntToString(treeData.rightCaryForward, tokenInfo?.decimals, 0)} {tokenInfo?.symbol}
               </div>
             </div>
           </div>
         )}
-      </Card>
       {/* Render Connection Line */}
       {level < 3 && (
         <div className="flex flex-col items-center">

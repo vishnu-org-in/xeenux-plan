@@ -11,6 +11,11 @@ export const xeenuxContractAbi = [
 			},
 			{
 				"internalType": "address",
+				"name": "_fee",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
 				"name": "_xeenux",
 				"type": "address"
 			},
@@ -413,6 +418,11 @@ export const xeenuxContractAbi = [
 						"internalType": "uint256",
 						"name": "purchaseWallet",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastROIDistributed",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct xeenuxInvestment.User[]",
@@ -694,7 +704,7 @@ export const xeenuxContractAbi = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "userId",
+				"name": "_userId",
 				"type": "uint256"
 			}
 		],
@@ -720,6 +730,16 @@ export const xeenuxContractAbi = [
 					{
 						"internalType": "uint256",
 						"name": "rightCount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "leftVolume",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "rightVolume",
 						"type": "uint256"
 					},
 					{
@@ -898,6 +918,11 @@ export const xeenuxContractAbi = [
 						"internalType": "uint256",
 						"name": "purchaseWallet",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastROIDistributed",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct xeenuxInvestment.User",
@@ -1009,6 +1034,11 @@ export const xeenuxContractAbi = [
 						"internalType": "uint256",
 						"name": "purchaseWallet",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastROIDistributed",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct xeenuxInvestment.User",
@@ -1119,6 +1149,11 @@ export const xeenuxContractAbi = [
 					{
 						"internalType": "uint256",
 						"name": "purchaseWallet",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastROIDistributed",
 						"type": "uint256"
 					}
 				],
@@ -1452,6 +1487,19 @@ export const xeenuxContractAbi = [
 			}
 		],
 		"name": "rewardUsers",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "roiIncomeLastDist",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -2079,6 +2127,11 @@ export const xeenuxContractAbi = [
 				"internalType": "uint256",
 				"name": "purchaseWallet",
 				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "lastROIDistributed",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -2259,7 +2312,7 @@ export const xeenuxContractAbi = [
 
 export type Addresses = { [key: string]: Address }
 export const xeenuxContractAddresses = {
-	'31337': '0xAD523115cd35a8d4E60B3C0953E0E0ac10418309', // local chain
+	'31337': '0xeF31027350Be2c7439C1b0BE022d49421488b72C', // local chain
 	'97': '0xFA02E3EAb90b6E523515Ab70b6456F13485E450D', // testnet
 } as Addresses;
 
