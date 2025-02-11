@@ -308,12 +308,7 @@ export function Hero({}: HeroProps) {
             </div>
             <Dialog>
               <DialogTrigger className="bg-transparent border border-purple-500/80 text-purple-500/80 rounded-xl w- h-12 font-semibold mx-auto w-full">
-                {/* <Button
-                      className="bg-transparent border border-purple-500/80 text-purple-500/80 rounded-xl w- h-12 font-semibold mx-auto w-48"
-                      type="button"
-                    > */}
                 swap USDT to {tokenInfo?.symbol}
-                {/* </Button> */}
               </DialogTrigger>
               <DialogContent className="p-0 border-none">
                 <DialogTitle className="text-xl font-bold sr-only">
