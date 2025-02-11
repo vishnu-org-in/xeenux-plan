@@ -16,6 +16,7 @@ import { BinaryTree } from "../dashboard/binary-tree";
 import { UserIncomes } from "../dashboard/use-income";
 import { bigIntToString } from "@/lib/utils";
 import { useContractData } from "@/context/contract";
+import { LevelDetailsAccordion } from "../dashboard/level-details";
 
 export function MainContent() {
   const { userInfo, refreshUserData, userPackages } = useUser();
@@ -215,7 +216,7 @@ export function MainContent() {
         title="Withdraw History"
         content={<UserWithdrawals />}
       />
-      <MainContentSection title="Full Team" content={<UserWithdrawals />} />
+      <MainContentSection title="Full Team" content={<LevelDetailsAccordion />} />
     </div>
   );
 }

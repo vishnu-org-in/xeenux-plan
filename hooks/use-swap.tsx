@@ -212,3 +212,11 @@ export const useSwapXeeToUsdt = () => {
     isXeeBalanceError,
   };
 };
+
+export function useSwapFee() {
+  return useReadContract({
+    address: xeenuxContractAddress,
+    abi: xeenuxContractAbi,
+    functionName: "swapFee",
+  });
+}

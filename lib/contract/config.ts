@@ -704,7 +704,32 @@ export const xeenuxContractAbi = [
 				"components": [
 					{
 						"internalType": "uint256",
-						"name": "userId",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "leftCount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "rightCount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "leftCaryForward",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "rightCaryForward",
 						"type": "uint256"
 					},
 					{
@@ -718,9 +743,9 @@ export const xeenuxContractAbi = [
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct xeenuxInvestment.BinarySubTree[3]",
+				"internalType": "struct xeenuxInvestment.BinaryNode",
 				"name": "",
-				"type": "tuple[3]"
+				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",
@@ -2234,7 +2259,7 @@ export const xeenuxContractAbi = [
 
 export type Addresses = { [key: string]: Address }
 export const xeenuxContractAddresses = {
-	'31337': '0x638A246F0Ec8883eF68280293FFE8Cfbabe61B44', // local chain
+	'31337': '0xAD523115cd35a8d4E60B3C0953E0E0ac10418309', // local chain
 	'97': '0x4EEcE44aC9c8C6C10e95d1d661C047543508D41a', // testnet
 } as Addresses;
 

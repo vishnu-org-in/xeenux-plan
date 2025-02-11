@@ -103,7 +103,7 @@ export const useWithdraw = () => {
   };
 };
 
-export function useBinaryTree(_userId: bigint) {
+export function useGetUserBinaryTree(_userId: bigint) {
   return useReadContract({
     address: xeenuxContractAddress,
     abi: xeenuxContractAbi,

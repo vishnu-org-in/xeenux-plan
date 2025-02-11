@@ -5,10 +5,21 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useContractData } from "@/context/contract";
+import { useUser } from "@/context/user";
+import { useGetAllUserLevels, useGetUserLevelDetails } from "@/hooks/use-user";
 import { bigIntToString, shortenAddress } from "@/lib/utils";
 import { UserLevelDetail } from "@/types";
 import { useState } from "react";
-
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 // Type for a single user level
 interface Level {
   level: bigint;
@@ -20,59 +31,27 @@ interface Level {
 interface LevelDetailsCache {
   [key: string]: UserLevelDetail[] | undefined;
 }
-export function LevelDetailsAccordion({
-  userLevels,
-  showLevels,
-  getLevelDetails,
-  userId,
-}: {
-  userId: number;
-  userLevels: Level[];
-  showLevels: boolean;
-  getLevelDetails: (
-    userId: number,
-    level: number
-  ) => Promise<UserLevelDetail[]>;
-}) {
-  const [levelDetailsCache, setLevelDetailsCache] = useState<LevelDetailsCache>(
-    {}
-  );
+export function LevelDetailsAccordion({}: {}) {
   const LevelRequiredReferrals = [5, 1, 1, 1, 1, 1, 5];
   const { tokenInfo } = useContractData();
-  // Track loading states for each level
-  const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>(
-    {}
-  );
-  const handleLevelClick = async (levelId: string, level: Level) => {
-    if (Number(level.userCount) === 0) return;
-    if (levelDetailsCache[levelId]) return;
+  const { userInfo } = useUser();
+  const { data: userLevels } = useGetAllUserLevels(userInfo?.id || BigInt(0));
+  const {
+    data: levelDetails,
+    setLevel,
+    isLoading: isLoadingLevelDetails,
+  } = useGetUserLevelDetails(userInfo?.id || BigInt(0));
 
-    setLoadingStates((prev) => ({ ...prev, [levelId]: true }));
-
-    try {
-      const details = await getLevelDetails(userId, Number(level.level));
-      setLevelDetailsCache((prev) => ({
-        ...prev,
-        [levelId]: details,
-      }));
-    } catch (error) {
-      console.error("Error fetching level details:", error);
-    } finally {
-      setLoadingStates((prev) => ({ ...prev, [levelId]: false }));
-    }
-  };
-
-  if (!showLevels) return null;
   return (
     <Accordion type="single" collapsible>
-      {userLevels.length > 0 ? (
+      {userLevels && userLevels?.length > 0 ? (
         userLevels.map((level, index) => {
           const levelId = `level-${index}`;
           return (
             <AccordionItem
               value={levelId}
               key={index}
-              onClick={() => handleLevelClick(levelId, level)}
+              onClick={() => setLevel(level.level)}
               className="flex flex-col gap-2 px-3 "
             >
               <AccordionTrigger>
@@ -85,57 +64,80 @@ export function LevelDetailsAccordion({
                 <div className="text-sm font-medium">
                   {level.userCount.toString()} users
                 </div>
-                <div className="text-sm font-medium">
+                {/* <div className="text-sm font-medium">
                   {bigIntToString(
                     level?.totalAmount,
                     Number(tokenInfo?.decimals || 0),
                     0
                   )}{" "}
                   {tokenInfo?.symbol}
-                </div>
+                </div> */}
               </AccordionTrigger>
-              <AccordionContent className="px-5 font-bold">
+              <AccordionContent className="px-1 font-bold">
                 {Number(level.userCount) === 0 ? (
                   <div className="flex flex-col gap-2">
                     <div className="text-sm text-gray-500">
                       No users in this level
                     </div>
-                    {LevelRequiredReferrals[index] >
+                    {/* {LevelRequiredReferrals[index] >
                       Number(level.userCount) && (
                       <span className="text-sm font-light text-orange-500">
                         you need minimum {LevelRequiredReferrals[index]} direct
                         referrals earn from this level
                       </span>
-                    )}
+                    )} */}
                   </div>
-                ) : loadingStates[levelId] ? (
+                ) : isLoadingLevelDetails ? (
                   <div className="text-sm">Loading...</div>
-                ) : levelDetailsCache[levelId] ? (
-                  <div className="space-y-2">
-                    {levelDetailsCache[levelId].map((detail, detailIndex) => (
-                      <div
-                        key={detailIndex}
-                        className="text-sm flex gap-2 border-b border-gray-400 py-2"
-                      >
-                        <span>{detailIndex + 1}.</span>
-                        <span className="">User-{Number(detail.userId)}</span>
-                        <span>-</span>
-                        <span className="">
-                          {shortenAddress(detail.userEmail)} (
-                          {shortenAddress(detail.userAddress)})
-                        </span>
-                        <span>-</span>
-                        <span className="">
+                ) : levelDetails ? (
+                  <Table className="w-full">
+                    <TableHeader className="bg-purple-500/50">
+                      <TableRow>
+                        <TableHead className="">S/N</TableHead>
+                        <TableHead>ID</TableHead>
+                        <TableHead>Email/Wallet</TableHead>
+                        <TableHead className="text-right">Amount</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {levelDetails.map((detail, i) => (
+                        <TableRow key={i} className="">
+                          <TableCell className="font-medium tracking-tighter">
+                            {i + 1}
+                          </TableCell>
+                          <TableCell>USER-{Number(detail.userId)}</TableCell>
+                          <TableCell className="font-medium">
+                            {shortenAddress(detail.userEmail)} (
+                            {shortenAddress(detail.userAddress)})
+                          </TableCell>
+                          <TableCell className="text-right">
+                            {bigIntToString(
+                              detail.userDeposit,
+                              Number(tokenInfo?.decimals || 0),
+                              0
+                            )}{" "}
+                            {tokenInfo?.symbol}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                    <TableFooter>
+                      <TableRow>
+                        <TableCell colSpan={3}>Total</TableCell>
+                        <TableCell className="text-right">
                           {bigIntToString(
-                            detail.userDeposit,
-                            Number(tokenInfo?.decimals || 0),
+                            levelDetails.reduce(
+                              (acc, curr) => acc + curr.userDeposit,
+                              BigInt(0)
+                            ),
+                            tokenInfo?.decimals || 0,
                             0
                           )}{" "}
                           {tokenInfo?.symbol}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                        </TableCell>
+                      </TableRow>
+                    </TableFooter>
+                  </Table>
                 ) : (
                   <div className="text-sm">Click to load details</div>
                 )}

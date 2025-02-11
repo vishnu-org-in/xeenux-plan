@@ -1,17 +1,23 @@
 'use client'
 
-interface SwapDetailsProps {
-  minimumReceived: string
-  priceImpact: string
-  fee: string
-}
+import { useContractData } from "@/context/contract";
 
-export function SwapDetails({ minimumReceived, priceImpact, fee }: SwapDetailsProps) {
+interface SwapDetailsProps {
+  amount: number
+  priceImpact: string
+  swapFee: bigint
+  symbol: string
+}
+function applySwapFee(amount: bigint, feePercent: bigint): bigint {
+  return (amount * (BigInt(10000) - feePercent)) / BigInt(10000);
+}
+export function SwapDetails({ amount, priceImpact, swapFee, symbol }: SwapDetailsProps) {
+  const { tokenInfo } = useContractData();
   return (
     <div className="space-y-2 text-sm">
       <div className="flex justify-between">
         <span className="text-gray-400">Minimum Received</span>
-        <span className="text-gray-200">{minimumReceived}</span>
+        <span className="text-gray-200">{applySwapFee(BigInt(amount), swapFee).toString()} {symbol}</span>
       </div>
       <div className="flex justify-between">
         <span className="text-gray-400">Price Impact</span>
@@ -19,7 +25,7 @@ export function SwapDetails({ minimumReceived, priceImpact, fee }: SwapDetailsPr
       </div>
       <div className="flex justify-between">
         <span className="text-gray-400">Liquidity Provider Fee</span>
-        <span className="text-gray-200">{fee}</span>
+        <span className="text-gray-200">{swapFee.toString()}%</span>
       </div>
     </div>
   )

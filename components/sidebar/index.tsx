@@ -14,7 +14,7 @@ export function Sidebar() {
   const rankName = ranks[Number(userInfo?.rank)] || "UNKNOWN";
   // const package = packages.find(p => p.value === Number(userInfo?.package));
   return (
-    <div className="w-full lg:w-96 space-y-4">
+    <div className="space-y-4">
       <SidebarDropdown
         title="Rank"
         icon={<HourglassIcon className="w-5 h-5 text-purple-400" />}

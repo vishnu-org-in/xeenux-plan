@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppKitAccount } from "@reown/appkit/react";
 import { useIncomeHistory } from "@/hooks/use-user";
 import { useUser } from "@/context/user";
@@ -17,6 +17,9 @@ const UserWithdrawals: React.FC = () => {
     setPage,
   } = useIncomeHistory(userInfo?.id || BigInt(0), UserActivityMode.WITHDRAWAL);
   const { data: tokenInfo } = useTokenInfo();
+  useEffect(() => {
+    console.log({ withdrawals });
+  }, [withdrawals]);
   return (
     <div className="">
       {isLoading && <p className="text-gray-500">Loading withdrawals...</p>}
@@ -55,6 +58,9 @@ const UserWithdrawals: React.FC = () => {
                   {bigIntToString(withdrawal.amount, tokenInfo?.decimals)}{" "}
                   {tokenInfo?.symbol}
                 </td>
+                {/* <td className="border border-purple-500/50 px-4 py-2 text-right">
+                  {withdrawal.mode.toString()}
+                </td> */}
               </tr>
             ))}
           </tbody>

@@ -10,14 +10,14 @@ import { useUsdtBalance, useXeeBalance } from "@/hooks/use-contract";
 import { bigIntToString, formatAmount, stringToBigInt } from "@/lib/utils";
 import { useContractData } from "@/context/contract";
 import toast from "react-hot-toast";
-import { useSwapUsdtToXee, useSwapXeeToUsdt } from "@/hooks/use-swap";
+import { useSwapFee, useSwapUsdtToXee, useSwapXeeToUsdt } from "@/hooks/use-swap";
 import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
 interface Token {
   symbol: string;
   icon: string;
   balance: string;
   amount: string;
-  decimals: bigint | null;
+  decimals: number | null;
   isBalanceLoading: boolean;
 }
 const usdtToken: Token = {
@@ -25,7 +25,7 @@ const usdtToken: Token = {
   icon: "/images/tether.svg",
   balance: "0",
   amount: "0",
-  decimals: BigInt(18), // USDT is always 18
+  decimals: 18, // USDT is always 18
   isBalanceLoading: true,
 };
 
@@ -138,6 +138,7 @@ export function SwapSection() {
     refetch: refetchUsdtBalance,
   } = useUsdtBalance();
   const { tokenInfo, swapPrice } = useContractData();
+  const { data: swapFee } = useSwapFee();
   async function refetchTokenBalances() {
     await refetchXeeBalance();
     await refetchUsdtBalance();
@@ -336,13 +337,14 @@ export function SwapSection() {
           onAmountChange={(value) => handleAmountChange(value, false)}
         />
 
-        <SwapSettings slippage={slippage} onSlippageChange={setSlippage} />
+        {/* <SwapSettings slippage={slippage} onSlippageChange={setSlippage} /> */}
 
         <div className="glass-card p-4">
           <SwapDetails
-            minimumReceived="0.00 XEE"
+            amount={Number(toToken.amount)}
+            symbol={toToken.symbol}
             priceImpact="< 0.01%"
-            fee="0.3%"
+            swapFee={swapFee || BigInt(0)}
           />
         </div>
 
