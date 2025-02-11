@@ -11,7 +11,7 @@ import {
 interface TokenInfo {
   name: string;
   symbol: string;
-  decimals: bigint;
+  decimals: number;
   totalSupply: bigint;
   tokenAddress: Address;
 }

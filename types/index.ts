@@ -96,3 +96,34 @@ export interface UserTree {
   leftTree: TreeNode[];
   rightTree: TreeNode[];
 }
+
+export interface BinaryUser {
+  userId: bigint;
+  name: string;
+  team: {
+    totalTeam: bigint;
+    directTeam: bigint;
+    leftBusiness: bigint;
+    rightBusiness: bigint;
+  };
+  leftChildId: bigint;
+  rightChildId: bigint;
+}
+
+export enum UserActivityMode {
+  INVESTMENT = 0,
+  REFERRAL = 1,
+  ROI = 2,
+  AUTOPOOL = 3,
+  REWARD = 4,
+  BINARY = 5,
+  WITHDRAWAL = 6,
+}
+
+export interface UserLevelDetail {
+  userId: bigint;
+  amountEarned: bigint;
+  userDeposit: bigint;
+  userEmail: string;
+  userAddress: string;
+}

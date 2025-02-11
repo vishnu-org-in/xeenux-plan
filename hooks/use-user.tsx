@@ -103,25 +103,11 @@ export const useWithdraw = () => {
   };
 };
 
-// Hook to get paginated withdrawal history with setPage for refetching
-export function useWithdrawalHistory(_userId: bigint) {
-  const [page, setPage] = useState<bigint>(BigInt(1));
-
-  const query = useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
-    functionName: "getWithdrawalHistory",
-    args: [_userId, page],
-  });
-
-  return { ...query, page, setPage };
-}
-
 export function useBinaryTree(_userId: bigint) {
   return useReadContract({
     address: xeenuxContractAddress,
     abi: xeenuxContractAbi,
-    functionName: "getBinaryTree",
+    functionName: "getUserBinaryTree",
     args: [_userId],
   });
 }
@@ -131,8 +117,30 @@ export function useIncomeHistory(_userId: bigint, _type: number) {
   const query = useReadContract({
     address: xeenuxContractAddress,
     abi: xeenuxContractAbi,
-    functionName: "getFilteredIncomeHistory",
+    functionName: "getFilteredActivities",
     args: [_userId, _type, page],
   });
   return { ...query, page, setPage };
+}
+
+export function useGetAllUserLevels(_userId: bigint) {
+  return useReadContract({
+    address: xeenuxContractAddress,
+    abi: xeenuxContractAbi,
+    functionName: "getAllLevelDetails",
+    args: [_userId],
+  });
+}
+
+export function useGetUserLevelDetails(_userId: bigint) {
+  const [level, setLevel] = useState(BigInt(0));
+  return {
+    ...useReadContract({
+      address: xeenuxContractAddress,
+      abi: xeenuxContractAbi,
+      functionName: "getLevelDetails",
+      args: [_userId, level],
+    }),
+    setLevel,
+  };
 }

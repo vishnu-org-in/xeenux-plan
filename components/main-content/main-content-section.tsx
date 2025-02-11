@@ -7,14 +7,15 @@ import { ReactNode, useState } from 'react'
 interface MainContentSectionProps {
   title: string
   content: ReactNode,
-  id?: string
+  id?: string,
+  className?: string
 }
 
-export function MainContentSection({ title, content, id = "" }: MainContentSectionProps) {
+export function MainContentSection({ title, content, id = "", className = "" }: MainContentSectionProps) {
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
-    <Card className="glass-card overflow-hidden" id={id}>
+    <Card id={id} className="glass-card overflow-hidden">
       <button
         className="w-full p-4 flex items-center justify-between text-left"
         onClick={() => setIsExpanded(!isExpanded)}
@@ -26,7 +27,7 @@ export function MainContentSection({ title, content, id = "" }: MainContentSecti
       </button>
       
       {isExpanded && (
-        <div className="text-xs p-4 pt-0">
+        <div className={`${className} text-xs p-4 pt-0`}>
           {content}
         </div>
       )}

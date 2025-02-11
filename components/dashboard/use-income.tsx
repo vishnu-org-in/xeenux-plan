@@ -4,6 +4,7 @@ import { useIncomeHistory } from "@/hooks/use-user";
 import { useUser } from "@/context/user";
 import { bigIntToString } from "@/lib/utils";
 import { useTokenInfo } from "@/hooks/use-contract";
+import { UserActivityMode } from "@/types";
 
 export const UserIncomes: React.FC<{
   _type: number;
@@ -39,9 +40,19 @@ export const UserIncomes: React.FC<{
               <th className="border border-purple-500/50 px-4 py-2 text-left">
                 Date
               </th>
+              {[UserActivityMode.REFERRAL].includes(_type) && (
+                <th className="border border-purple-500/50 px-4 py-2 text-left">
+                  User
+                </th>
+              )}
               <th className="border border-purple-500/50 px-4 py-2 text-right">
                 Amount
               </th>
+              {_type === UserActivityMode.REFERRAL && (
+                <th className="border border-purple-500/50 px-4 py-2 text-right">
+                  Level
+                </th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -52,10 +63,20 @@ export const UserIncomes: React.FC<{
                     Number(withdrawal.timestamp) * 1000
                   ).toLocaleDateString()}
                 </td>
+                {[UserActivityMode.REFERRAL].includes(_type) && (
+                  <td className="border border-purple-500/50 px-4 py-2 text-left">
+                    USER{Number(withdrawal.id)}
+                  </td>
+                )}
                 <td className="border border-purple-500/50 px-4 py-2 text-right">
                   {bigIntToString(withdrawal.amount, tokenInfo?.decimals)}{" "}
                   {tokenInfo?.symbol}
                 </td>
+                {[UserActivityMode.REFERRAL].includes(_type) && (
+                  <td className="border border-purple-500/50 px-4 py-2 text-left">
+                    {Number(withdrawal.level) + 1}
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

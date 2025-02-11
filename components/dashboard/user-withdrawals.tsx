@@ -1,9 +1,10 @@
 import React from "react";
 import { useAppKitAccount } from "@reown/appkit/react";
-import { useWithdrawalHistory } from "@/hooks/use-user";
+import { useIncomeHistory } from "@/hooks/use-user";
 import { useUser } from "@/context/user";
 import { bigIntToString } from "@/lib/utils";
 import { useTokenInfo } from "@/hooks/use-contract";
+import { UserActivityMode } from "@/types";
 
 const UserWithdrawals: React.FC = () => {
   const { address } = useAppKitAccount(); // Get user's address
@@ -14,7 +15,7 @@ const UserWithdrawals: React.FC = () => {
     error,
     page,
     setPage,
-  } = useWithdrawalHistory(userInfo?.id || BigInt(0));
+  } = useIncomeHistory(userInfo?.id || BigInt(0), UserActivityMode.WITHDRAWAL);
   const { data: tokenInfo } = useTokenInfo();
   return (
     <div className="">

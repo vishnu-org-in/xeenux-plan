@@ -13,61 +13,18 @@ import { Progress } from "../ui/progress";
 import UserPackages from "../dashboard/user-packages";
 import UserWithdrawals from "../dashboard/user-withdrawals";
 import { BinaryTree } from "../dashboard/binary-tree";
-import { BinaryTree as BinaryTreeX } from "@/components/binary-tree";
 import { UserIncomes } from "../dashboard/use-income";
-
-const treeData = {
-  id: "XEE001",
-  name: "XEENUX",
-  leftValue: 1013400,
-  rightValue: 858000,
-  left: {
-    id: "XEE002",
-    name: "John Doe",
-    leftValue: 1012300,
-    rightValue: 0,
-    left: {
-      id: "XEE003",
-      name: "Alice Smith",
-      leftValue: 1011200,
-      rightValue: 0,
-    },
-  },
-  right: {
-    id: "XEE004",
-    name: "Jane Smith",
-    leftValue: 253000,
-    rightValue: 55000,
-    left: {
-      id: "XEE005",
-      name: "Bob Johnson",
-      leftValue: 165000,
-      rightValue: 77000,
-    },
-    right: {
-      id: "XEE006",
-      name: "Sarah Wilson",
-      leftValue: 0,
-      rightValue: 0,
-    },
-  },
-};
+import { bigIntToString } from "@/lib/utils";
+import { useContractData } from "@/context/contract";
 
 export function MainContent() {
   const { userInfo, refreshUserData, userPackages } = useUser();
   const [buyPackage, setBuyPackage] = useState(0);
-  const {
-    registerUser,
-    isPriceLoading,
-    isPriceReady,
-    packageIndex,
-    packagePrice,
-    setPackageIndex,
-    isPriceError,
-    status,
-  } = useRegister({
-    _package: buyPackage,
-  });
+  const { tokenInfo } = useContractData();
+  const { registerUser, isPriceReady, setPackageIndex, isPriceError, status } =
+    useRegister({
+      _package: buyPackage,
+    });
   const { isConnected } = useAppKitAccount();
   const { open } = useAppKit();
   const handleBuyPackage = async (e: FormEvent) => {
@@ -105,6 +62,28 @@ export function MainContent() {
       );
     }
   };
+  const totalLimit = useMemo(() => {
+    let totalLimit = BigInt(0);
+    if (!userPackages || userPackages.length === 0) return totalLimit; // Avoid errors when data isn't available
+
+    userPackages.forEach((pkg) => {
+      totalLimit += pkg.ceilingLimit; // Sum total ceiling limits
+    });
+
+    return totalLimit;
+  }, [userPackages]);
+
+  const totalUsed = useMemo(() => {
+    let totalUsed = BigInt(0);
+    if (!userPackages || userPackages.length === 0) return totalUsed; // Avoid errors when data isn't available
+
+    userPackages.forEach((pkg) => {
+      totalUsed += pkg.earned; // Sum total earned amounts
+    });
+
+    return totalUsed;
+  }, [userPackages]);
+
   const ceilingProgress = useMemo(() => {
     if (!userPackages || userPackages.length === 0) return 0; // Avoid errors when data isn't available
 
@@ -124,7 +103,33 @@ export function MainContent() {
       <MainContentSection
         title="Ceiling Limit(4X)"
         content={
-          <Progress value={ceilingProgress || 1} className="h-2 bg-gray-700" />
+          <div className="flex flex-col gap-2">
+            <Progress
+              value={ceilingProgress || 1}
+              className="h-2 bg-gray-700"
+            />
+            <div className="flex justify-center items-center gap-5 text-xs tracking-tighter">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 bg-purple-500 rounded-full"></span>
+                <span className="text-gray-50">
+                  Total ({bigIntToString(totalLimit, tokenInfo?.decimals || 0, 0)}{" "}
+                  {tokenInfo?.symbol})
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 bg-gray-700 rounded-full"></span>
+                <span className="text-gray-50">
+                  Available (
+                  {bigIntToString(
+                    totalLimit - totalUsed,
+                    tokenInfo?.decimals || 0,
+                    0
+                  )}{" "}
+                  {tokenInfo?.symbol})
+                </span>
+              </div>
+            </div>
+          </div>
         }
       />
 
@@ -169,16 +174,16 @@ export function MainContent() {
 
       <MainContentSection
         title="ROI Income"
-        content={<UserIncomes _type={0} />}
+        content={<UserIncomes _type={2} />}
       />
       <MainContentSection
         title="Binary Income"
-        content={<UserIncomes _type={1} />}
+        content={<UserIncomes _type={5} />}
       />
 
       <MainContentSection
         title="Level Income"
-        content={<UserIncomes _type={2} />}
+        content={<UserIncomes _type={1} />}
       />
 
       <MainContentSection
@@ -197,7 +202,8 @@ export function MainContent() {
       /> */}
       <MainContentSection
         title="My Tree"
-        content={<BinaryTree userId={userInfo?.id || BigInt(0)} isYou />}
+        className="!overflow-x-scroll"
+        content={<BinaryTree userId={userInfo?.id || BigInt(0)} />}
       />
 
       <MainContentSection
@@ -209,6 +215,7 @@ export function MainContent() {
         title="Withdraw History"
         content={<UserWithdrawals />}
       />
+      <MainContentSection title="Full Team" content={<UserWithdrawals />} />
     </div>
   );
 }
