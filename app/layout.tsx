@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark">
           <TooltipProvider>
-            <main className="min-h-screen p-2 overflow-hidden">
+            <main className="min-h-screen p-2 overflow-x-hidden">
               <ContextProvider cookies={cookies}>{children}</ContextProvider>
             </main>
             <Footer />

@@ -237,10 +237,10 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen px-2 py-2 bg-gradient-to-b from-[#12021c] to-[#1a0329]">
       {/* <Header /> */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#4c51ff]/20 rounded-full blur-3xl" />
+      <div className="container mx-auto py-8">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#4c51ff]/20 rounded-full blur-3xl" />
 
-        <Card className="glass-card max-w-7xl mx-auto p-8">
+        <Card className="glass-card w-full md:max-w-7xl mx-auto p-4">
           <h1 className="text-4xl font-bold text-center mb-12 gradient-text">
             Join now
           </h1>
@@ -365,7 +365,7 @@ export default function RegisterPage() {
                 </span>
               </div>
             </div>
-            <div className="flex justify-center items-center gap-5 mt-5">
+            <div className="flex md:flex-row flex-col justify-center items-center gap-5 mt-5">
               <div>
                 <Dialog>
                   <DialogTrigger className="bg-transparent border border-purple-500/80 text-purple-500/80 rounded-xl w- h-12 font-semibold mx-auto w-48">
@@ -373,7 +373,7 @@ export default function RegisterPage() {
                       className="bg-transparent border border-purple-500/80 text-purple-500/80 rounded-xl w- h-12 font-semibold mx-auto w-48"
                       type="button"
                     > */}
-                    swap usdt to xee
+                    Swap USDT to XEE
                     {/* </Button> */}
                   </DialogTrigger>
                   <DialogContent className="p-0 border-none">
