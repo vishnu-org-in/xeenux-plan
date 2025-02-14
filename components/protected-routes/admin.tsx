@@ -10,7 +10,7 @@ import { Address } from "viem";
 
 export function AdminRoute({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const { isConnected, isConnecting } = useAccount();
+  const { isConnected, isConnecting, isDisconnected } = useAccount();
   const { address } = useAppKitAccount();
   const {
     data: isAdmin,
@@ -25,14 +25,22 @@ export function AdminRoute({ children }: { children: React.ReactNode }) {
       isLoadingAdmin,
       isConnecting,
       isPending,
+      isDisconnected,
     });
     if (!isLoadingAdmin && !isConnecting && !isPending) {
-      if (!isConnected || !isAdmin) {
+      if (!isConnected || !isAdmin || isDisconnected) {
         console.log("redirecting", { isConnected, isAdmin });
         router.push("/");
       }
     }
-  }, [isConnected, isAdmin, isLoadingAdmin, router, isConnecting, isPending]);
+  }, [
+    isConnected,
+    isAdmin,
+    isLoadingAdmin,
+    isConnecting,
+    isPending,
+    isDisconnected,
+  ]);
 
   if (isLoadingAdmin || isConnecting) {
     return (

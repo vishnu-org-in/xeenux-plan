@@ -57,15 +57,6 @@ export const useRegister = ({ _package }: { _package: number | undefined }) => {
     else setStatus("idle");
   }, [isPriceLoading]);
   useEffect(() => {
-    console.log({
-      isPriceLoading,
-      isPriceReady,
-      priceData,
-      isPriceError,
-      priceError,
-    });
-  }, [isPriceLoading, isPriceReady, priceData, isPriceError, priceError]);
-  useEffect(() => {
     if (isPriceReady && priceData) {
       setPackagePrice(priceData as any);
     }
