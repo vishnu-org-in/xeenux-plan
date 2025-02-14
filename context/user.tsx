@@ -29,6 +29,7 @@ interface UserContextType {
   userVolumes: UserVolumes | undefined;
   userClaims: UserClaims | undefined;
   isLoadingUserInfo: boolean;
+  isPendingUserInfo: boolean;
   userInfoError: Error | null;
   refreshUserData: (keys?: UserDataKeys[]) => void;
 }
@@ -52,6 +53,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     isLoading: isLoadingUserInfo,
     error: userInfoError,
     queryKey: userInfoQueryKey,
+    isPending: isPendingUserInfo,
   } = useUserInfo(address as Address);
 
   const {
@@ -85,7 +87,9 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       // @ts-ignore
       if (!userInfo || Number(userInfo.id) === 0) {
       } else {
-        router.push("/user/dashboard");
+        // if (!window.location.pathname.startsWith("/user")) {
+        //   router.push("/user/dashboard");
+        // }
       }
     }
   }, [userInfo, isLoadingUserInfo, isConnected, router]);
@@ -159,12 +163,13 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         userTeamStats,
         userPackages,
         isLoadingUserInfo,
+        isPendingUserInfo,
         userInfoError,
         refreshUserData,
         userVolumes,
         userTotalEarnings,
         userClaims,
-        userAvailableWithdraw
+        userAvailableWithdraw,
       }}
     >
       {children}

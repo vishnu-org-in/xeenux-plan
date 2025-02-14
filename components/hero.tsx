@@ -30,9 +30,6 @@ export function Hero({}: HeroProps) {
     refreshUserData,
   } = useUser();
   const { data: lastBurnTimestamp } = useLastBurnDate();
-  useEffect(() => {
-    console.log({ lastBurnTimestamp });
-  }, [lastBurnTimestamp]);
   const [amount, setAmount] = useState<string>("");
   const handleAmountChange = (value: string) => {
     if (value === "" || /^\d*\.?\d*$/.test(value)) {
@@ -50,7 +47,7 @@ export function Hero({}: HeroProps) {
   const handleWithdraw = async () => {
     if (parseFloat(amount) <= 0) return;
     const txhash = await withdraw(
-      stringToBigInt(amount, tokenInfo?.decimals || 0)
+      stringToBigInt(amount, tokenInfo?.decimals || 0),
     );
     refreshUserData([UserDataKeys.USER_CLAIMS, UserDataKeys.USER_INFO]);
     toast.success("Withdrawal successful");
@@ -87,7 +84,7 @@ export function Hero({}: HeroProps) {
               {bigIntToString(
                 tokensToBeBurnt || BigInt(0),
                 Number(tokenInfo?.decimals || 0),
-                0
+                0,
               )}
             </p>
             <p className="text-[10px] md:text-xs text-gray-400">
@@ -119,13 +116,12 @@ export function Hero({}: HeroProps) {
             Burning date timer
           </p>
           <div className="w-full">
-            {/* <CountdownTimer targetDate={new Date("2025-02-04")} /> */}
             {lastBurnTimestamp && (
               <CountdownTimer
                 targetDate={
                   new Date(
                     (Number(lastBurnTimestamp) || 0) * 1000 +
-                      1000 * 60 * 60 * 24 * 30
+                      1000 * 60 * 60 * 24 * 30,
                   )
                 }
               />
@@ -180,7 +176,7 @@ export function Hero({}: HeroProps) {
                   {bigIntToString(
                     userTotalEarnings,
                     tokenInfo?.decimals || 0,
-                    5
+                    5,
                   )}{" "}
                   {tokenInfo?.symbol}
                 </p>
@@ -201,7 +197,7 @@ export function Hero({}: HeroProps) {
                   {bigIntToString(
                     userVolumes?.selfVolume || BigInt(0),
                     tokenInfo?.decimals || 0,
-                    5
+                    5,
                   )}{" "}
                   {tokenInfo?.symbol}
                 </p>
@@ -219,7 +215,7 @@ export function Hero({}: HeroProps) {
                   {bigIntToString(
                     userInfo?.purchaseWallet || BigInt(0),
                     tokenInfo?.decimals || 0,
-                    5
+                    5,
                   )}{" "}
                   {tokenInfo?.symbol}
                 </p>
@@ -239,7 +235,7 @@ export function Hero({}: HeroProps) {
                 {bigIntToString(
                   userAvailableWithdraw,
                   tokenInfo?.decimals || 0,
-                  5
+                  5,
                 )}{" "}
                 {tokenInfo?.symbol}
               </span>
@@ -278,7 +274,7 @@ export function Hero({}: HeroProps) {
                   {bigIntToString(
                     userAvailableWithdraw,
                     tokenInfo?.decimals || 0,
-                    5
+                    5,
                   )}{" "}
                   {tokenInfo?.symbol}
                 </p>
@@ -297,7 +293,7 @@ export function Hero({}: HeroProps) {
                   {bigIntToString(
                     userInfo?.totalWithdraw || BigInt(0),
                     tokenInfo?.decimals || 0,
-                    5
+                    5,
                   )}{" "}
                   {tokenInfo?.symbol}
                 </p>

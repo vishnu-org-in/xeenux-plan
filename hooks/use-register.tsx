@@ -1,25 +1,17 @@
 import { useReadContract, useWriteContract } from "wagmi";
 import { useEffect, useState } from "react";
-import {
-  Addresses,
-  xeenuxContractAbi,
-  xeenuxContractAddresses,
-  xeenuxTokenAddresses,
-} from "@/lib/contract/config";
+import { xeenuxContractAbi } from "@/lib/contract/config";
 import { Address, erc20Abi } from "viem";
 import { useAppKitAccount } from "@reown/appkit/react";
 import { WalletNotConnectedException } from "@/lib/exceptions";
-import { config, getSupportedNetworks } from "@/config";
+import { config } from "@/config";
 import { xeenuxContractAddress, xeenuxTokenAddress } from "./values";
 import { waitForTransactionReceipt } from "@wagmi/core";
-// const chainId = String(getSupportedNetworks()[0].id) as keyof Addresses;
-// const xeenuxContractAddress = xeenuxContractAddresses[chainId];
-// const xeenuxTokenAddress = xeenuxTokenAddresses[chainId];
 
 export const useRegister = ({ _package }: { _package: number | undefined }) => {
   const { address, isConnected } = useAppKitAccount();
   const [packageIndex, setPackageIndex] = useState<number | undefined>(
-    _package
+    _package,
   );
   const [packagePrice, setPackagePrice] = useState<{
     usdt: bigint;
@@ -165,7 +157,7 @@ export const useRegister = ({ _package }: { _package: number | undefined }) => {
     } catch (error) {
       setStatus("idle");
       setError(
-        error instanceof Error ? error : new Error("Registration failed")
+        error instanceof Error ? error : new Error("Registration failed"),
       );
       throw error;
     }

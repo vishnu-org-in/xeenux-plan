@@ -1,14 +1,12 @@
 import { useReadContract, useWriteContract } from 'wagmi';
 import { useEffect, useState } from 'react';
-import { Addresses, usdtAddresses, xeenuxContractAbi, xeenuxContractAddresses, xeenuxTokenAddresses } from '@/lib/contract/config';
+import { xeenuxContractAbi } from '@/lib/contract/config';
 import { Address, erc20Abi } from 'viem';
 import { useAppKitAccount } from '@reown/appkit/react';
 import { WalletNotConnectedException } from '@/lib/exceptions';
 import { getSupportedNetworks } from '@/config';
-const chainId = String(getSupportedNetworks()[0].id) as keyof Addresses;
-const xeenuxContractAddress = xeenuxContractAddresses[chainId];
-const usdtAddress = usdtAddresses[chainId];
-const xeenuxTokenAddress = xeenuxTokenAddresses[chainId];
+import { usdtAddress, xeenuxContractAddress, xeenuxTokenAddress } from './values';
+
 
 // Hook for 'getUserId' function
 export function useUserId(userAddress: Address) {

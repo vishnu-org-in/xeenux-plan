@@ -1,18 +1,12 @@
 import { config, getSupportedNetworks } from "@/config";
-import {
-  Addresses,
-  usdtAddresses,
-  xeenuxContractAbi,
-  xeenuxContractAddresses,
-  xeenuxTokenAddresses,
-} from "@/lib/contract/config";
+import { xeenuxContractAbi } from "@/lib/contract/config";
 import { WalletNotConnectedException } from "@/lib/exceptions";
 import { useAppKitAccount } from "@reown/appkit/react";
 import { useState } from "react";
 import { Address, erc20Abi } from "viem";
 import { useReadContract, useWriteContract } from "wagmi";
 import {
-  usdtTokenAddress,
+  usdtAddress as usdtTokenAddress,
   xeenuxContractAddress,
   xeenuxTokenAddress,
 } from "./values";
@@ -26,7 +20,7 @@ import { waitForTransactionReceipt } from "@wagmi/core";
 export const useSwapUsdtToXee = () => {
   const { address, isConnected } = useAppKitAccount();
   const [status, setStatus] = useState<"idle" | "approving" | "swapping">(
-    "idle"
+    "idle",
   );
   const [error, setError] = useState<Error | null>(null);
 
@@ -76,7 +70,7 @@ export const useSwapUsdtToXee = () => {
     } catch (error) {
       setStatus("idle");
       setError(
-        error instanceof Error ? error : new Error("USDT approval failed")
+        error instanceof Error ? error : new Error("USDT approval failed"),
       );
       throw error;
     }
@@ -130,7 +124,7 @@ export const useSwapUsdtToXee = () => {
 export const useSwapXeeToUsdt = () => {
   const { address, isConnected } = useAppKitAccount();
   const [status, setStatus] = useState<"idle" | "approving" | "swapping">(
-    "idle"
+    "idle",
   );
   const [error, setError] = useState<Error | null>(null);
 
@@ -165,7 +159,7 @@ export const useSwapXeeToUsdt = () => {
     } catch (error) {
       setStatus("idle");
       setError(
-        error instanceof Error ? error : new Error("XEE approval failed")
+        error instanceof Error ? error : new Error("XEE approval failed"),
       );
       throw error;
     }
