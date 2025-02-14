@@ -7,25 +7,26 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 export function ReferralLinks({ userId }: { userId: number }) {
-  const leftLink = `${window.location.origin}?ref=${userId}&position=left`;
-  const rightLink = `${window.location.origin}?ref=${userId}&position=right`;
+  const leftLink = `${window.location.origin}/register?ref=${userId}&position=left`;
+  const rightLink = `${window.location.origin}/register?ref=${userId}&position=right`;
   const [copiedMessage, setCopiedMessage] = useState(false);
 
   const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-    .then(() => {
-      // setCopiedMessage(true);
-      toast.success("Referral link copied to clipboard");
-      // setTimeout(() => setCopiedMessage(false), 3000); // Hide after 3 seconds
-    })
-    .catch(() => {
-      // toast({
-      //   title: "Error",
-      //   description: "Failed to copy. Please try again.",
-      //   variant: "destructive",
-      // });
-      toast.error("Failed to copy. Please try again.");
-    });
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        // setCopiedMessage(true);
+        toast.success("Referral link copied to clipboard");
+        // setTimeout(() => setCopiedMessage(false), 3000); // Hide after 3 seconds
+      })
+      .catch(() => {
+        // toast({
+        //   title: "Error",
+        //   description: "Failed to copy. Please try again.",
+        //   variant: "destructive",
+        // });
+        toast.error("Failed to copy. Please try again.");
+      });
   };
 
   return (
