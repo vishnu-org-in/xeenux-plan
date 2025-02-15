@@ -7,7 +7,7 @@ import React, { type ReactNode } from "react";
 import { cookieToInitialState, WagmiProvider, type Config } from "wagmi";
 import { getQueryClient } from "@/lib/utils/query-client";
 import { UserProvider } from "./user";
-import { tokens } from "@/lib/contract/config";
+import { tokens } from "@/lib/contracts/config";
 import { ContractProvider } from "./contract";
 
 // Set up queryClient
@@ -48,7 +48,7 @@ function ContextProvider({
 }) {
   const initialState = cookieToInitialState(
     wagmiAdapter.wagmiConfig as Config,
-    cookies
+    cookies,
   );
 
   return (

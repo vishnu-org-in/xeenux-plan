@@ -1,15 +1,15 @@
 import { config, getSupportedNetworks } from "@/config";
-import { xeenuxContractAbi } from "@/lib/contract/config";
+import {
+  xeenuxContractAbi,
+  xeenuxContractAddress,
+  usdtTokenAddress,
+  xeenuxTokenAddress,
+} from "@/lib/contracts/config";
 import { WalletNotConnectedException } from "@/lib/exceptions";
 import { useAppKitAccount } from "@reown/appkit/react";
 import { useState } from "react";
 import { Address, erc20Abi } from "viem";
 import { useReadContract, useWriteContract } from "wagmi";
-import {
-  usdtAddress as usdtTokenAddress,
-  xeenuxContractAddress,
-  xeenuxTokenAddress,
-} from "./values";
 import { waitForTransactionReceipt } from "@wagmi/core";
 
 // const chainId = String(getSupportedNetworks()[0].id) as keyof Addresses;

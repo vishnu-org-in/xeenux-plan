@@ -1,11 +1,14 @@
 import { useReadContract, useWriteContract } from "wagmi";
 import { useEffect, useState } from "react";
-import { xeenuxContractAbi } from "@/lib/contract/config";
 import { Address, erc20Abi } from "viem";
 import { useAppKitAccount } from "@reown/appkit/react";
 import { WalletNotConnectedException } from "@/lib/exceptions";
 import { config } from "@/config";
-import { xeenuxContractAddress, xeenuxTokenAddress } from "./values";
+import {
+  xeenuxContractAbi,
+  xeenuxContractAddress,
+  xeenuxTokenAddress,
+} from "@/lib/contracts/config";
 import { waitForTransactionReceipt } from "@wagmi/core";
 
 export const useRegister = ({ _package }: { _package: number | undefined }) => {
