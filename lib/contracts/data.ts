@@ -4132,7 +4132,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0x01f96a1b6bB2EFF7400C8f286B49A9cc3e2373d8",
+      address: "0xDB32Ed8386f8Fcd07d041E3986eF84FE44319E93",
       abi: [
         {
           inputs: [
