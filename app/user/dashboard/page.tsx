@@ -8,8 +8,8 @@ import { Hero } from "@/components/hero";
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen overflow-x-hidden">
-      <Header />
+    // <div className="min-h-screen overflow-x-hidden">
+    //   <Header />
       <div className="container mx-auto py-8">
         <Hero />
         <div className="flex flex-col lg:flex-row gap-8">
@@ -21,6 +21,6 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }

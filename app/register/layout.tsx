@@ -4,7 +4,6 @@ import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/context/user";
 import { Loader } from "@/components/ui/loader";
-import { Header } from "@/components/header";
 
 export default function RegisterLayout({
   children,
@@ -52,9 +51,8 @@ export default function RegisterLayout({
   }
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
-      <Header />
+    <>
       {children}
-    </div>
+    </>
   );
 }

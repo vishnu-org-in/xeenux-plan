@@ -1,9 +1,5 @@
-import { useReadContract, useWriteContract } from "wagmi";
-import { useEffect, useState } from "react";
+import { useAccount, useReadContract, useWriteContract } from "wagmi";
 import { Address, erc20Abi } from "viem";
-import { useAppKitAccount } from "@reown/appkit/react";
-import { WalletNotConnectedException } from "@/lib/exceptions";
-import { getSupportedNetworks } from "@/config";
 import {
   usdtTokenAddress,
   xeenuxContractAbi,
@@ -55,7 +51,7 @@ export function useTokensToBeBurnt() {
 }
 
 export function useXeeBalance() {
-  const { address } = useAppKitAccount();
+  const { address } = useAccount();
   return useReadContract({
     address: xeenuxTokenAddress,
     abi: erc20Abi,
@@ -64,7 +60,7 @@ export function useXeeBalance() {
   });
 }
 export function useUsdtBalance() {
-  const { address } = useAppKitAccount();
+  const { address } = useAccount();
   return useReadContract({
     address: usdtTokenAddress,
     abi: erc20Abi,

@@ -1,16 +1,9 @@
 'use client'
 
-// import { useWeb3Modal } from '@web3modal/react'
-import { useAccount } from 'wagmi'
-import { Button } from '@/components/ui/button'
-import { LogOut, MoonIcon, SunIcon } from 'lucide-react'
-import { useTheme } from 'next-themes'
 import Image from 'next/image'
-import { useAppKit } from '@reown/appkit/react'
+import { RainbowKitCustomConnectButton } from './scaffold-eth'
 
 export function Header() {
-  const { open } = useAppKit()
-  const { theme, setTheme } = useTheme()
 
   return (
     <header className="glass-card border-b sticky top-0 z-50">
@@ -28,29 +21,7 @@ export function Header() {
           </div>
           
           <div className="flex items-center gap-4">
-            
-            {/* <Button 
-              onClick={() => open()}
-              className="glass-button text-[8px] sm:text-sm"
-            >
-              {isConnected ? 
-                `${address?.slice(0, 6)}...${address?.slice(-4)}` : 
-                'Connect Wallet'
-              }
-              Connect Wallet
-            </Button> */}
-
-            {/* <Button 
-              onClick={() => open()}
-              className="glass-button"
-            >
-              {isConnected ? 
-                `${address?.slice(0, 6)}...${address?.slice(-4)}` : 
-                'Connect Wallet'
-              }
-              Log out
-            </Button> */}
-            <appkit-button balance='hide' />
+            <RainbowKitCustomConnectButton />
           </div>
         </div>
       </div>

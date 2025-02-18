@@ -1,14 +1,12 @@
 import { Address } from "viem";
-import { useReadContract, useWriteContract } from "wagmi";
-import { useAppKitAccount } from "@reown/appkit/react";
+import { useAccount, useReadContract, useWriteContract } from "wagmi";
 import { useState } from "react";
 import { WalletNotConnectedException } from "@/lib/exceptions";
-import { waitForTransactionReceipt } from "@wagmi/core";
-import { config } from "@/config";
 import {
   xeenuxContractAbi,
   xeenuxContractAddress,
 } from "@/lib/contracts/config";
+import { useTransactor } from "./scaffold-eth";
 
 // Hook for 'getUserInfo' function
 export function useUserInfo(_address: Address) {
@@ -66,10 +64,11 @@ export function useUserVolumes(_id: bigint) {
 }
 
 export const useWithdraw = () => {
-  const { address, isConnected } = useAppKitAccount();
+  const { address, isConnected } = useAccount();
   const [status, setStatus] = useState<"idle" | "withdrawing">("idle");
   const [error, setError] = useState<Error | null>(null);
   const { writeContractAsync } = useWriteContract();
+  const transactor = useTransactor();
 
   const withdraw = async (amount: bigint) => {
     try {
@@ -80,15 +79,14 @@ export const useWithdraw = () => {
       setStatus("withdrawing");
 
       // Call the withdraw function on the contract
-      const txHash = await writeContractAsync({
+      const txHash = await transactor(() =>writeContractAsync({
         address: xeenuxContractAddress,
         abi: xeenuxContractAbi,
         functionName: "withdraw",
         args: [amount],
-      });
+      }));
 
-      await waitForTransactionReceipt(config, { hash: txHash });
-
+      // await waitForTransactionReceipt(config, { hash: txHash });
       setStatus("idle");
       return txHash as Address;
     } catch (err) {

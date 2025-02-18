@@ -9,19 +9,19 @@ import { CountdownTimer } from "./ui/countdown-timer";
 import { useEffect, useState } from "react";
 import { useContractData } from "@/context/contract";
 import { bigIntToString, shortenAddress, stringToBigInt } from "@/lib/utils";
-import { useAppKitAccount } from "@reown/appkit/react";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { SwapSection } from "./swap-section";
 import { UserDataKeys, useUser } from "@/context/user";
 import { useWithdraw } from "@/hooks/use-user";
 import toast from "react-hot-toast";
 import { useLastBurnDate } from "@/hooks/use-contract";
+import { useAccount } from "wagmi";
 interface HeroProps {}
 
 export function Hero({}: HeroProps) {
   const { withdraw, status, error } = useWithdraw();
   const { tokensToBeBurnt, tokenInfo, nextPrice } = useContractData();
-  const { address } = useAppKitAccount();
+  const { address } = useAccount();
   const {
     userInfo,
     userTotalEarnings,

@@ -1,20 +1,19 @@
-import { useReadContract, useWriteContract } from "wagmi";
+import { useAccount, useReadContract, useWriteContract } from "wagmi";
 import { useEffect, useState } from "react";
 import { Address, erc20Abi } from "viem";
-import { useAppKitAccount } from "@reown/appkit/react";
 import { WalletNotConnectedException } from "@/lib/exceptions";
-import { config } from "@/config";
 import {
   xeenuxContractAbi,
   xeenuxContractAddress,
   xeenuxTokenAddress,
 } from "@/lib/contracts/config";
 import { waitForTransactionReceipt } from "@wagmi/core";
+import { useTransactor } from "./scaffold-eth";
 
 export const useRegister = ({ _package }: { _package: number | undefined }) => {
-  const { address, isConnected } = useAppKitAccount();
+  const { address, isConnected } = useAccount();
   const [packageIndex, setPackageIndex] = useState<number | undefined>(
-    _package,
+    _package
   );
   const [packagePrice, setPackagePrice] = useState<{
     usdt: bigint;
@@ -64,6 +63,7 @@ export const useRegister = ({ _package }: { _package: number | undefined }) => {
       setPackagePrice(priceData as any);
     }
   }, [isPriceReady, priceData]);
+  const transactor = useTransactor();
   const { writeContractAsync } = useWriteContract();
   const { data: allowanceData } = useReadContract({
     address: xeenuxTokenAddress,
@@ -81,16 +81,18 @@ export const useRegister = ({ _package }: { _package: number | undefined }) => {
         setStatus("idle");
         return "0x0";
       }
-      const approvalHash = await writeContractAsync({
-        address: xeenuxTokenAddress,
-        abi: erc20Abi,
-        functionName: "approve",
-        args: [xeenuxContractAddress, amount],
-      });
+      const approvalHash = await transactor(() =>
+        writeContractAsync({
+          address: xeenuxTokenAddress,
+          abi: erc20Abi,
+          functionName: "approve",
+          args: [xeenuxContractAddress, amount],
+        })
+      );
 
-      await waitForTransactionReceipt(config, {
-        hash: approvalHash,
-      });
+      // await waitForTransactionReceipt(config, {
+      //   hash: approvalHash,
+      // });
 
       return approvalHash as Address;
     } catch (error) {
@@ -129,29 +131,34 @@ export const useRegister = ({ _package }: { _package: number | undefined }) => {
       }
       await approveToken(packagePrice.xee);
       setStatus("registering");
-      const registrationHash = await writeContractAsync({
-        address: xeenuxContractAddress,
-        abi: xeenuxContractAbi,
-        functionName: "buy",
-        args: [
-          address as Address,
-          BigInt(_ref),
-          BigInt(_package),
-          BigInt(_position),
-          _name,
-          _email,
-          _phone,
-        ],
-      });
-      await waitForTransactionReceipt(config, {
-        hash: registrationHash,
-      });
+      const registrationHash = await transactor(
+        () =>
+          writeContractAsync({
+            address: xeenuxContractAddress,
+            abi: xeenuxContractAbi,
+            functionName: "buy",
+            args: [
+              address as Address,
+              BigInt(_ref),
+              BigInt(_package),
+              BigInt(_position),
+              _name,
+              _email,
+              _phone,
+            ],
+          }),
+        {},
+        { message: "Registration successful" }
+      );
+      // await waitForTransactionReceipt(config, {
+      //   hash: registrationHash,
+      // });
       setStatus("idle");
       return registrationHash as Address;
     } catch (error) {
       setStatus("idle");
       setError(
-        error instanceof Error ? error : new Error("Registration failed"),
+        error instanceof Error ? error : new Error("Registration failed")
       );
       throw error;
     }

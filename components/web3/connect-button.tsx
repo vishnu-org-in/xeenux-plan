@@ -1,3 +1,3 @@
-export default function ConnectButton() {
-    return <appkit-button balance="hide" />
-  }
+// export default function ConnectButton() {
+//     return <appkit-button balance="hide" />
+//   }

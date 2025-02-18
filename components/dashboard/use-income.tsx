@@ -1,5 +1,4 @@
 import React from "react";
-import { useAppKitAccount } from "@reown/appkit/react";
 import { useIncomeHistory } from "@/hooks/use-user";
 import { useUser } from "@/context/user";
 import { bigIntToString } from "@/lib/utils";
@@ -9,7 +8,6 @@ import { UserActivityMode } from "@/types";
 export const UserIncomes: React.FC<{
   _type: number;
 }> = ({ _type }) => {
-  const { address } = useAppKitAccount(); // Get user's address
   const { userInfo } = useUser();
   const {
     data: userIncomes,

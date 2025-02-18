@@ -1,4 +1,3 @@
-import { config, getSupportedNetworks } from "@/config";
 import {
   xeenuxContractAbi,
   xeenuxContractAddress,
@@ -6,11 +5,10 @@ import {
   xeenuxTokenAddress,
 } from "@/lib/contracts/config";
 import { WalletNotConnectedException } from "@/lib/exceptions";
-import { useAppKitAccount } from "@reown/appkit/react";
 import { useState } from "react";
 import { Address, erc20Abi } from "viem";
-import { useReadContract, useWriteContract } from "wagmi";
-import { waitForTransactionReceipt } from "@wagmi/core";
+import { useAccount, useReadContract, useWriteContract } from "wagmi";
+import { useTransactor } from "./scaffold-eth";
 
 // const chainId = String(getSupportedNetworks()[0].id) as keyof Addresses;
 // const xeenuxContractAddress = xeenuxContractAddresses[chainId];
@@ -18,9 +16,9 @@ import { waitForTransactionReceipt } from "@wagmi/core";
 // const xeenuxTokenAddress = xeenuxTokenAddresses[chainId];
 
 export const useSwapUsdtToXee = () => {
-  const { address, isConnected } = useAppKitAccount();
+  const { address, isConnected } = useAccount();
   const [status, setStatus] = useState<"idle" | "approving" | "swapping">(
-    "idle",
+    "idle"
   );
   const [error, setError] = useState<Error | null>(null);
 
@@ -49,7 +47,7 @@ export const useSwapUsdtToXee = () => {
   });
 
   const { writeContractAsync } = useWriteContract();
-
+  const transactor = useTransactor();
   const approveUsdt = async (amount: bigint): Promise<Address> => {
     setStatus("approving");
     try {
@@ -57,20 +55,22 @@ export const useSwapUsdtToXee = () => {
         setStatus("idle");
         return "0x0";
       }
-      const approvalHash = await writeContractAsync({
-        address: usdtTokenAddress,
-        abi: erc20Abi,
-        functionName: "approve",
-        args: [xeenuxContractAddress, amount],
-      });
-      await waitForTransactionReceipt(config, {
-        hash: approvalHash,
-      });
+      const approvalHash = await transactor(() =>
+        writeContractAsync({
+          address: usdtTokenAddress,
+          abi: erc20Abi,
+          functionName: "approve",
+          args: [xeenuxContractAddress, amount],
+        })
+      );
+      // await waitForTransactionReceipt(config, {
+      //   hash: approvalHash,
+      // });
       return approvalHash as Address;
     } catch (error) {
       setStatus("idle");
       setError(
-        error instanceof Error ? error : new Error("USDT approval failed"),
+        error instanceof Error ? error : new Error("USDT approval failed")
       );
       throw error;
     }
@@ -92,16 +92,21 @@ export const useSwapUsdtToXee = () => {
 
       // Then perform swap
       setStatus("swapping");
-      const swapHash = await writeContractAsync({
-        address: xeenuxContractAddress,
-        abi: xeenuxContractAbi,
-        functionName: "swapUSDTToXeenux",
-        args: [amount],
-      });
+      const swapHash = await transactor(
+        () =>
+          writeContractAsync({
+            address: xeenuxContractAddress,
+            abi: xeenuxContractAbi,
+            functionName: "swapUSDTToXeenux",
+            args: [amount],
+          }),
+        {},
+        { message: "Swap successful" }
+      );
 
-      await waitForTransactionReceipt(config, {
-        hash: swapHash,
-      });
+      // await waitForTransactionReceipt(config, {
+      //   hash: swapHash,
+      // });
       setStatus("idle");
       return swapHash as Address;
     } catch (error) {
@@ -122,9 +127,9 @@ export const useSwapUsdtToXee = () => {
 };
 
 export const useSwapXeeToUsdt = () => {
-  const { address, isConnected } = useAppKitAccount();
+  const { address, isConnected } = useAccount();
   const [status, setStatus] = useState<"idle" | "approving" | "swapping">(
-    "idle",
+    "idle"
   );
   const [error, setError] = useState<Error | null>(null);
 
@@ -144,22 +149,24 @@ export const useSwapXeeToUsdt = () => {
   });
 
   const { writeContractAsync } = useWriteContract();
-
+  const transactor = useTransactor();
   const approveXee = async (amount: bigint): Promise<Address> => {
     setStatus("approving");
     try {
-      const approvalHash = await writeContractAsync({
-        address: xeenuxTokenAddress,
-        abi: erc20Abi,
-        functionName: "approve",
-        args: [xeenuxContractAddress, amount],
-      });
+      const approvalHash = await transactor(() =>
+        writeContractAsync({
+          address: xeenuxTokenAddress,
+          abi: erc20Abi,
+          functionName: "approve",
+          args: [xeenuxContractAddress, amount],
+        })
+      );
 
       return approvalHash as Address;
     } catch (error) {
       setStatus("idle");
       setError(
-        error instanceof Error ? error : new Error("XEE approval failed"),
+        error instanceof Error ? error : new Error("XEE approval failed")
       );
       throw error;
     }
@@ -181,12 +188,17 @@ export const useSwapXeeToUsdt = () => {
 
       // Then perform swap
       setStatus("swapping");
-      const swapHash = await writeContractAsync({
-        address: xeenuxContractAddress,
-        abi: xeenuxContractAbi,
-        functionName: "swapXeenuxToUSDT",
-        args: [amount],
-      });
+      const swapHash = await transactor(
+        () =>
+          writeContractAsync({
+            address: xeenuxContractAddress,
+            abi: xeenuxContractAbi,
+            functionName: "swapXeenuxToUSDT",
+            args: [amount],
+          }),
+        {},
+        { message: "Swap successful" }
+      );
 
       setStatus("idle");
       return swapHash as Address;

@@ -9,9 +9,10 @@ import { SwapDetails } from "./swap/swap-details";
 import { useUsdtBalance, useXeeBalance } from "@/hooks/use-contract";
 import { bigIntToString, formatAmount, stringToBigInt } from "@/lib/utils";
 import { useContractData } from "@/context/contract";
-import toast from "react-hot-toast";
 import { useSwapFee, useSwapUsdtToXee, useSwapXeeToUsdt } from "@/hooks/use-swap";
-import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
+import { useAccount } from "wagmi";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { notification } from "@/utils/scaffold-eth";
 interface Token {
   symbol: string;
   icon: string;
@@ -122,8 +123,8 @@ function calculatePriceImpact(
 }
 
 export function SwapSection() {
-  const { open } = useAppKit();
-  const { isConnected } = useAppKitAccount();
+  const { isConnected } = useAccount();
+  const { openConnectModal  } = useConnectModal();
   const [fromToken, setFromToken] = useState({ ...usdtToken });
   const [toToken, setToToken] = useState({ ...xeeToken });
   const [slippage, setSlippage] = useState("0.5");
@@ -272,7 +273,7 @@ export function SwapSection() {
 
   const handleSwap = async () => {
     if (!canSwap || !fromToken.decimals) {
-      toast.error("Cannot swap at this time");
+      // notification.error("Cannot swap at this time");
       return;
     }
     try {
@@ -283,10 +284,10 @@ export function SwapSection() {
 
       if (fromToken.symbol === "USDT") {
         await swapUsdtToXee(amount);
-        toast.success("Successfully swapped USDT to XEE");
+        // notification.success("Successfully swapped USDT to XEE");
       } else {
         await swapXeeToUsdt(amount);
-        toast.success("Successfully swapped XEE to USDT");
+        // notification.success("Successfully swapped XEE to USDT");
       }
 
       // Reset amounts
@@ -297,15 +298,15 @@ export function SwapSection() {
       console.error("Swap failed:", error);
       if (error instanceof Error) {
         // Handle specific error messages
-        if (error.message.includes("Wallet not connected")) {
-          toast.error("Please connect your wallet");
-        } else if (error.message.includes("Insufficient")) {
-          toast.error(error.message);
-        } else {
-          toast.error(error.message);
-        }
+        // if (error.message.includes("Wallet not connected")) {
+        //   toast.error("Please connect your wallet");
+        // } else if (error.message.includes("Insufficient")) {
+        //   toast.error(error.message);
+        // } else {
+        //   toast.error(error.message);
+        // }
       } else {
-        toast.error("An unexpected error occurred");
+        notification.error("An unexpected error occurred");
       }
     }
   };
@@ -351,7 +352,7 @@ export function SwapSection() {
         <Button
           className="w-full glass-button py-6 text-lg font-semibold"
           disabled={isConnected && !canSwap}
-          onClick={isConnected ? handleSwap : () => open()}
+          onClick={isConnected ? handleSwap : openConnectModal}
         >
           {(() => {
             if (!isConnected) return "Connect Wallet";

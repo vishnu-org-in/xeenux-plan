@@ -1,11 +1,9 @@
 "use client";
 
-import { Header } from "@/components/header";
 import { AdminOverview } from "@/components/admin/overview";
 import { AdminControls } from "@/components/admin/controls";
 import { useState } from "react";
-import toast from "react-hot-toast";
-// import { useToast } from '@/components/ui/use-toast'
+import { notification } from "@/utils/scaffold-eth";
 
 export default function AdminDashboard() {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,17 +14,17 @@ export default function AdminDashboard() {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      toast.success(`${action} completed successfully`);
+      notification.success(`${action} completed successfully`);
     } catch (error) {
-      toast.error("Something went wrong");
+      notification.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#12021c] to-[#1a0329]">
-      <Header />
+    // <div className="min-h-screen bg-gradient-to-b from-[#12021c] to-[#1a0329]">
+    //   <Header />
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 gradient-text">
           Admin Dashboard
@@ -35,6 +33,6 @@ export default function AdminDashboard() {
         <AdminOverview />
         <AdminControls onAction={handleAction} isLoading={isLoading} />
       </div>
-    </div>
+    // </div>
   );
 }

@@ -4,11 +4,7 @@ import {
   xeenuxContractAbi,
   xeenuxContractAddress,
 } from "@/lib/contracts/config";
-import { useAppKitAccount } from "@reown/appkit/react";
-import { useState } from "react";
-import { WalletNotConnectedException } from "@/lib/exceptions";
-import { waitForTransactionReceipt } from "@wagmi/core";
-import { config } from "@/config";
+import { useTransactor } from "./scaffold-eth";
 
 export function useIsAdmin(_address?: Address) {
   return useReadContract({
@@ -101,47 +97,57 @@ export function useTotalTurnover() {
 
 export function useDistributeIncome() {
   const { writeContractAsync } = useWriteContract();
+  const transactor = useTransactor();
   const distributeROI = async () => {
     try {
-      const distributeHash = await writeContractAsync({
-        address: xeenuxContractAddress,
-        abi: xeenuxContractAbi,
-        functionName: "distributeROI",
-        args: [],
-      });
-      await waitForTransactionReceipt(config, {
-        hash: distributeHash,
-      });
+      const distributeHash = await transactor(() =>
+        writeContractAsync({
+          address: xeenuxContractAddress,
+          abi: xeenuxContractAbi,
+          functionName: "distributeROI",
+          args: [],
+        })
+      );
+      // await waitForTransactionReceipt(config, {
+      //   hash: distributeHash,
+      // });
+      return distributeHash;
     } catch (e) {
       console.error(e);
     }
   };
   const distributeBinaryIncome = async () => {
     try {
-      const distributeHash = await writeContractAsync({
-        address: xeenuxContractAddress,
-        abi: xeenuxContractAbi,
-        functionName: "distributeBinaryIncome",
-        args: [],
-      });
-      await waitForTransactionReceipt(config, {
-        hash: distributeHash,
-      });
+      const distributeHash = await transactor(() =>
+        writeContractAsync({
+          address: xeenuxContractAddress,
+          abi: xeenuxContractAbi,
+          functionName: "distributeBinaryIncome",
+          args: [],
+        })
+      );
+      // await waitForTransactionReceipt(config, {
+      //   hash: distributeHash,
+      // });
+      return distributeHash;
     } catch (e) {
       console.error(e);
     }
   };
   const distributeWeeklyReward = async () => {
     try {
-      const distributeHash = await writeContractAsync({
-        address: xeenuxContractAddress,
-        abi: xeenuxContractAbi,
-        functionName: "distributeWeeklyReward",
-        args: [],
-      });
-      await waitForTransactionReceipt(config, {
-        hash: distributeHash,
-      });
+      const distributeHash = await transactor(() =>
+        writeContractAsync({
+          address: xeenuxContractAddress,
+          abi: xeenuxContractAbi,
+          functionName: "distributeWeeklyReward",
+          args: [],
+        })
+      );
+      // await waitForTransactionReceipt(config, {
+      //   hash: distributeHash,
+      // });
+      return distributeHash;
     } catch (e) {
       console.error(e);
     }

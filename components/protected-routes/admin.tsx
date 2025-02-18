@@ -2,16 +2,13 @@
 import { useEffect } from "react";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/context/user";
 import { Loader } from "../ui/loader";
-import { useAppKitAccount } from "@reown/appkit/react";
 import { useIsAdmin } from "@/hooks/use-admin";
 import { Address } from "viem";
 
 export function AdminRoute({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const { isConnected, isConnecting, isDisconnected } = useAccount();
-  const { address } = useAppKitAccount();
+  const { address,isConnected, isConnecting, isDisconnected } = useAccount();
   const {
     data: isAdmin,
     isLoading: isLoadingAdmin,

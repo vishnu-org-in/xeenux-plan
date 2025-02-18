@@ -22,7 +22,6 @@ import {
 import SelectPackage from "@/components/ui/select-package";
 import toast from "react-hot-toast";
 import { useXeeBalance } from "@/hooks/use-contract";
-import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
 import {
   Dialog,
   DialogContent,
@@ -34,6 +33,9 @@ import { b2f, strictEmailRegex } from "@/lib/utils";
 import { useContractData } from "@/context/contract";
 import { useUser } from "@/context/user";
 import { useRegister } from "@/hooks/use-register";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { useAccount } from "wagmi";
+import { notification } from "@/utils/scaffold-eth";
 
 // Country codes data
 const countryCodes = [
@@ -130,6 +132,7 @@ export default function RegisterPage() {
     package: 0,
     ref: 0,
   });
+  const { openConnectModal  } = useConnectModal();
   useEffect(() => {
     // Access window object only after component mounts
     const params = new URLSearchParams(window.location.search);
@@ -158,8 +161,7 @@ export default function RegisterPage() {
   useEffect(() => {
     console.log({ packagePrice, tokenInfo });
   }, [packagePrice, tokenInfo]);
-  const { isConnected } = useAppKitAccount();
-  const { open } = useAppKit();
+  const { isConnected } = useAccount();
   const { data: xeeBalanceData } = useXeeBalance();
   // Handle input changes
   const handleInputChange =
@@ -172,8 +174,8 @@ export default function RegisterPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!isConnected) {
-      toast.error("Please connect your wallet");
-      open();
+      notification.error("Please connect your wallet");
+      // open();
       return;
     }
     // Format phone number with country code
@@ -182,35 +184,35 @@ export default function RegisterPage() {
     }${formData.phoneNumber.replace(/\D/g, "")}`;
     // Validate input lengths
     if (formData.name.length > 30) {
-      toast.error("Name must be 30 characters or less");
+      notification.error("Name must be 30 characters or less");
       return;
     }
     if (formData.email.length > 50) {
-      toast.error("Email must be 50 characters or less");
+      notification.error("Email must be 50 characters or less");
       return;
     }
     if (!strictEmailRegex.test(formData.email)) {
-      toast.error("Please enter a valid email address");
+      notification.error("Please enter a valid email address");
       return;
     }
     if (fullPhoneNumber.length > 15) {
-      toast.error("Phone number must be 15 characters or less");
+      notification.error("Phone number must be 15 characters or less");
       return;
     }
     if (formData.name.trim().length === 0) {
-      toast.error("Name is required");
+      notification.error("Name is required");
       return;
     }
     if (fullPhoneNumber.trim().length === 0) {
-      toast.error("Phone number is required");
+      notification.error("Phone number is required");
       return;
     }
     if (!isPriceReady) {
-      toast.error("Please wait for the package price to load");
+      notification.error("Please wait for the package price to load");
       return;
     }
     if (isPriceError) {
-      toast.error("Error loading package price");
+      notification.error("Error loading package price");
       return;
     }
 
@@ -224,14 +226,14 @@ export default function RegisterPage() {
         _package: formData.package,
         _ref: formData.ref,
       });
-      toast.success("Registered successfully");
+      // notification.success("Registered successfully");
       refreshUserData();
       // window.location.reload();
     } catch (error: any) {
       console.error("Registration failed:", error);
-      toast.error(
-        "Registration failed: " + error?.message || error || "Unknown error"
-      );
+      // notification.error(
+      //   "Registration failed: " + error?.message || error || "Unknown error"
+      // );
     }
   };
   return (
@@ -391,7 +393,7 @@ export default function RegisterPage() {
                 type={isConnected ? "submit" : "button"}
                 className={`bg-purple-500 rounded-xl h-12 font-semibold w-48 hover:bg-purple-500/80`}
                 disabled={status !== "idle"}
-                onClick={isConnected ? undefined : () => open()}
+                onClick={isConnected ? undefined : openConnectModal}
               >
                 {status === "idle" && (
                   <>{isConnected ? "Register" : "Connect wallet"}</>

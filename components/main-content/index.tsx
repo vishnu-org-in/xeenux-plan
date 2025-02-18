@@ -7,8 +7,6 @@ import { UserDataKeys, useUser } from "@/context/user";
 import { useRegister } from "@/hooks/use-register";
 import { Button } from "../ui/button";
 import { Wallet } from "lucide-react";
-import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
-import toast from "react-hot-toast";
 import { Progress } from "../ui/progress";
 import UserPackages from "../dashboard/user-packages";
 import UserWithdrawals from "../dashboard/user-withdrawals";
@@ -17,6 +15,9 @@ import { UserIncomes } from "../dashboard/use-income";
 import { bigIntToString } from "@/lib/utils";
 import { useContractData } from "@/context/contract";
 import { LevelDetailsAccordion } from "../dashboard/level-details";
+import { useAccount } from "wagmi";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { notification } from "@/utils/scaffold-eth";
 
 export function MainContent() {
   const { userInfo, refreshUserData, userPackages } = useUser();
@@ -26,21 +27,21 @@ export function MainContent() {
     useRegister({
       _package: buyPackage,
     });
-  const { isConnected } = useAppKitAccount();
-  const { open } = useAppKit();
+  const { isConnected } = useAccount();
+  const { openConnectModal  } = useConnectModal();
   const handleBuyPackage = async (e: FormEvent) => {
     e.preventDefault();
     if (!isConnected) {
-      toast.error("Please connect your wallet");
-      open();
+      notification.error("Please connect your wallet");
+      openConnectModal?.();
       return;
     }
     if (!isPriceReady) {
-      toast.error("Please wait for the package price to load");
+      notification.error("Please wait for the package price to load");
       return;
     }
     if (isPriceError) {
-      toast.error("Error loading package price");
+      notification.error("Error loading package price");
       return;
     }
     try {
@@ -53,14 +54,14 @@ export function MainContent() {
         _package: buyPackage,
         _ref: Number(userInfo?.ref)!,
       });
-      toast.success("Package bought successfully");
+      // notification.success("Package bought successfully");
       refreshUserData([UserDataKeys.USER_INFO, UserDataKeys.USER_PACKAGES]);
       // window.location.reload();
     } catch (error: any) {
       console.error("Package buy failed:", error);
-      toast.error(
-        "Package buy failed: " + error?.message || error || "Unknown error"
-      );
+      // toast.error(
+      //   "Package buy failed: " + error?.message || error || "Unknown error"
+      // );
     }
   };
   const totalLimit = useMemo(() => {
@@ -150,7 +151,7 @@ export function MainContent() {
               type={isConnected ? "submit" : "button"}
               className={`bg-purple-500 rounded-xl h-12 font-semibold w-full hover:bg-purple-500/80`}
               disabled={status !== "idle"}
-              onClick={isConnected ? handleBuyPackage : () => open()}
+              onClick={isConnected ? handleBuyPackage : openConnectModal}
             >
               {status === "idle" && (
                 <>

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useAppKitAccount } from "@reown/appkit/react";
 import { useIncomeHistory } from "@/hooks/use-user";
 import { useUser } from "@/context/user";
 import { bigIntToString } from "@/lib/utils";
@@ -7,7 +6,6 @@ import { useTokenInfo } from "@/hooks/use-contract";
 import { UserActivityMode } from "@/types";
 
 const UserWithdrawals: React.FC = () => {
-  const { address } = useAppKitAccount(); // Get user's address
   const { userInfo } = useUser();
   const {
     data: withdrawals,
