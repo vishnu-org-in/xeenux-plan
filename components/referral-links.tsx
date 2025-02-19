@@ -1,14 +1,24 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Copy, Share2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { notification } from "@/utils/scaffold-eth";
 
 export function ReferralLinks({ userId }: { userId: number }) {
-  const leftLink = `${window.location.origin}/register?ref=${userId}&position=left`;
-  const rightLink = `${window.location.origin}/register?ref=${userId}&position=right`;
+  const [leftLink, setLeftLink] = useState<string>("");
+  const [rightLink, setRightLink] = useState<string>("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setLeftLink(
+        `${window.location.origin}/register?ref=${userId}&position=left`,
+      );
+      setRightLink(
+        `${window.location.origin}/register?ref=${userId}&position=right`,
+      );
+    }
+  }, [userId]);
   const [copiedMessage, setCopiedMessage] = useState(false);
 
   const copyToClipboard = (text: string) => {

@@ -20,7 +20,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import SelectPackage from "@/components/ui/select-package";
-import toast from "react-hot-toast";
 import { useXeeBalance } from "@/hooks/use-contract";
 import {
   Dialog,
@@ -132,7 +131,7 @@ export default function RegisterPage() {
     package: 0,
     ref: 0,
   });
-  const { openConnectModal  } = useConnectModal();
+  const { openConnectModal } = useConnectModal();
   useEffect(() => {
     // Access window object only after component mounts
     const params = new URLSearchParams(window.location.search);
@@ -350,18 +349,20 @@ export default function RegisterPage() {
                 <span>
                   {Number(packagePrice.xee) > 0
                     ? Number(
-                        b2f(packagePrice.xee, Number(tokenInfo?.decimals || 0))
+                        b2f(packagePrice.xee, Number(tokenInfo?.decimals || 0)),
                       )
                     : 0.0}{" "}
                   {tokenInfo?.symbol}{" "}
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-400">Your {tokenInfo?.symbol} balance:</span>
+                <span className="text-gray-400">
+                  Your {tokenInfo?.symbol} balance:
+                </span>
                 <span>
                   {b2f(
                     xeeBalanceData || BigInt(0),
-                    Number(tokenInfo?.decimals || 0)
+                    Number(tokenInfo?.decimals || 0),
                   )}{" "}
                   XEE
                 </span>
