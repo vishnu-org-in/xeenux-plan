@@ -1,15 +1,15 @@
 import { Address } from "viem";
-import { useReadContract, useWriteContract } from "wagmi";
 import {
-  xeenuxContractAbi,
-  xeenuxContractAddress,
-} from "@/lib/contracts/config";
-import { useTransactor } from "./scaffold-eth";
+  useScaffoldReadContract,
+  useScaffoldWriteContract,
+  useTransactor,
+} from "./scaffold-eth";
+import { useContractsInfo } from "./use-contract";
 
 export function useIsAdmin(_address?: Address) {
-  return useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "isAdmin",
     args: [_address!],
     query: {
@@ -19,98 +19,60 @@ export function useIsAdmin(_address?: Address) {
 }
 
 export function useIncomeDistributionData() {
-  return useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "getIncomeDistData",
     args: [],
   });
 }
-// export function useAllIncomeDistTime() {
-//   return useReadContract({
-//     address: xeenuxContractAddress,
-//     abi: xeenuxContractAbi,
-//     functionName: "allIncomeDistTime",
-//     args: [],
-//   });
-// }
-// export function useAllIncomeDistTime() {
-//   return useReadContract({
-//     address: xeenuxContractAddress,
-//     abi: xeenuxContractAbi,
-//     functionName: "weeklyRewardDistTime",
-//     args: [],
-//   });
-// }
-
-// export function useLastBinaryDistributionTimestamp() {
-//   return useReadContract({
-//     address: xeenuxContractAddress,
-//     abi: xeenuxContractAbi,
-//     functionName: "roiIncomeLastDist",
-//     args: [],
-//   });
-// }
-
-// export function useLastWeeklyDistributionTimestamp() {
-//   return useReadContract({
-//     address: xeenuxContractAddress,
-//     abi: xeenuxContractAbi,
-//     functionName: "weeklyRewardLastDist",
-//     args: [],
-//   });
-// }
 
 export function useWeeklyTurnOver() {
-  return useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "weeklyTurnover",
     args: [],
   });
 }
 
 export function useTotalUsers() {
-  return useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "totalUsers",
     args: [],
   });
 }
 export function useWeeklyTurnover() {
-  return useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "weeklyTurnover",
     args: [],
   });
 }
 export function useTotalTurnover() {
-  return useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "totalTurnover",
     args: [],
   });
 }
 
 export function useDistributeIncome() {
-  const { writeContractAsync } = useWriteContract();
-  const transactor = useTransactor();
+  const { xeenuxContractInfo } = useContractsInfo();
+  const { writeContractAsync: writeXenuxContractAsync } =
+    useScaffoldWriteContract({
+      contractName: xeenuxContractInfo.name,
+    });
   const distributeROI = async () => {
     try {
-      const distributeHash = await transactor(() =>
-        writeContractAsync({
-          address: xeenuxContractAddress,
-          abi: xeenuxContractAbi,
-          functionName: "distributeROI",
-          args: [],
-        })
-      );
-      // await waitForTransactionReceipt(config, {
-      //   hash: distributeHash,
-      // });
+      const distributeHash = await writeXenuxContractAsync({
+        functionName: "distributeROI",
+        args: [],
+      });
       return distributeHash;
     } catch (e) {
       console.error(e);
@@ -118,17 +80,10 @@ export function useDistributeIncome() {
   };
   const distributeBinaryIncome = async () => {
     try {
-      const distributeHash = await transactor(() =>
-        writeContractAsync({
-          address: xeenuxContractAddress,
-          abi: xeenuxContractAbi,
-          functionName: "distributeBinaryIncome",
-          args: [],
-        })
-      );
-      // await waitForTransactionReceipt(config, {
-      //   hash: distributeHash,
-      // });
+      const distributeHash = await writeXenuxContractAsync({
+        functionName: "distributeBinaryIncome",
+        args: [],
+      });
       return distributeHash;
     } catch (e) {
       console.error(e);
@@ -136,17 +91,10 @@ export function useDistributeIncome() {
   };
   const distributeWeeklyReward = async () => {
     try {
-      const distributeHash = await transactor(() =>
-        writeContractAsync({
-          address: xeenuxContractAddress,
-          abi: xeenuxContractAbi,
-          functionName: "distributeWeeklyReward",
-          args: [],
-        })
-      );
-      // await waitForTransactionReceipt(config, {
-      //   hash: distributeHash,
-      // });
+      const distributeHash = await writeXenuxContractAsync({
+        functionName: "distributeWeeklyReward",
+        args: [],
+      });
       return distributeHash;
     } catch (e) {
       console.error(e);
@@ -157,5 +105,28 @@ export function useDistributeIncome() {
     distributeROI,
     distributeBinaryIncome,
     distributeWeeklyReward,
+  };
+}
+
+export function useBurnTokens() {
+  const { xeenuxContractInfo } = useContractsInfo();
+  const { writeContractAsync: writeXenuxContractAsync } =
+    useScaffoldWriteContract({
+      contractName: xeenuxContractInfo.name,
+    });
+  const burnTokens = async (amount: bigint) => {
+    try {
+      const burnHash = await writeXenuxContractAsync({
+        functionName: "burnXeenux",
+        args: [amount],
+      });
+      return burnHash;
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  return {
+    burnTokens,
   };
 }

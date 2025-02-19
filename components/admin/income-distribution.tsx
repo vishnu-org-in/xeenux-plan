@@ -1,12 +1,13 @@
 import { Gift } from "lucide-react";
 import { Card } from "../ui/card";
 import { Button } from "../ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useDistributeIncome,
   useIncomeDistributionData,
 } from "@/hooks/use-admin";
 import { CountdownTimer } from "../ui/countdown-timer";
+import { formatDistanceToNow, formatDistance } from "date-fns"; // To format timestamps
 const IncomeCard = ({
   targetDate = new Date(),
   distributeAction,
@@ -36,11 +37,15 @@ const IncomeCard = ({
 
         <div className="flex flex-col items-center justify-between gap-4">
           <span className="text-sm text-gray-400">
-            Next {name} distribution in:
+            {targetDate > new Date()
+              ? `Next ${name} Distribution in: `
+              : `${name} Distribution elapsed: `}
+            {formatDistanceToNow(targetDate)}{" "}
+            {targetDate > new Date() ? "time" : "ago"}
           </span>
-          <div className="w-full">
+          {/* <div className="w-full">
             <CountdownTimer targetDate={targetDate} />
-          </div>
+          </div> */}
           <Button
             onClick={distributeAction}
             disabled={isLoading}
@@ -69,6 +74,10 @@ export function IncomeDistribution() {
   const handleDistributeWeeklyReward = async () => {
     await distributeWeeklyReward();
   };
+
+  useEffect(() => {
+    console.log({ incomeDistData });
+  }, [incomeDistData]);
   return (
     <>
       <IncomeCard

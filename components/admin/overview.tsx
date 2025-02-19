@@ -50,14 +50,14 @@ const stats = [
   //   color: "text-purple-500",
   //   key: "total-fees",
   // },
-  // {
-  //   title: "Tokens Burned",
-  //   value: "0 XEE",
-  //   change: "+2.3%",
-  //   icon: Flame,
-  //   color: "text-orange-500",
-  //   key: "total-burned",
-  // },
+  {
+    title: "Tokens Burned",
+    value: "0 XEE",
+    change: "+2.3%",
+    icon: Flame,
+    color: "text-orange-500",
+    key: "total-burned",
+  },
 ];
 
 export function AdminOverview() {
@@ -103,7 +103,7 @@ export function AdminOverview() {
     }
   }, [totalTurnover, setOverviewDataValue, tokenInfo]);
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3x xl:grid-cols-4 gap-6 mb-8">
       {overviewData.map((stat, index) => (
         <Card
           key={index}

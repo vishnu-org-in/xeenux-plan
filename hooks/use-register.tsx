@@ -1,19 +1,27 @@
-import { useAccount, useReadContract, useWriteContract } from "wagmi";
+import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
 import { Address, erc20Abi } from "viem";
 import { WalletNotConnectedException } from "@/lib/exceptions";
 import {
-  xeenuxContractAbi,
-  xeenuxContractAddress,
-  xeenuxTokenAddress,
-} from "@/lib/contracts/config";
-import { waitForTransactionReceipt } from "@wagmi/core";
-import { useTransactor } from "./scaffold-eth";
-
+  useDeployedContractInfo,
+  useScaffoldReadContract,
+  useScaffoldWriteContract,
+  useSelectedNetwork,
+  useTransactor,
+} from "./scaffold-eth";
+import { AllowedChainIds } from "@/utils/scaffold-eth";
+const xeenuxContractName = "XeenuxInvestment";
+const xeeContractName = "XEE";
+const usdtContractName = "USDT";
 export const useRegister = ({ _package }: { _package: number | undefined }) => {
+  const { id: chainId } = useSelectedNetwork();
+  const { data: xeenuxContractData } = useDeployedContractInfo({
+    chainId: chainId as AllowedChainIds,
+    contractName: xeenuxContractName,
+  });
   const { address, isConnected } = useAccount();
   const [packageIndex, setPackageIndex] = useState<number | undefined>(
-    _package
+    _package,
   );
   const [packagePrice, setPackagePrice] = useState<{
     usdt: bigint;
@@ -32,9 +40,8 @@ export const useRegister = ({ _package }: { _package: number | undefined }) => {
     isLoading: isPriceLoading,
     isError: isPriceError,
     error: priceError,
-  } = useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  } = useScaffoldReadContract({
+    contractName: xeenuxContractName,
     functionName: "getPackagePrice",
     args: [packageIndex || 0],
     query: {
@@ -45,9 +52,8 @@ export const useRegister = ({ _package }: { _package: number | undefined }) => {
     data: xeeBalanceData,
     isLoading: isXeeBalanceLoading,
     isError: isXeeBalanceError,
-  } = useReadContract({
-    address: xeenuxTokenAddress,
-    abi: erc20Abi,
+  } = useScaffoldReadContract({
+    contractName: xeeContractName,
     functionName: "balanceOf",
     args: [address as Address],
     query: {
@@ -63,15 +69,19 @@ export const useRegister = ({ _package }: { _package: number | undefined }) => {
       setPackagePrice(priceData as any);
     }
   }, [isPriceReady, priceData]);
-  const transactor = useTransactor();
-  const { writeContractAsync } = useWriteContract();
-  const { data: allowanceData } = useReadContract({
-    address: xeenuxTokenAddress,
-    abi: erc20Abi,
+  // const transactor = useTransactor();
+  const { writeContractAsync: writeXeenuxContractAsync } =
+    useScaffoldWriteContract({ contractName: xeenuxContractName });
+  const { writeContractAsync: writeXeenuxTokenAsync } =
+    useScaffoldWriteContract({ contractName: xeeContractName });
+  const { data: allowanceData } = useScaffoldReadContract({
+    // address: xeenuxTokenAddress,
+    // abi: erc20Abi,
+    contractName: xeeContractName,
     functionName: "allowance",
-    args: [address as Address, xeenuxContractAddress],
+    args: [address as Address, xeenuxContractData?.address],
     query: {
-      enabled: address !== undefined,
+      enabled: address !== undefined && !!xeenuxContractData,
     },
   });
   const approveToken = async (amount: bigint): Promise<Address> => {
@@ -81,13 +91,14 @@ export const useRegister = ({ _package }: { _package: number | undefined }) => {
         setStatus("idle");
         return "0x0";
       }
-      const approvalHash = await transactor(() =>
-        writeContractAsync({
-          address: xeenuxTokenAddress,
-          abi: erc20Abi,
+      const approvalHash = await writeXeenuxTokenAsync(
+        {
+          // address: xeenuxTokenAddress,
+          // abi: erc20Abi,
           functionName: "approve",
-          args: [xeenuxContractAddress, amount],
-        })
+          args: [xeenuxContractData?.address, amount],
+        },
+        { showSuccessToast: false },
       );
 
       // await waitForTransactionReceipt(config, {
@@ -131,25 +142,42 @@ export const useRegister = ({ _package }: { _package: number | undefined }) => {
       }
       await approveToken(packagePrice.xee);
       setStatus("registering");
-      const registrationHash = await transactor(
-        () =>
-          writeContractAsync({
-            address: xeenuxContractAddress,
-            abi: xeenuxContractAbi,
-            functionName: "buy",
-            args: [
-              address as Address,
-              BigInt(_ref),
-              BigInt(_package),
-              BigInt(_position),
-              _name,
-              _email,
-              _phone,
-            ],
-          }),
-        {},
-        { message: "Registration successful" }
+      const registrationHash = await writeXeenuxContractAsync(
+        {
+          // address: xeenuxContractAddress,
+          // abi: xeenuxContractAbi,
+          functionName: "buy",
+          args: [
+            address as Address,
+            BigInt(_ref),
+            _package,
+            _position,
+            _name,
+            _email,
+            _phone,
+          ],
+        },
+        { successToastMessage: "Registration successful" },
       );
+      // const registrationHash = await transactor(
+      //   () =>
+      //     writeContractAsync({
+      //       address: xeenuxContractAddress,
+      //       abi: xeenuxContractAbi,
+      //       functionName: "buy",
+      //       args: [
+      //         address as Address,
+      //         BigInt(_ref),
+      //         BigInt(_package),
+      //         BigInt(_position),
+      //         _name,
+      //         _email,
+      //         _phone,
+      //       ],
+      //     }),
+      //   {},
+      //   { message: "Registration successful" },
+      // );
       // await waitForTransactionReceipt(config, {
       //   hash: registrationHash,
       // });
@@ -158,7 +186,7 @@ export const useRegister = ({ _package }: { _package: number | undefined }) => {
     } catch (error) {
       setStatus("idle");
       setError(
-        error instanceof Error ? error : new Error("Registration failed")
+        error instanceof Error ? error : new Error("Registration failed"),
       );
       throw error;
     }

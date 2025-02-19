@@ -1,63 +1,64 @@
 import { Address } from "viem";
-import { useAccount, useReadContract, useWriteContract } from "wagmi";
+import { useAccount } from "wagmi";
 import { useState } from "react";
 import { WalletNotConnectedException } from "@/lib/exceptions";
 import {
-  xeenuxContractAbi,
-  xeenuxContractAddress,
-} from "@/lib/contracts/config";
-import { useTransactor } from "./scaffold-eth";
+  useScaffoldReadContract,
+  useScaffoldWriteContract,
+  useTransactor,
+} from "./scaffold-eth";
+import { useContractsInfo } from "./use-contract";
 
 // Hook for 'getUserInfo' function
 export function useUserInfo(_address: Address) {
-  return useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "getUserInfo",
     args: [_address],
   });
 }
 
 export function useUserDirectRefNo(_id: bigint) {
-  return useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "usersDirectRefNo",
     args: [_id],
   });
 }
 
 export function useUserPackages(_id: bigint) {
-  return useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "getUserPackages",
     args: [_id],
   });
 }
 
 export function useUserTeamStats(_id: bigint) {
-  return useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "getUserTeamStats",
     args: [_id],
   });
 }
 
 export function useUserClaims(_id: bigint) {
-  return useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "getUserClaims",
     args: [_id],
   });
 }
 
 export function useUserVolumes(_id: bigint) {
-  return useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "getUserVolumes",
     args: [_id],
   });
@@ -67,8 +68,11 @@ export const useWithdraw = () => {
   const { address, isConnected } = useAccount();
   const [status, setStatus] = useState<"idle" | "withdrawing">("idle");
   const [error, setError] = useState<Error | null>(null);
-  const { writeContractAsync } = useWriteContract();
-  const transactor = useTransactor();
+  const { xeenuxContractInfo } = useContractsInfo();
+  const { writeContractAsync: writeXeenuxContractAsync } =
+    useScaffoldWriteContract({
+      contractName: xeenuxContractInfo.name,
+    });
 
   const withdraw = async (amount: bigint) => {
     try {
@@ -79,12 +83,10 @@ export const useWithdraw = () => {
       setStatus("withdrawing");
 
       // Call the withdraw function on the contract
-      const txHash = await transactor(() =>writeContractAsync({
-        address: xeenuxContractAddress,
-        abi: xeenuxContractAbi,
+      const txHash = await writeXeenuxContractAsync({
         functionName: "withdraw",
         args: [amount],
-      }));
+      });
 
       // await waitForTransactionReceipt(config, { hash: txHash });
       setStatus("idle");
@@ -104,9 +106,9 @@ export const useWithdraw = () => {
 };
 
 export function useGetUserBinaryTree(_userId: bigint) {
-  return useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "getUserBinaryTree",
     args: [_userId],
   });
@@ -114,9 +116,9 @@ export function useGetUserBinaryTree(_userId: bigint) {
 
 export function useIncomeHistory(_userId: bigint, _type: number) {
   const [page, setPage] = useState(BigInt(1));
-  const query = useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  const query = useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "getFilteredActivities",
     args: [_userId, _type, page],
   });
@@ -124,9 +126,9 @@ export function useIncomeHistory(_userId: bigint, _type: number) {
 }
 
 export function useGetAllUserLevels(_userId: bigint) {
-  return useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "getAllLevelDetails",
     args: [_userId],
   });
@@ -134,10 +136,10 @@ export function useGetAllUserLevels(_userId: bigint) {
 
 export function useGetUserLevelDetails(_userId: bigint) {
   const [level, setLevel] = useState(BigInt(0));
+  const { xeenuxContractInfo } = useContractsInfo();
   return {
-    ...useReadContract({
-      address: xeenuxContractAddress,
-      abi: xeenuxContractAbi,
+    ...useScaffoldReadContract({
+      contractName: xeenuxContractInfo.name,
       functionName: "getLevelDetails",
       args: [_userId, level],
     }),

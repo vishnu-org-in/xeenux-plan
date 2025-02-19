@@ -7,10 +7,12 @@ import {
   useTokenInfo,
   useTokensToBeBurnt,
 } from "@/hooks/use-contract";
-import { useState } from "react";
-import { bigIntToString } from "@/lib/utils";
+import { useEffect, useMemo, useState } from "react";
+import { bigIntToString, stringToBigInt } from "@/lib/utils";
 import { useSwapFee } from "@/hooks/use-swap";
 import { CountdownTimer } from "../ui/countdown-timer";
+import { useBurnTokens } from "@/hooks/use-admin";
+import { formatDistanceToNow } from "date-fns";
 
 export function TokenBurning() {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +20,24 @@ export function TokenBurning() {
   const { data: tokensToBeBurnt } = useTokensToBeBurnt();
   const [burnAmount, setBurnAmount] = useState<string>("");
   const { data: tokenInfo } = useTokenInfo();
-  const burnTokens = async () => {};
+  const { burnTokens: burnXeenux } = useBurnTokens();
+  const nextBurnDate = useMemo(() => {
+    if (!lastBurnTimestamp) return new Date(0);
+    return new Date(
+      (Number(lastBurnTimestamp) || 0) * 1000 + 1000 * 60 * 60 * 24 * 30,
+    );
+  }, [lastBurnTimestamp]);
+  const burnTokens = async () => {
+    setIsLoading(true);
+    try {
+      await burnXeenux(stringToBigInt(burnAmount, tokenInfo?.decimals));
+      setBurnAmount("");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <Card className="glass-card p-6">
       <div className="flex items-center gap-3 mb-6">
@@ -29,20 +48,43 @@ export function TokenBurning() {
       </div>
       {/* <CountdownTimer targetDate={new Date("2025-02-04")} /> */}
       {lastBurnTimestamp && (
-        <CountdownTimer
-          targetDate={
-            new Date(
-              (Number(lastBurnTimestamp) || 0) * 1000 +
-                1000 * 60 * 60 * 24 * 30,
-            )
-          }
-        />
+        // <CountdownTimer
+        //   targetDate={
+        //     new Date(
+        //       (Number(lastBurnTimestamp) || 0) * 1000 +
+        //         1000 * 60 * 60 * 24 * 30,
+        //     )
+        //   }
+        // />
+        <span className="text-sm text-gray-400">
+          {nextBurnDate > new Date()
+            ? `Next Scheduled Burn in: `
+            : `Scheduled Burn elapsed: `}
+          <span className="text-gray-200">
+            {formatDistanceToNow(nextBurnDate)}{" "}
+            {nextBurnDate > new Date() ? "time" : "ago"}
+          </span>
+        </span>
       )}
       <p className="text-gray-400 text-sm">
         {bigIntToString(tokensToBeBurnt || BigInt(0), tokenInfo?.decimals, 0)}{" "}
-        {tokenInfo?.symbol} tokens are available for burn
+        {tokenInfo?.symbol} tokens are available for burn:{" "}
+        <a
+          href="#0"
+          onClick={() =>
+            setBurnAmount(
+              bigIntToString(
+                tokensToBeBurnt || BigInt(0),
+                tokenInfo?.decimals,
+                0,
+              ),
+            )
+          }
+          className="text-primary text-xs underline lowercase"
+        >
+          Burn All
+        </a>
       </p>
-
       <div className="space-y-4">
         <div className="flex gap-3">
           <Input

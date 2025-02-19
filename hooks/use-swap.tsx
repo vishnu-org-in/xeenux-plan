@@ -1,25 +1,20 @@
-import {
-  xeenuxContractAbi,
-  xeenuxContractAddress,
-  usdtTokenAddress,
-  xeenuxTokenAddress,
-} from "@/lib/contracts/config";
 import { WalletNotConnectedException } from "@/lib/exceptions";
 import { useState } from "react";
-import { Address, erc20Abi } from "viem";
-import { useAccount, useReadContract, useWriteContract } from "wagmi";
-import { useTransactor } from "./scaffold-eth";
-
-// const chainId = String(getSupportedNetworks()[0].id) as keyof Addresses;
-// const xeenuxContractAddress = xeenuxContractAddresses[chainId];
-// const usdtTokenAddress = usdtAddresses[chainId];
-// const xeenuxTokenAddress = xeenuxTokenAddresses[chainId];
+import { Address } from "viem";
+import { useAccount } from "wagmi";
+import {
+  useScaffoldReadContract,
+  useScaffoldWriteContract,
+} from "./scaffold-eth";
+import { useContractsInfo } from "./use-contract";
 
 export const useSwapUsdtToXee = () => {
   const { address, isConnected } = useAccount();
   const [status, setStatus] = useState<"idle" | "approving" | "swapping">(
     "idle"
   );
+  const { xeenuxContractInfo, usdtTokenInfo, xeeTokenInfo } =
+    useContractsInfo();
   const [error, setError] = useState<Error | null>(null);
 
   // Read USDT balance
@@ -27,27 +22,30 @@ export const useSwapUsdtToXee = () => {
     data: usdtBalanceData,
     isLoading: isUsdtBalanceLoading,
     isError: isUsdtBalanceError,
-  } = useReadContract({
-    address: usdtTokenAddress,
-    abi: erc20Abi,
+  } = useScaffoldReadContract({
+    contractName: usdtTokenInfo.name,
     functionName: "balanceOf",
     args: [address as Address],
     query: {
       enabled: address !== undefined,
     },
   });
-  const { data: allowanceData } = useReadContract({
-    address: usdtTokenAddress,
-    abi: erc20Abi,
+  const { data: allowanceData } = useScaffoldReadContract({
+    contractName: usdtTokenInfo.name,
     functionName: "allowance",
-    args: [address as Address, xeenuxContractAddress],
+    args: [address as Address, xeenuxContractInfo?.address],
     query: {
       enabled: address !== undefined,
     },
   });
-
-  const { writeContractAsync } = useWriteContract();
-  const transactor = useTransactor();
+  const { writeContractAsync: writeUsdtContractAsync } =
+    useScaffoldWriteContract({
+      contractName: usdtTokenInfo.name,
+    });
+  const { writeContractAsync: writeXeenuxContractAsync } =
+    useScaffoldWriteContract({
+      contractName: xeenuxContractInfo.name,
+    });
   const approveUsdt = async (amount: bigint): Promise<Address> => {
     setStatus("approving");
     try {
@@ -55,17 +53,13 @@ export const useSwapUsdtToXee = () => {
         setStatus("idle");
         return "0x0";
       }
-      const approvalHash = await transactor(() =>
-        writeContractAsync({
-          address: usdtTokenAddress,
-          abi: erc20Abi,
+      const approvalHash = await writeUsdtContractAsync(
+        {
           functionName: "approve",
-          args: [xeenuxContractAddress, amount],
-        })
+          args: [xeenuxContractInfo.address, amount],
+        },
+        { showSuccessToast: false }
       );
-      // await waitForTransactionReceipt(config, {
-      //   hash: approvalHash,
-      // });
       return approvalHash as Address;
     } catch (error) {
       setStatus("idle");
@@ -92,21 +86,13 @@ export const useSwapUsdtToXee = () => {
 
       // Then perform swap
       setStatus("swapping");
-      const swapHash = await transactor(
-        () =>
-          writeContractAsync({
-            address: xeenuxContractAddress,
-            abi: xeenuxContractAbi,
-            functionName: "swapUSDTToXeenux",
-            args: [amount],
-          }),
-        {},
-        { message: "Swap successful" }
+      const swapHash = await writeXeenuxContractAsync(
+        {
+          functionName: "swapUSDTToXeenux",
+          args: [amount],
+        },
+        { successToastMessage: "Swap successful" }
       );
-
-      // await waitForTransactionReceipt(config, {
-      //   hash: swapHash,
-      // });
       setStatus("idle");
       return swapHash as Address;
     } catch (error) {
@@ -131,6 +117,7 @@ export const useSwapXeeToUsdt = () => {
   const [status, setStatus] = useState<"idle" | "approving" | "swapping">(
     "idle"
   );
+  const { xeenuxContractInfo, xeeTokenInfo } = useContractsInfo();
   const [error, setError] = useState<Error | null>(null);
 
   // Read XEE balance
@@ -138,30 +125,44 @@ export const useSwapXeeToUsdt = () => {
     data: xeeBalanceData,
     isLoading: isXeeBalanceLoading,
     isError: isXeeBalanceError,
-  } = useReadContract({
-    address: xeenuxTokenAddress,
-    abi: erc20Abi,
+  } = useScaffoldReadContract({
+    contractName: xeeTokenInfo.name,
     functionName: "balanceOf",
     args: [address as Address],
     query: {
       enabled: address !== undefined,
     },
   });
-
-  const { writeContractAsync } = useWriteContract();
-  const transactor = useTransactor();
+  const { data: allowanceData } = useScaffoldReadContract({
+    contractName: xeeTokenInfo.name,
+    functionName: "allowance",
+    args: [address as Address, xeenuxContractInfo?.address],
+    query: {
+      enabled: address !== undefined,
+    },
+  });
+  const { writeContractAsync: writeXeeContractAsync } =
+    useScaffoldWriteContract({
+      contractName: xeeTokenInfo.name,
+    });
+  const { writeContractAsync: writeXeenuxContractAsync } =
+    useScaffoldWriteContract({
+      contractName: xeenuxContractInfo.name,
+    });
   const approveXee = async (amount: bigint): Promise<Address> => {
     setStatus("approving");
     try {
-      const approvalHash = await transactor(() =>
-        writeContractAsync({
-          address: xeenuxTokenAddress,
-          abi: erc20Abi,
+      if (allowanceData && allowanceData >= amount) {
+        setStatus("idle");
+        return "0x0";
+      }
+      const approvalHash = await writeXeeContractAsync(
+        {
           functionName: "approve",
-          args: [xeenuxContractAddress, amount],
-        })
+          args: [xeenuxContractInfo.address, amount],
+        },
+        { showSuccessToast: false }
       );
-
       return approvalHash as Address;
     } catch (error) {
       setStatus("idle");
@@ -188,18 +189,13 @@ export const useSwapXeeToUsdt = () => {
 
       // Then perform swap
       setStatus("swapping");
-      const swapHash = await transactor(
-        () =>
-          writeContractAsync({
-            address: xeenuxContractAddress,
-            abi: xeenuxContractAbi,
-            functionName: "swapXeenuxToUSDT",
-            args: [amount],
-          }),
-        {},
-        { message: "Swap successful" }
+      const swapHash = await writeXeenuxContractAsync(
+        {
+          functionName: "swapXeenuxToUSDT",
+          args: [amount],
+        },
+        { successToastMessage: "Swap successful" }
       );
-
       setStatus("idle");
       return swapHash as Address;
     } catch (error) {
@@ -220,9 +216,9 @@ export const useSwapXeeToUsdt = () => {
 };
 
 export function useSwapFee() {
-  return useReadContract({
-    address: xeenuxContractAddress,
-    abi: xeenuxContractAbi,
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
     functionName: "swapFee",
   });
 }

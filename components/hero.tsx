@@ -16,6 +16,8 @@ import { useWithdraw } from "@/hooks/use-user";
 import toast from "react-hot-toast";
 import { useLastBurnDate } from "@/hooks/use-contract";
 import { useAccount } from "wagmi";
+import { formatDistanceToNow } from "date-fns";
+
 interface HeroProps {}
 
 export function Hero({}: HeroProps) {
@@ -62,8 +64,12 @@ export function Hero({}: HeroProps) {
         <div className="flex gap-2 py-2 md:px-4 rounded-full">
           <span className="text-gray-500 text-xs sm:text-sm">
             Time of Registration:{" "}
-            <span className="text-white font-bold">
-              {new Date(Number(userInfo?.registeredAt) * 1000).toLocaleString()}
+            <span className="text-white font- text-xs">
+              {formatDistanceToNow(
+                new Date(Number(userInfo?.registeredAt || 0) * 1000),
+              )}{" "}
+              ago
+              {/* {new Date(Number(userInfo?.registeredAt) * 1000).toLocaleString()} */}
             </span>
           </span>
         </div>

@@ -28,7 +28,7 @@ export function MainContent() {
       _package: buyPackage,
     });
   const { isConnected } = useAccount();
-  const { openConnectModal  } = useConnectModal();
+  const { openConnectModal } = useConnectModal();
   const handleBuyPackage = async (e: FormEvent) => {
     e.preventDefault();
     if (!isConnected) {
@@ -114,7 +114,8 @@ export function MainContent() {
               <div className="flex items-center gap-2">
                 <span className="w-3 h-3 bg-purple-500 rounded-full"></span>
                 <span className="text-gray-50">
-                  Total ({bigIntToString(totalLimit, tokenInfo?.decimals || 0, 0)}{" "}
+                  Total (
+                  {bigIntToString(totalLimit, tokenInfo?.decimals || 0, 0)}{" "}
                   {tokenInfo?.symbol})
                 </span>
               </div>
@@ -125,7 +126,7 @@ export function MainContent() {
                   {bigIntToString(
                     totalLimit - totalUsed,
                     tokenInfo?.decimals || 0,
-                    0
+                    0,
                   )}{" "}
                   {tokenInfo?.symbol})
                 </span>
@@ -194,7 +195,7 @@ export function MainContent() {
       />
 
       <MainContentSection
-        title="Weekly Bonus"
+        title="Weekly Reward"
         content={<UserIncomes _type={4} />}
       />
 
@@ -203,7 +204,7 @@ export function MainContent() {
         content={<BinaryTreeX data={treeData} />}
       /> */}
       <MainContentSection
-        title="My Tree"
+        title="Binary Tree"
         className="!overflow-x-scroll"
         content={<BinaryTree userId={userInfo?.id || BigInt(0)} />}
       />
@@ -217,7 +218,10 @@ export function MainContent() {
         title="Withdraw History"
         content={<UserWithdrawals />}
       />
-      <MainContentSection title="Full Team" content={<LevelDetailsAccordion />} />
+      <MainContentSection
+        title="Full Team"
+        content={<LevelDetailsAccordion />}
+      />
     </div>
   );
 }

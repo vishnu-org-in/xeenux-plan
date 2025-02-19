@@ -39,7 +39,7 @@ export function Sidebar() {
                   (userInfo?.levelIncome || BigInt(0)) +
                   (userInfo?.autopoolIncome || BigInt(0)),
                 tokenInfo?.decimals || 0,
-                0
+                2,
               )}{" "}
               {tokenInfo?.symbol}
             </span>
@@ -50,7 +50,7 @@ export function Sidebar() {
               {bigIntToString(
                 userInfo?.roiIncome || BigInt(0),
                 tokenInfo?.decimals || 0,
-                5
+                2,
               )}{" "}
               {tokenInfo?.symbol}
             </span>
@@ -61,7 +61,7 @@ export function Sidebar() {
               {bigIntToString(
                 userInfo?.binaryIncome || BigInt(0),
                 tokenInfo?.decimals || 0,
-                5
+                2,
               )}{" "}
               {tokenInfo?.symbol}
             </span>
@@ -72,7 +72,7 @@ export function Sidebar() {
               {bigIntToString(
                 userInfo?.levelIncome || BigInt(0),
                 tokenInfo?.decimals || 0,
-                5
+                5,
               )}{" "}
               {tokenInfo?.symbol}
             </span>
@@ -83,18 +83,18 @@ export function Sidebar() {
               {bigIntToString(
                 userInfo?.autopoolIncome || BigInt(0),
                 tokenInfo?.decimals || 0,
-                5
+                5,
               )}{" "}
               {tokenInfo?.symbol}
             </span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-gray-400">Weekly Bonus</span>
+            <span className="text-gray-400">Weekly Reward</span>
             <span className="text-gray-200">
               {bigIntToString(
                 userInfo?.rewardIncome || BigInt(0),
                 tokenInfo?.decimals || 0,
-                5
+                5,
               )}{" "}
               {tokenInfo?.symbol}
             </span>
@@ -135,7 +135,7 @@ export function Sidebar() {
               {bigIntToString(
                 userVolumes?.directVolume || BigInt(0),
                 Number(tokenInfo?.decimals || 0),
-                5
+                5,
               )}{" "}
               {tokenInfo?.symbol}
             </span>
@@ -147,7 +147,7 @@ export function Sidebar() {
                 (userVolumes?.leftVolume || BigInt(0)) +
                   (userVolumes?.rightVolume || BigInt(0)),
                 Number(tokenInfo?.decimals || 0),
-                5
+                5,
               )}{" "}
               {tokenInfo?.symbol}
             </span>
