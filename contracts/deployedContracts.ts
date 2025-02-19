@@ -789,7 +789,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0x851356ae760d987E095750cCeb3bC6014560891C",
+      address: "0x4c5859f0F772848b2D91F1D83E2Fe57935348029",
       abi: [
         {
           inputs: [
@@ -1043,19 +1043,6 @@ const deployedContracts = {
         {
           inputs: [],
           name: "binaryIncomeLastDist",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "blockTimestamp",
           outputs: [
             {
               internalType: "uint256",
@@ -1537,12 +1524,12 @@ const deployedContracts = {
                 },
                 {
                   internalType: "uint256",
-                  name: "leftCaryForward",
+                  name: "leftCarryForward",
                   type: "uint256",
                 },
                 {
                   internalType: "uint256",
-                  name: "rightCaryForward",
+                  name: "rightCarryForward",
                   type: "uint256",
                 },
                 {
@@ -2391,6 +2378,19 @@ const deployedContracts = {
           inputs: [
             {
               internalType: "uint256",
+              name: "_fee",
+              type: "uint256",
+            },
+          ],
+          name: "setBinaryFee",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
               name: "_level",
               type: "uint256",
             },
@@ -2852,6 +2852,16 @@ const deployedContracts = {
               name: "rightVolume",
               type: "uint256",
             },
+            {
+              internalType: "uint256",
+              name: "leftCarryForward",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "rightCarryForward",
+              type: "uint256",
+            },
           ],
           stateMutability: "view",
           type: "function",
@@ -3070,6 +3080,16 @@ const deployedContracts = {
             {
               internalType: "uint256",
               name: "rightVolume",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "leftCarryForward",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "rightCarryForward",
               type: "uint256",
             },
           ],
@@ -4034,7 +4054,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0xA03f286B54d13e9FBad6D62b234d531d0e23A10B",
+      address: "0x5F513F9A315cD46efDf843D185Ae21BEB5047ED4",
       abi: [
         {
           inputs: [
@@ -4288,19 +4308,6 @@ const deployedContracts = {
         {
           inputs: [],
           name: "binaryIncomeLastDist",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "blockTimestamp",
           outputs: [
             {
               internalType: "uint256",
@@ -4782,12 +4789,12 @@ const deployedContracts = {
                 },
                 {
                   internalType: "uint256",
-                  name: "leftCaryForward",
+                  name: "leftCarryForward",
                   type: "uint256",
                 },
                 {
                   internalType: "uint256",
-                  name: "rightCaryForward",
+                  name: "rightCarryForward",
                   type: "uint256",
                 },
                 {
@@ -5636,6 +5643,19 @@ const deployedContracts = {
           inputs: [
             {
               internalType: "uint256",
+              name: "_fee",
+              type: "uint256",
+            },
+          ],
+          name: "setBinaryFee",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
               name: "_level",
               type: "uint256",
             },
@@ -6097,6 +6117,16 @@ const deployedContracts = {
               name: "rightVolume",
               type: "uint256",
             },
+            {
+              internalType: "uint256",
+              name: "leftCarryForward",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "rightCarryForward",
+              type: "uint256",
+            },
           ],
           stateMutability: "view",
           type: "function",
@@ -6315,6 +6345,16 @@ const deployedContracts = {
             {
               internalType: "uint256",
               name: "rightVolume",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "leftCarryForward",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "rightCarryForward",
               type: "uint256",
             },
           ],

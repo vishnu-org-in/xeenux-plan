@@ -3,29 +3,40 @@ import { Card } from "@/components/ui/card";
 import { useContractData } from "@/context/contract";
 import { cn, bigIntToString } from "@/lib/utils";
 // import Image from "next/image";
-import { ChevronDown, User, Star } from "lucide-react";
-import { useGetUserBinaryTree } from "@/hooks/use-user";
+import { ChevronDown, User, Star, RotateCcw } from "lucide-react";
+import { useGetUserBinaryTree, useUserInfo } from "@/hooks/use-user";
+import { useUser } from "@/context/user";
 
 interface BinaryNode {
   id: bigint;
   name: string;
   leftCount: bigint;
   rightCount: bigint;
-  leftCaryForward: bigint;
-  rightCaryForward: bigint;
+  leftCarryForward: bigint;
+  rightCarryForward: bigint;
   leftChildId: bigint;
   rightChildId: bigint;
 }
 
 const BinaryTreeNode = ({
   userId,
-  isRoot = false,
+  setUserId,
   level = 1,
+  isRoot = false,
 }: {
   userId: bigint;
-  isRoot?: boolean;
+  setUserId: (id: bigint) => void;
   level?: number;
+  isRoot?: boolean;
 }) => {
+  const { userInfo } = useUser();
+  const [expanded, setExpanded] = useState(false);
+  const { data: treeData, isLoading, error } = useGetUserBinaryTree(userId);
+  const { tokenInfo } = useContractData();
+  useEffect(() => {
+    console.log({ treeData });
+  }, [treeData]);
+
   if (userId === BigInt(0)) {
     return (
       <div className="flex flex-col items-center gap-4 py-4 w-full justify-center">
@@ -51,21 +62,22 @@ const BinaryTreeNode = ({
               </div>
             </div>
             <div className="flex gap-4 w-full items-start justify-center">
-              <BinaryTreeNode userId={BigInt(0)} level={level + 1} />
-              <BinaryTreeNode userId={BigInt(0)} level={level + 1} />
+              <BinaryTreeNode
+                userId={BigInt(0)}
+                level={level + 1}
+                setUserId={setUserId}
+              />
+              <BinaryTreeNode
+                userId={BigInt(0)}
+                level={level + 1}
+                setUserId={setUserId}
+              />
             </div>
           </>
         )}
       </div>
     );
   }
-  const [expanded, setExpanded] = useState(false);
-  const { data: treeData, isLoading, error } = useGetUserBinaryTree(userId);
-  const { tokenInfo } = useContractData();
-  useEffect(() => {
-    console.log({ treeData });
-  }, [treeData]);
-
   if (isLoading) return <p className="text-gray-400">Loading...</p>;
   if (error) return <p className="text-red-500 text-sm">Failed to load tree</p>;
   if (!treeData) return null;
@@ -75,13 +87,27 @@ const BinaryTreeNode = ({
       {/* User Card */}
       <Card className="relative py-4 border border-purple-500 bg-primary-900 shadow-md flex flex-col items-center gap-1 min-w-48 rounded-xl">
         {/* <Image src="/images/xeenux.png" alt="Icon" width={30} height={30} /> */}
-        <h2 className="text-xs text-purple-300 font-semibold flex items-center gap-2">
-          <User size={12} />
-          USER{Number(treeData.id)}
-        </h2>
-        <h3 className="text-sm text-purple-400 font-bold">
-          {treeData.name} {isRoot && "(You)"}
-        </h3>
+        {isRoot && userId !== userInfo?.id && (
+          <button
+            className="absolute -top-2 -right-2 p-1 border border-purple-500/50 bg-purple-500 rounded-full"
+            onClick={() => setUserId(userInfo?.id || BigInt(0))}
+          >
+            <RotateCcw size={16} />
+          </button>
+        )}
+        <button
+          onClick={() => {
+            if (isRoot && userId !== userInfo?.id) setUserId(userId);
+          }}
+        >
+          <h2 className="text-xs text-purple-300 font-semibold flex items-center gap-2">
+            <User size={12} />
+            USER{Number(treeData.id)}
+          </h2>
+          <h3 className="text-sm text-purple-400 font-bold">
+            {treeData.name} {userInfo?.id === userId && "(You)"}
+          </h3>
+        </button>
         <button
           className="text-xs text-purple-200 mt-2 flex items-center gap-1 bg-purple-500/50 rounded px-2 py-1"
           onClick={() => setExpanded(!expanded)}
@@ -91,7 +117,7 @@ const BinaryTreeNode = ({
           <ChevronDown
             className={cn(
               "w-4 h-4 transition-transform",
-              expanded && "rotate-180"
+              expanded && "rotate-180",
             )}
           />
         </button>
@@ -111,9 +137,9 @@ const BinaryTreeNode = ({
               <Star size={12} />
               Left Carryforward:{" "}
               {bigIntToString(
-                treeData.leftCaryForward,
+                treeData.leftCarryForward,
                 tokenInfo?.decimals,
-                0
+                0,
               )}{" "}
               {tokenInfo?.symbol}
             </div>
@@ -121,9 +147,9 @@ const BinaryTreeNode = ({
               <Star size={12} />
               Right Carryforward:{" "}
               {bigIntToString(
-                treeData.rightCaryForward,
+                treeData.rightCarryForward,
                 tokenInfo?.decimals,
-                0
+                0,
               )}{" "}
               {tokenInfo?.symbol}
             </div>
@@ -146,17 +172,30 @@ const BinaryTreeNode = ({
           </div>
           <div className="flex gap-4 w-full items-start justify-center">
             {treeData.leftChildId ? (
-              <BinaryTreeNode userId={treeData.leftChildId} level={level + 1} />
+              <BinaryTreeNode
+                userId={treeData.leftChildId}
+                level={level + 1}
+                setUserId={setUserId}
+              />
             ) : (
-              <BinaryTreeNode userId={BigInt(0)} level={level + 1} />
+              <BinaryTreeNode
+                userId={BigInt(0)}
+                level={level + 1}
+                setUserId={setUserId}
+              />
             )}
             {treeData.rightChildId ? (
               <BinaryTreeNode
                 userId={treeData.rightChildId}
                 level={level + 1}
+                setUserId={setUserId}
               />
             ) : (
-              <BinaryTreeNode userId={BigInt(0)} level={level + 1} />
+              <BinaryTreeNode
+                userId={BigInt(0)}
+                level={level + 1}
+                setUserId={setUserId}
+              />
             )}
           </div>
         </>
@@ -166,6 +205,7 @@ const BinaryTreeNode = ({
 };
 
 // **Binary Tree Root Component**
-export const BinaryTree = ({ userId }: { userId: bigint }) => {
-  return <BinaryTreeNode userId={userId} isRoot />;
+export const BinaryTree = ({ userId: _userId }: { userId: bigint }) => {
+  const [userId, setUserId] = useState(_userId);
+  return <BinaryTreeNode userId={userId} setUserId={setUserId} isRoot />;
 };
