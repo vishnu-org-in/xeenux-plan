@@ -97,7 +97,7 @@ const BinaryTreeNode = ({
         )}
         <button
           onClick={() => {
-            if (isRoot && userId !== userInfo?.id) setUserId(userId);
+            if (!isRoot) setUserId(userId);
           }}
         >
           <h2 className="text-xs text-purple-300 font-semibold flex items-center gap-2">
