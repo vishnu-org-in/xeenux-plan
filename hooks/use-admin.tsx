@@ -130,3 +130,12 @@ export function useBurnTokens() {
     burnTokens,
   };
 }
+
+export function useTotalTokensBurnt() {
+  const { xeenuxContractInfo } = useContractsInfo();
+  return useScaffoldReadContract({
+    contractName: xeenuxContractInfo.name,
+    functionName: "xeenuxBurnt",
+    args: [],
+  });
+}

@@ -2,6 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import {
+  useTotalTokensBurnt,
   useTotalTurnover,
   useTotalUsers,
   useWeeklyTurnOver,
@@ -65,6 +66,7 @@ export function AdminOverview() {
   const { data: totalUsers } = useTotalUsers();
   const { data: weeklyTurnover } = useWeeklyTurnOver();
   const { data: totalTurnover } = useTotalTurnover();
+  const { data: totalTokensBurnt } = useTotalTokensBurnt();
   const { data: tokenInfo } = useTokenInfo();
   const setOverviewDataValue = useCallback(
     (key: string, value: string) => {
@@ -102,6 +104,16 @@ export function AdminOverview() {
       );
     }
   }, [totalTurnover, setOverviewDataValue, tokenInfo]);
+  useEffect(() => {
+    if (totalTokensBurnt) {
+      setOverviewDataValue(
+        "total-burned",
+        bigIntToString(totalTokensBurnt, tokenInfo?.decimals, 0) +
+          " " +
+          tokenInfo?.symbol,
+      );
+    }
+  }, [totalTokensBurnt, setOverviewDataValue, tokenInfo]);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3x xl:grid-cols-4 gap-6 mb-8">
       {overviewData.map((stat, index) => (
