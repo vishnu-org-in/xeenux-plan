@@ -147,7 +147,9 @@ export function Hero({}: HeroProps) {
               <div className="p-3 rounded-full bg-purple-500/20">
                 <Wallet className="lg:w-6 lg:h-6 w-4 h-4 text-purple-500" />
               </div>
-              <p className="text-sm text-gray-200">My ID</p>
+              <p className="text-sm text-gray-200">
+                My ID: {userInfo?.id?.toString()}
+              </p>
             </div>
             <div>
               {/* <p className="text-sm opacity-50 font-bold">
