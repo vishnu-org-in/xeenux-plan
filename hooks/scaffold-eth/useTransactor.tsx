@@ -114,7 +114,8 @@ export const useTransactor = (
 
       transactionReceipt = await publicClient!.waitForTransactionReceipt({
         hash: transactionHash,
-        confirmations: options?.blockConfirmations,
+        confirmations: options?.blockConfirmations ?? 1,
+        pollingInterval: 1000,
       });
       notification.remove(notificationId);
 

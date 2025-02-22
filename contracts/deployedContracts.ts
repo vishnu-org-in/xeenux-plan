@@ -789,7 +789,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0xfbC22278A96299D91d41C453234d97b4F5Eb9B2d",
+      address: "0x71089Ba41e478702e1904692385Be3972B2cBf9e",
       abi: [
         {
           inputs: [
@@ -1704,6 +1704,11 @@ const deployedContracts = {
                   name: "lastROIDistributed",
                   type: "uint256",
                 },
+                {
+                  internalType: "uint8",
+                  name: "lastRankSaved",
+                  type: "uint8",
+                },
               ],
               internalType: "struct XeenuxInvestment.User",
               name: "",
@@ -1820,6 +1825,11 @@ const deployedContracts = {
                   name: "lastROIDistributed",
                   type: "uint256",
                 },
+                {
+                  internalType: "uint8",
+                  name: "lastRankSaved",
+                  type: "uint8",
+                },
               ],
               internalType: "struct XeenuxInvestment.User",
               name: "",
@@ -1935,6 +1945,11 @@ const deployedContracts = {
                   internalType: "uint256",
                   name: "lastROIDistributed",
                   type: "uint256",
+                },
+                {
+                  internalType: "uint8",
+                  name: "lastRankSaved",
+                  type: "uint8",
                 },
               ],
               internalType: "struct XeenuxInvestment.User",
@@ -3057,6 +3072,11 @@ const deployedContracts = {
               internalType: "uint256",
               name: "lastROIDistributed",
               type: "uint256",
+            },
+            {
+              internalType: "uint8",
+              name: "lastRankSaved",
+              type: "uint8",
             },
           ],
           stateMutability: "view",
@@ -4054,7 +4074,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0xc175075F66e814df46343C06f38BDB75A365e6CF",
+      address: "0xb55FC4f889DB2E29726a51552B0a2Cc9Cd167053",
       abi: [
         {
           inputs: [
@@ -4969,6 +4989,11 @@ const deployedContracts = {
                   name: "lastROIDistributed",
                   type: "uint256",
                 },
+                {
+                  internalType: "uint8",
+                  name: "lastRankSaved",
+                  type: "uint8",
+                },
               ],
               internalType: "struct XeenuxInvestment.User",
               name: "",
@@ -5085,6 +5110,11 @@ const deployedContracts = {
                   name: "lastROIDistributed",
                   type: "uint256",
                 },
+                {
+                  internalType: "uint8",
+                  name: "lastRankSaved",
+                  type: "uint8",
+                },
               ],
               internalType: "struct XeenuxInvestment.User",
               name: "",
@@ -5200,6 +5230,11 @@ const deployedContracts = {
                   internalType: "uint256",
                   name: "lastROIDistributed",
                   type: "uint256",
+                },
+                {
+                  internalType: "uint8",
+                  name: "lastRankSaved",
+                  type: "uint8",
                 },
               ],
               internalType: "struct XeenuxInvestment.User",
@@ -6322,6 +6357,11 @@ const deployedContracts = {
               internalType: "uint256",
               name: "lastROIDistributed",
               type: "uint256",
+            },
+            {
+              internalType: "uint8",
+              name: "lastRankSaved",
+              type: "uint8",
             },
           ],
           stateMutability: "view",

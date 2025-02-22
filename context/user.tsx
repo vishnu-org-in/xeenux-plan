@@ -82,7 +82,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     queryKey: userVolumesQueryKey,
   } = useUserVolumes(userInfo?.id || BigInt(0));
   useEffect(() => {
-    console.log({ userInfo, isConnected, isLoadingUserInfo });
+    console.log({ userInfo, isConnected, isLoadingUserInfo, userTeamStats });
     if (!isLoadingUserInfo && isConnected) {
       // @ts-ignore
       if (!userInfo || Number(userInfo.id) === 0) {
@@ -92,7 +92,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         // }
       }
     }
-  }, [userInfo, isLoadingUserInfo, isConnected, router]);
+  }, [userInfo, isLoadingUserInfo, isConnected, router, userTeamStats]);
   const userTotalEarnings = useMemo(() => {
     if (!userInfo) return BigInt(0);
     return (
