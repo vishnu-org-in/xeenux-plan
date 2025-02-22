@@ -241,7 +241,7 @@ export default function RegisterPage() {
       <div className="container mx-auto py-8">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#4c51ff]/20 rounded-full blur-3xl" />
 
-        <Card className="glass-card w-full md:max-w-7xl mx-auto p-4">
+        <Card className="md:glass-card border-none w-full md:max-w-7xl mx-auto p-4">
           <h1 className="text-4xl font-bold text-center mb-12 gradient-text">
             Join now
           </h1>
