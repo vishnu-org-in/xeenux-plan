@@ -789,7 +789,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0x9fD16eA9E31233279975D99D5e8Fc91dd214c7Da",
+      address: "0x286B8DecD5ED79c962b2d8F4346CD97FF0E2C352",
       abi: [
         {
           inputs: [
@@ -1631,6 +1631,26 @@ const deployedContracts = {
                   type: "address",
                 },
                 {
+                  internalType: "uint32",
+                  name: "refCount",
+                  type: "uint32",
+                },
+                {
+                  internalType: "uint8",
+                  name: "rank",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "position",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "lastRankSaved",
+                  type: "uint8",
+                },
+                {
                   internalType: "uint256",
                   name: "ref",
                   type: "uint256",
@@ -1671,36 +1691,6 @@ const deployedContracts = {
                   type: "uint256",
                 },
                 {
-                  internalType: "uint16",
-                  name: "refCount",
-                  type: "uint16",
-                },
-                {
-                  internalType: "uint8",
-                  name: "rank",
-                  type: "uint8",
-                },
-                {
-                  internalType: "uint8",
-                  name: "position",
-                  type: "uint8",
-                },
-                {
-                  internalType: "string",
-                  name: "name",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "email",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "phone",
-                  type: "string",
-                },
-                {
                   internalType: "uint256",
                   name: "registeredAt",
                   type: "uint256",
@@ -1726,9 +1716,19 @@ const deployedContracts = {
                   type: "uint256",
                 },
                 {
-                  internalType: "uint8",
-                  name: "lastRankSaved",
-                  type: "uint8",
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "email",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "phone",
+                  type: "string",
                 },
               ],
               internalType: "struct XeenuxInvestment.User",
@@ -1757,6 +1757,26 @@ const deployedContracts = {
                   type: "address",
                 },
                 {
+                  internalType: "uint32",
+                  name: "refCount",
+                  type: "uint32",
+                },
+                {
+                  internalType: "uint8",
+                  name: "rank",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "position",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "lastRankSaved",
+                  type: "uint8",
+                },
+                {
                   internalType: "uint256",
                   name: "ref",
                   type: "uint256",
@@ -1797,36 +1817,6 @@ const deployedContracts = {
                   type: "uint256",
                 },
                 {
-                  internalType: "uint16",
-                  name: "refCount",
-                  type: "uint16",
-                },
-                {
-                  internalType: "uint8",
-                  name: "rank",
-                  type: "uint8",
-                },
-                {
-                  internalType: "uint8",
-                  name: "position",
-                  type: "uint8",
-                },
-                {
-                  internalType: "string",
-                  name: "name",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "email",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "phone",
-                  type: "string",
-                },
-                {
                   internalType: "uint256",
                   name: "registeredAt",
                   type: "uint256",
@@ -1852,9 +1842,19 @@ const deployedContracts = {
                   type: "uint256",
                 },
                 {
-                  internalType: "uint8",
-                  name: "lastRankSaved",
-                  type: "uint8",
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "email",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "phone",
+                  type: "string",
                 },
               ],
               internalType: "struct XeenuxInvestment.User",
@@ -1883,6 +1883,26 @@ const deployedContracts = {
                   type: "address",
                 },
                 {
+                  internalType: "uint32",
+                  name: "refCount",
+                  type: "uint32",
+                },
+                {
+                  internalType: "uint8",
+                  name: "rank",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "position",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "lastRankSaved",
+                  type: "uint8",
+                },
+                {
                   internalType: "uint256",
                   name: "ref",
                   type: "uint256",
@@ -1923,36 +1943,6 @@ const deployedContracts = {
                   type: "uint256",
                 },
                 {
-                  internalType: "uint16",
-                  name: "refCount",
-                  type: "uint16",
-                },
-                {
-                  internalType: "uint8",
-                  name: "rank",
-                  type: "uint8",
-                },
-                {
-                  internalType: "uint8",
-                  name: "position",
-                  type: "uint8",
-                },
-                {
-                  internalType: "string",
-                  name: "name",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "email",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "phone",
-                  type: "string",
-                },
-                {
                   internalType: "uint256",
                   name: "registeredAt",
                   type: "uint256",
@@ -1978,9 +1968,19 @@ const deployedContracts = {
                   type: "uint256",
                 },
                 {
-                  internalType: "uint8",
-                  name: "lastRankSaved",
-                  type: "uint8",
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "email",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "phone",
+                  type: "string",
                 },
               ],
               internalType: "struct XeenuxInvestment.User",
@@ -2653,64 +2653,6 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          name: "teamsLeft",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          name: "teamsRight",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
           inputs: [],
           name: "totalTurnover",
           outputs: [
@@ -2763,25 +2705,6 @@ const deployedContracts = {
             },
           ],
           name: "userActivities",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          name: "userAutopoolParent",
           outputs: [
             {
               internalType: "uint256",
@@ -2946,60 +2869,32 @@ const deployedContracts = {
               type: "uint256",
             },
           ],
-          name: "usersDirectRefNo",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          name: "usersDirectTeam",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "id",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "level",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
           name: "usersInfo",
           outputs: [
             {
               internalType: "address",
               name: "acct",
               type: "address",
+            },
+            {
+              internalType: "uint32",
+              name: "refCount",
+              type: "uint32",
+            },
+            {
+              internalType: "uint8",
+              name: "rank",
+              type: "uint8",
+            },
+            {
+              internalType: "uint8",
+              name: "position",
+              type: "uint8",
+            },
+            {
+              internalType: "uint8",
+              name: "lastRankSaved",
+              type: "uint8",
             },
             {
               internalType: "uint256",
@@ -3042,36 +2937,6 @@ const deployedContracts = {
               type: "uint256",
             },
             {
-              internalType: "uint16",
-              name: "refCount",
-              type: "uint16",
-            },
-            {
-              internalType: "uint8",
-              name: "rank",
-              type: "uint8",
-            },
-            {
-              internalType: "uint8",
-              name: "position",
-              type: "uint8",
-            },
-            {
-              internalType: "string",
-              name: "name",
-              type: "string",
-            },
-            {
-              internalType: "string",
-              name: "email",
-              type: "string",
-            },
-            {
-              internalType: "string",
-              name: "phone",
-              type: "string",
-            },
-            {
               internalType: "uint256",
               name: "registeredAt",
               type: "uint256",
@@ -3097,9 +2962,19 @@ const deployedContracts = {
               type: "uint256",
             },
             {
-              internalType: "uint8",
-              name: "lastRankSaved",
-              type: "uint8",
+              internalType: "string",
+              name: "name",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "email",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "phone",
+              type: "string",
             },
           ],
           stateMutability: "view",
@@ -3133,25 +3008,6 @@ const deployedContracts = {
             {
               internalType: "uint256",
               name: "rightCarryForward",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          name: "usersRefNo",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
               type: "uint256",
             },
           ],
