@@ -789,7 +789,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0x547382C0D1b23f707918D3c83A77317B71Aa8470",
+      address: "0x9fD16eA9E31233279975D99D5e8Fc91dd214c7Da",
       abi: [
         {
           inputs: [
@@ -836,11 +836,6 @@ const deployedContracts = {
             },
           ],
           name: "AccessControlUnauthorizedAccount",
-          type: "error",
-        },
-        {
-          inputs: [],
-          name: "InvalidUserId",
           type: "error",
         },
         {
@@ -1123,6 +1118,20 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [],
+          name: "claimBinaryIncome",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "claimRoi",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
           inputs: [
             {
               internalType: "address",
@@ -1200,25 +1209,6 @@ const deployedContracts = {
               internalType: "struct XeenuxInvestment.LevelDetail[]",
               name: "",
               type: "tuple[]",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "i",
-              type: "uint256",
-            },
-          ],
-          name: "getAutoPoolLevel",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
             },
           ],
           stateMutability: "view",
@@ -1397,6 +1387,32 @@ const deployedContracts = {
               internalType: "struct XeenuxInvestment.PackagePrice",
               name: "",
               type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getPendingBinaryIncome",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getPendingRoi",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
             },
           ],
           stateMutability: "view",
@@ -1626,11 +1642,6 @@ const deployedContracts = {
                 },
                 {
                   internalType: "uint256",
-                  name: "sn",
-                  type: "uint256",
-                },
-                {
-                  internalType: "uint256",
                   name: "roiIncome",
                   type: "uint256",
                 },
@@ -1702,6 +1713,16 @@ const deployedContracts = {
                 {
                   internalType: "uint256",
                   name: "lastROIDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastBinaryDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastRewardDistributed",
                   type: "uint256",
                 },
                 {
@@ -1747,11 +1768,6 @@ const deployedContracts = {
                 },
                 {
                   internalType: "uint256",
-                  name: "sn",
-                  type: "uint256",
-                },
-                {
-                  internalType: "uint256",
                   name: "roiIncome",
                   type: "uint256",
                 },
@@ -1823,6 +1839,16 @@ const deployedContracts = {
                 {
                   internalType: "uint256",
                   name: "lastROIDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastBinaryDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastRewardDistributed",
                   type: "uint256",
                 },
                 {
@@ -1868,11 +1894,6 @@ const deployedContracts = {
                 },
                 {
                   internalType: "uint256",
-                  name: "sn",
-                  type: "uint256",
-                },
-                {
-                  internalType: "uint256",
                   name: "roiIncome",
                   type: "uint256",
                 },
@@ -1944,6 +1965,16 @@ const deployedContracts = {
                 {
                   internalType: "uint256",
                   name: "lastROIDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastBinaryDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastRewardDistributed",
                   type: "uint256",
                 },
                 {
@@ -2452,19 +2483,6 @@ const deployedContracts = {
             },
           ],
           name: "setPoolFee",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "_amt",
-              type: "uint256",
-            },
-          ],
-          name: "setPrice",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -2995,11 +3013,6 @@ const deployedContracts = {
             },
             {
               internalType: "uint256",
-              name: "sn",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
               name: "roiIncome",
               type: "uint256",
             },
@@ -3071,6 +3084,16 @@ const deployedContracts = {
             {
               internalType: "uint256",
               name: "lastROIDistributed",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "lastBinaryDistributed",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "lastRewardDistributed",
               type: "uint256",
             },
             {
@@ -4074,7 +4097,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0xC458Dc755e95475767A52eBa900F69D86FA14b90",
+      address: "0x2481A8657F0Ad93FB55f5Ea2a3059d60484Fae5b",
       abi: [
         {
           inputs: [
@@ -4121,11 +4144,6 @@ const deployedContracts = {
             },
           ],
           name: "AccessControlUnauthorizedAccount",
-          type: "error",
-        },
-        {
-          inputs: [],
-          name: "InvalidUserId",
           type: "error",
         },
         {
@@ -4408,6 +4426,20 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [],
+          name: "claimBinaryIncome",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "claimRoi",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
           inputs: [
             {
               internalType: "address",
@@ -4485,25 +4517,6 @@ const deployedContracts = {
               internalType: "struct XeenuxInvestment.LevelDetail[]",
               name: "",
               type: "tuple[]",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "i",
-              type: "uint256",
-            },
-          ],
-          name: "getAutoPoolLevel",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
             },
           ],
           stateMutability: "view",
@@ -4682,6 +4695,32 @@ const deployedContracts = {
               internalType: "struct XeenuxInvestment.PackagePrice",
               name: "",
               type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getPendingBinaryIncome",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getPendingRoi",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
             },
           ],
           stateMutability: "view",
@@ -4900,6 +4939,26 @@ const deployedContracts = {
                   type: "address",
                 },
                 {
+                  internalType: "uint32",
+                  name: "refCount",
+                  type: "uint32",
+                },
+                {
+                  internalType: "uint8",
+                  name: "rank",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "position",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "lastRankSaved",
+                  type: "uint8",
+                },
+                {
                   internalType: "uint256",
                   name: "ref",
                   type: "uint256",
@@ -4907,11 +4966,6 @@ const deployedContracts = {
                 {
                   internalType: "uint256",
                   name: "id",
-                  type: "uint256",
-                },
-                {
-                  internalType: "uint256",
-                  name: "sn",
                   type: "uint256",
                 },
                 {
@@ -4945,36 +4999,6 @@ const deployedContracts = {
                   type: "uint256",
                 },
                 {
-                  internalType: "uint16",
-                  name: "refCount",
-                  type: "uint16",
-                },
-                {
-                  internalType: "uint8",
-                  name: "rank",
-                  type: "uint8",
-                },
-                {
-                  internalType: "uint8",
-                  name: "position",
-                  type: "uint8",
-                },
-                {
-                  internalType: "string",
-                  name: "name",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "email",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "phone",
-                  type: "string",
-                },
-                {
                   internalType: "uint256",
                   name: "registeredAt",
                   type: "uint256",
@@ -4990,9 +5014,29 @@ const deployedContracts = {
                   type: "uint256",
                 },
                 {
-                  internalType: "uint8",
-                  name: "lastRankSaved",
-                  type: "uint8",
+                  internalType: "uint256",
+                  name: "lastBinaryDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastRewardDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "email",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "phone",
+                  type: "string",
                 },
               ],
               internalType: "struct XeenuxInvestment.User",
@@ -5021,6 +5065,26 @@ const deployedContracts = {
                   type: "address",
                 },
                 {
+                  internalType: "uint32",
+                  name: "refCount",
+                  type: "uint32",
+                },
+                {
+                  internalType: "uint8",
+                  name: "rank",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "position",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "lastRankSaved",
+                  type: "uint8",
+                },
+                {
                   internalType: "uint256",
                   name: "ref",
                   type: "uint256",
@@ -5028,11 +5092,6 @@ const deployedContracts = {
                 {
                   internalType: "uint256",
                   name: "id",
-                  type: "uint256",
-                },
-                {
-                  internalType: "uint256",
-                  name: "sn",
                   type: "uint256",
                 },
                 {
@@ -5066,36 +5125,6 @@ const deployedContracts = {
                   type: "uint256",
                 },
                 {
-                  internalType: "uint16",
-                  name: "refCount",
-                  type: "uint16",
-                },
-                {
-                  internalType: "uint8",
-                  name: "rank",
-                  type: "uint8",
-                },
-                {
-                  internalType: "uint8",
-                  name: "position",
-                  type: "uint8",
-                },
-                {
-                  internalType: "string",
-                  name: "name",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "email",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "phone",
-                  type: "string",
-                },
-                {
                   internalType: "uint256",
                   name: "registeredAt",
                   type: "uint256",
@@ -5111,9 +5140,29 @@ const deployedContracts = {
                   type: "uint256",
                 },
                 {
-                  internalType: "uint8",
-                  name: "lastRankSaved",
-                  type: "uint8",
+                  internalType: "uint256",
+                  name: "lastBinaryDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastRewardDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "email",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "phone",
+                  type: "string",
                 },
               ],
               internalType: "struct XeenuxInvestment.User",
@@ -5142,6 +5191,26 @@ const deployedContracts = {
                   type: "address",
                 },
                 {
+                  internalType: "uint32",
+                  name: "refCount",
+                  type: "uint32",
+                },
+                {
+                  internalType: "uint8",
+                  name: "rank",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "position",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "lastRankSaved",
+                  type: "uint8",
+                },
+                {
                   internalType: "uint256",
                   name: "ref",
                   type: "uint256",
@@ -5149,11 +5218,6 @@ const deployedContracts = {
                 {
                   internalType: "uint256",
                   name: "id",
-                  type: "uint256",
-                },
-                {
-                  internalType: "uint256",
-                  name: "sn",
                   type: "uint256",
                 },
                 {
@@ -5187,36 +5251,6 @@ const deployedContracts = {
                   type: "uint256",
                 },
                 {
-                  internalType: "uint16",
-                  name: "refCount",
-                  type: "uint16",
-                },
-                {
-                  internalType: "uint8",
-                  name: "rank",
-                  type: "uint8",
-                },
-                {
-                  internalType: "uint8",
-                  name: "position",
-                  type: "uint8",
-                },
-                {
-                  internalType: "string",
-                  name: "name",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "email",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "phone",
-                  type: "string",
-                },
-                {
                   internalType: "uint256",
                   name: "registeredAt",
                   type: "uint256",
@@ -5232,9 +5266,29 @@ const deployedContracts = {
                   type: "uint256",
                 },
                 {
-                  internalType: "uint8",
-                  name: "lastRankSaved",
-                  type: "uint8",
+                  internalType: "uint256",
+                  name: "lastBinaryDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastRewardDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "email",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "phone",
+                  type: "string",
                 },
               ],
               internalType: "struct XeenuxInvestment.User",
@@ -5745,19 +5799,6 @@ const deployedContracts = {
           inputs: [
             {
               internalType: "uint256",
-              name: "_amt",
-              type: "uint256",
-            },
-          ],
-          name: "setPrice",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
               name: "_newRate",
               type: "uint256",
             },
@@ -5920,64 +5961,6 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          name: "teamsLeft",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          name: "teamsRight",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
           inputs: [],
           name: "totalTurnover",
           outputs: [
@@ -6030,25 +6013,6 @@ const deployedContracts = {
             },
           ],
           name: "userActivities",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          name: "userAutopoolParent",
           outputs: [
             {
               internalType: "uint256",
@@ -6213,60 +6177,32 @@ const deployedContracts = {
               type: "uint256",
             },
           ],
-          name: "usersDirectRefNo",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          name: "usersDirectTeam",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "id",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "level",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
           name: "usersInfo",
           outputs: [
             {
               internalType: "address",
               name: "acct",
               type: "address",
+            },
+            {
+              internalType: "uint32",
+              name: "refCount",
+              type: "uint32",
+            },
+            {
+              internalType: "uint8",
+              name: "rank",
+              type: "uint8",
+            },
+            {
+              internalType: "uint8",
+              name: "position",
+              type: "uint8",
+            },
+            {
+              internalType: "uint8",
+              name: "lastRankSaved",
+              type: "uint8",
             },
             {
               internalType: "uint256",
@@ -6276,11 +6212,6 @@ const deployedContracts = {
             {
               internalType: "uint256",
               name: "id",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "sn",
               type: "uint256",
             },
             {
@@ -6314,36 +6245,6 @@ const deployedContracts = {
               type: "uint256",
             },
             {
-              internalType: "uint16",
-              name: "refCount",
-              type: "uint16",
-            },
-            {
-              internalType: "uint8",
-              name: "rank",
-              type: "uint8",
-            },
-            {
-              internalType: "uint8",
-              name: "position",
-              type: "uint8",
-            },
-            {
-              internalType: "string",
-              name: "name",
-              type: "string",
-            },
-            {
-              internalType: "string",
-              name: "email",
-              type: "string",
-            },
-            {
-              internalType: "string",
-              name: "phone",
-              type: "string",
-            },
-            {
               internalType: "uint256",
               name: "registeredAt",
               type: "uint256",
@@ -6359,9 +6260,29 @@ const deployedContracts = {
               type: "uint256",
             },
             {
-              internalType: "uint8",
-              name: "lastRankSaved",
-              type: "uint8",
+              internalType: "uint256",
+              name: "lastBinaryDistributed",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "lastRewardDistributed",
+              type: "uint256",
+            },
+            {
+              internalType: "string",
+              name: "name",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "email",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "phone",
+              type: "string",
             },
           ],
           stateMutability: "view",
@@ -6395,25 +6316,6 @@ const deployedContracts = {
             {
               internalType: "uint256",
               name: "rightCarryForward",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          name: "usersRefNo",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
               type: "uint256",
             },
           ],
