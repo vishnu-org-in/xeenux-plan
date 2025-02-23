@@ -21,7 +21,7 @@ export function MainContentSection({
 
     return (
         <Card id={id} className="glass-card overflow-hidden">
-            <button
+            <div
                 className="w-full p-4 flex items-center justify-between text-left"
                 onClick={() => setIsExpanded(!isExpanded)}
             >
@@ -36,7 +36,7 @@ export function MainContentSection({
                 <ChevronDown
                     className={`w-5 h-5 transition-transform ${isExpanded ? "rotate-180" : ""}`}
                 />
-            </button>
+            </div>
 
             {isExpanded && (
                 <div className={`${className} text-xs p-4 pt-0`}>{content}</div>

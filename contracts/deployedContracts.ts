@@ -789,7 +789,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0x286B8DecD5ED79c962b2d8F4346CD97FF0E2C352",
+      address: "0xC32609C91d6B6b51D48f2611308FEf121B02041f",
       abi: [
         {
           inputs: [
@@ -1393,7 +1393,13 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [],
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_id",
+              type: "uint256",
+            },
+          ],
           name: "getPendingBinaryIncome",
           outputs: [
             {
@@ -1406,7 +1412,13 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [],
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_id",
+              type: "uint256",
+            },
+          ],
           name: "getPendingRoi",
           outputs: [
             {
@@ -2692,6 +2704,19 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [],
+          name: "usdtTokenDecimals",
+          outputs: [
+            {
+              internalType: "uint8",
+              name: "",
+              type: "uint8",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
           inputs: [
             {
               internalType: "uint256",
@@ -3150,6 +3175,19 @@ const deployedContracts = {
               internalType: "contract IERC20Metadata",
               name: "",
               type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "xeenuxTokenDecimals",
+          outputs: [
+            {
+              internalType: "uint8",
+              name: "",
+              type: "uint8",
             },
           ],
           stateMutability: "view",
@@ -3953,7 +3991,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0x2481A8657F0Ad93FB55f5Ea2a3059d60484Fae5b",
+      address: "0x70293538Ef5ee334504489339d411EBBF5C5cf96",
       abi: [
         {
           inputs: [
@@ -4557,7 +4595,13 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [],
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_id",
+              type: "uint256",
+            },
+          ],
           name: "getPendingBinaryIncome",
           outputs: [
             {
@@ -4570,7 +4614,13 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [],
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_id",
+              type: "uint256",
+            },
+          ],
           name: "getPendingRoi",
           outputs: [
             {
@@ -5856,6 +5906,19 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [],
+          name: "usdtTokenDecimals",
+          outputs: [
+            {
+              internalType: "uint8",
+              name: "",
+              type: "uint8",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
           inputs: [
             {
               internalType: "uint256",
@@ -6314,6 +6377,19 @@ const deployedContracts = {
               internalType: "contract IERC20Metadata",
               name: "",
               type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "xeenuxTokenDecimals",
+          outputs: [
+            {
+              internalType: "uint8",
+              name: "",
+              type: "uint8",
             },
           ],
           stateMutability: "view",

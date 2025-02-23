@@ -154,7 +154,7 @@ export function usePendingROI(_userId: bigint) {
     return useScaffoldReadContract({
         contractName: xeenuxContractInfo.name,
         functionName: "getPendingRoi",
-        // args: [_userId],
+        args: [_userId],
     });
 }
 export function usePendingBinary(_userId: bigint) {
@@ -162,7 +162,7 @@ export function usePendingBinary(_userId: bigint) {
     return useScaffoldReadContract({
         contractName: xeenuxContractInfo.name,
         functionName: "getPendingBinaryIncome",
-        // args: [_userId],
+        args: [_userId],
     });
 }
 
