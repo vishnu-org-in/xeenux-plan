@@ -217,17 +217,17 @@ export function MainContent() {
                             )}{" "}
                             {tokenInfo?.symbol})
                         </span>
-                        <button
+                        {/* <button
                             className="py-1 px-2 text-sm rounded-[5px] bg-purple-500 flex justify-center items-center hover:!border-purple-500/50"
                             onClick={claimROI}
                         >
                             Claim
-                        </button>
+                        </button> */}
                     </div>
                 }
                 content={<UserIncomes _type={2} />}
             />
-            {/* <MainContentSection
+            <MainContentSection
                 title={
                     <div className="flex items-center w-full flex-1 gap-2">
                         <span>Binary Income</span>
@@ -240,20 +240,20 @@ export function MainContent() {
                             )}{" "}
                             {tokenInfo?.symbol})
                         </span>
-                        <button
+                        {/* <button
                             className="py-1 px-2 text-sm rounded-[5px] bg-purple-500 flex justify-center items-center hover:!border-purple-500/50"
                             onClick={claimBinaryIncome}
                         >
                             Claim
-                        </button>
+                        </button> */}
                     </div>
                 }
                 content={<UserIncomes _type={5} />}
-            /> */}
-            <MainContentSection
+            />
+            {/* <MainContentSection
                 title={"Binary Income"}
                 content={<UserIncomes _type={5} />}
-            />
+            /> */}
 
             <MainContentSection
                 title="Level Income"

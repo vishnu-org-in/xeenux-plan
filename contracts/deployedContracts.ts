@@ -3,6 +3,3213 @@
  * You should not edit it manually or your changes might be overwritten.
  */
 const deployedContracts = {
+  5611: {
+    USDT: {
+      address: "0x92F9C462a0Ff75862bD7EB0ad9Ae7566f56020Ce",
+      abi: [
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "name_",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "symbol_",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "totalSupply_",
+              type: "uint256",
+            },
+            {
+              internalType: "uint8",
+              name: "_d",
+              type: "uint8",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "owner",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "value",
+              type: "uint256",
+            },
+          ],
+          name: "Approval",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "sender",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "value",
+              type: "uint256",
+            },
+          ],
+          name: "Burn",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "previousOwner",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "OwnershipTransferred",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "from",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "to",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "value",
+              type: "uint256",
+            },
+          ],
+          name: "Transfer",
+          type: "event",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "owner",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+          ],
+          name: "allowance",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "approve",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+          ],
+          name: "balanceOf",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_value",
+              type: "uint256",
+            },
+          ],
+          name: "burn",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "decimals",
+          outputs: [
+            {
+              internalType: "uint8",
+              name: "",
+              type: "uint8",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "subtractedValue",
+              type: "uint256",
+            },
+          ],
+          name: "decreaseAllowance",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getOwner",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "addedValue",
+              type: "uint256",
+            },
+          ],
+          name: "increaseAllowance",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "name",
+          outputs: [
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "renounceOwnership",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "symbol",
+          outputs: [
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "totalSupply",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "recipient",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "transfer",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "sender",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "recipient",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "transferFrom",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "transferOwnership",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+    XEE: {
+      address: "0xa41cD34b859Bf008ccaeeab84C2e9dB905C84CBa",
+      abi: [
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "name_",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "symbol_",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "totalSupply_",
+              type: "uint256",
+            },
+            {
+              internalType: "uint8",
+              name: "_d",
+              type: "uint8",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "owner",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "value",
+              type: "uint256",
+            },
+          ],
+          name: "Approval",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "sender",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "value",
+              type: "uint256",
+            },
+          ],
+          name: "Burn",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "previousOwner",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "OwnershipTransferred",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "from",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "to",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "value",
+              type: "uint256",
+            },
+          ],
+          name: "Transfer",
+          type: "event",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "owner",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+          ],
+          name: "allowance",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "approve",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+          ],
+          name: "balanceOf",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_value",
+              type: "uint256",
+            },
+          ],
+          name: "burn",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "decimals",
+          outputs: [
+            {
+              internalType: "uint8",
+              name: "",
+              type: "uint8",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "subtractedValue",
+              type: "uint256",
+            },
+          ],
+          name: "decreaseAllowance",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getOwner",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "addedValue",
+              type: "uint256",
+            },
+          ],
+          name: "increaseAllowance",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "name",
+          outputs: [
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "renounceOwnership",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "symbol",
+          outputs: [
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "totalSupply",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "recipient",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "transfer",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "sender",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "recipient",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "transferFrom",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "transferOwnership",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+    XeenuxInvestment: {
+      address: "0x7b3841F474c69293a240B8039e57d62a2A2e6dBD",
+      abi: [
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_liq",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "_fee",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "_xeenux",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "_usdt",
+              type: "address",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          inputs: [],
+          name: "AccessControlBadConfirmation",
+          type: "error",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+            {
+              internalType: "bytes32",
+              name: "neededRole",
+              type: "bytes32",
+            },
+          ],
+          name: "AccessControlUnauthorizedAccount",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "ReentrancyGuardReentrantCall",
+          type: "error",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
+            },
+            {
+              indexed: true,
+              internalType: "bytes32",
+              name: "previousAdminRole",
+              type: "bytes32",
+            },
+            {
+              indexed: true,
+              internalType: "bytes32",
+              name: "newAdminRole",
+              type: "bytes32",
+            },
+          ],
+          name: "RoleAdminChanged",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "sender",
+              type: "address",
+            },
+          ],
+          name: "RoleGranted",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "sender",
+              type: "address",
+            },
+          ],
+          name: "RoleRevoked",
+          type: "event",
+        },
+        {
+          inputs: [],
+          name: "ADMIN_ROLE",
+          outputs: [
+            {
+              internalType: "bytes32",
+              name: "",
+              type: "bytes32",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "DEFAULT_ADMIN_ROLE",
+          outputs: [
+            {
+              internalType: "bytes32",
+              name: "",
+              type: "bytes32",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "amt",
+              type: "uint256",
+            },
+          ],
+          name: "USDTtoXEENUX",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "activity",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "mode",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "level",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "timestamp",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "autoPoolFee",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "autoPoolMaxMembers",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "binaryIncomeLastDist",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "amt",
+              type: "uint256",
+            },
+          ],
+          name: "burnXeenux",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_user",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "_ref",
+              type: "uint256",
+            },
+            {
+              internalType: "uint8",
+              name: "_package",
+              type: "uint8",
+            },
+            {
+              internalType: "uint8",
+              name: "_position",
+              type: "uint8",
+            },
+            {
+              internalType: "string",
+              name: "_name",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "_email",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "_phone",
+              type: "string",
+            },
+          ],
+          name: "buy",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_token",
+              type: "address",
+            },
+          ],
+          name: "changeXeenuxAddress",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "claimBinaryIncome",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "claimRoi",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "token",
+              type: "address",
+            },
+          ],
+          name: "claimStuckTokens",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "defaultRefer",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "distributeBinaryIncome",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "distributeROI",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "distributeWeeklyReward",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_userId",
+              type: "uint256",
+            },
+          ],
+          name: "getAllLevelDetails",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "level",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "userCount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "totalAmount",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.LevelDetail[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_userId",
+              type: "uint256",
+            },
+            {
+              internalType: "uint8",
+              name: "_mode",
+              type: "uint8",
+            },
+            {
+              internalType: "uint256",
+              name: "_page",
+              type: "uint256",
+            },
+          ],
+          name: "getFilteredActivities",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "mode",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "level",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "timestamp",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.Activity[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getIncomeDistData",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "allIncomeDistTime",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "weeklyRewardDistTime",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "binaryIncomeLastDist",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "roiIncomeLastDist",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "weeklyRewardLastDist",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.IncomeDistData",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_userId",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "_level",
+              type: "uint256",
+            },
+          ],
+          name: "getLevelDetails",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "userId",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amountEarned",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "userDeposit",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "userEmail",
+                  type: "string",
+                },
+                {
+                  internalType: "address",
+                  name: "userAddress",
+                  type: "address",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.UserLevelDetail[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint8",
+              name: "_index",
+              type: "uint8",
+            },
+          ],
+          name: "getPackagePrice",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "usdt",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "xee",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.PackagePrice",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_id",
+              type: "uint256",
+            },
+          ],
+          name: "getPendingBinaryIncome",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_id",
+              type: "uint256",
+            },
+          ],
+          name: "getPendingRoi",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
+            },
+          ],
+          name: "getRoleAdmin",
+          outputs: [
+            {
+              internalType: "bytes32",
+              name: "",
+              type: "bytes32",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getTokenInfo",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "totalSupply",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint8",
+                  name: "decimals",
+                  type: "uint8",
+                },
+                {
+                  internalType: "address",
+                  name: "tokenAddress",
+                  type: "address",
+                },
+                {
+                  internalType: "string",
+                  name: "symbol",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.TokenData",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_id",
+              type: "uint256",
+            },
+          ],
+          name: "getUserActivitiesLength",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_userId",
+              type: "uint256",
+            },
+          ],
+          name: "getUserBinaryTree",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "leftCount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "rightCount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "leftVolume",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "rightVolume",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "leftCarryForward",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "rightCarryForward",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "leftChildId",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "rightChildId",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.BinaryNode",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_id",
+              type: "uint256",
+            },
+          ],
+          name: "getUserClaims",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "roiIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "levelIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "autopoolIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "rewardIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "binaryIncome",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.UserClaim",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_user",
+              type: "address",
+            },
+          ],
+          name: "getUserDetail",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "address",
+                  name: "acct",
+                  type: "address",
+                },
+                {
+                  internalType: "uint32",
+                  name: "refCount",
+                  type: "uint32",
+                },
+                {
+                  internalType: "uint8",
+                  name: "rank",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "position",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "lastRankSaved",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint256",
+                  name: "ref",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "roiIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "levelIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "autopoolIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "rewardIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "binaryIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "totalWithdraw",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "registeredAt",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "purchaseWallet",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastROIDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastBinaryDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastRewardDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "email",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "phone",
+                  type: "string",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.User",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_address",
+              type: "address",
+            },
+          ],
+          name: "getUserInfo",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "address",
+                  name: "acct",
+                  type: "address",
+                },
+                {
+                  internalType: "uint32",
+                  name: "refCount",
+                  type: "uint32",
+                },
+                {
+                  internalType: "uint8",
+                  name: "rank",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "position",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "lastRankSaved",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint256",
+                  name: "ref",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "roiIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "levelIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "autopoolIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "rewardIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "binaryIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "totalWithdraw",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "registeredAt",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "purchaseWallet",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastROIDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastBinaryDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastRewardDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "email",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "phone",
+                  type: "string",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.User",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_id",
+              type: "uint256",
+            },
+          ],
+          name: "getUserInfo",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "address",
+                  name: "acct",
+                  type: "address",
+                },
+                {
+                  internalType: "uint32",
+                  name: "refCount",
+                  type: "uint32",
+                },
+                {
+                  internalType: "uint8",
+                  name: "rank",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "position",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "lastRankSaved",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint256",
+                  name: "ref",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "roiIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "levelIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "autopoolIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "rewardIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "binaryIncome",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "totalWithdraw",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "registeredAt",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "purchaseWallet",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastROIDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastBinaryDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "lastRewardDistributed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "email",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "phone",
+                  type: "string",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.User",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "user",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "_level",
+              type: "uint256",
+            },
+          ],
+          name: "getUserLevelRefs",
+          outputs: [
+            {
+              internalType: "uint256[]",
+              name: "",
+              type: "uint256[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "userId",
+              type: "uint256",
+            },
+          ],
+          name: "getUserPackages",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "package",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "ceilingLimit",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "earned",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "timestamp",
+                  type: "uint256",
+                },
+                {
+                  internalType: "bool",
+                  name: "isActive",
+                  type: "bool",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.UserPackageInfo[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_userId",
+              type: "uint256",
+            },
+          ],
+          name: "getUserTeamStats",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "directTeam",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "totalTeam",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "directBusiness",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "totalBusiness",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "leftBusiness",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "rightBusiness",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.TeamStats",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_id",
+              type: "uint256",
+            },
+          ],
+          name: "getUserVolumes",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "selfVolume",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "directVolume",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "leftVolume",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "rightVolume",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "levelIncome",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.UserVolume",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "globalUsers",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
+            },
+            {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+          ],
+          name: "grantRole",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
+            },
+            {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+          ],
+          name: "hasRole",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          name: "id",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_addr",
+              type: "address",
+            },
+          ],
+          name: "isAdmin",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "lastBurnTimestamp",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "levelIncomeFee",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "liqHolder",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "nextPrice",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "packages",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "price",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
+            },
+            {
+              internalType: "address",
+              name: "callerConfirmation",
+              type: "address",
+            },
+          ],
+          name: "renounceRole",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
+            },
+            {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+          ],
+          name: "revokeRole",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "rewardUsers",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "roiIncomeLastDist",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_fee",
+              type: "uint256",
+            },
+          ],
+          name: "setBinaryFee",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_level",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "_fee",
+              type: "uint256",
+            },
+          ],
+          name: "setLevelFee",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_level",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "_fee",
+              type: "uint256",
+            },
+          ],
+          name: "setPackageFee",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_level",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "_fee",
+              type: "uint256",
+            },
+          ],
+          name: "setPoolFee",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_newRate",
+              type: "uint256",
+            },
+          ],
+          name: "setSwapBurnRate",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_fee",
+              type: "uint256",
+            },
+          ],
+          name: "setSwapFee",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes4",
+              name: "interfaceId",
+              type: "bytes4",
+            },
+          ],
+          name: "supportsInterface",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "swapBurnRate",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "swapFee",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "swapPrice",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "swapUSDTLiquidity",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "amt",
+              type: "uint256",
+            },
+          ],
+          name: "swapUSDTToXeenux",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "swapXeenuxLiquidity",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "amt",
+              type: "uint256",
+            },
+          ],
+          name: "swapXeenuxToUSDT",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "teams",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "totalTurnover",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "totalUsers",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "usdtToken",
+          outputs: [
+            {
+              internalType: "contract IERC20Metadata",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "usdtTokenDecimals",
+          outputs: [
+            {
+              internalType: "uint8",
+              name: "",
+              type: "uint8",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "userActivities",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "userBinaryTree",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "leftChildId",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "rightChildId",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "userPackages",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "package",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "ceilingLimit",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "earned",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "timestamp",
+              type: "uint256",
+            },
+            {
+              internalType: "bool",
+              name: "isActive",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "usersBinary",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "leftVolume",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "rightVolume",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "leftCarryForward",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "rightCarryForward",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "usersClaim",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "roiIncome",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "levelIncome",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "autopoolIncome",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "rewardIncome",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "binaryIncome",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "usersInfo",
+          outputs: [
+            {
+              internalType: "address",
+              name: "acct",
+              type: "address",
+            },
+            {
+              internalType: "uint32",
+              name: "refCount",
+              type: "uint32",
+            },
+            {
+              internalType: "uint8",
+              name: "rank",
+              type: "uint8",
+            },
+            {
+              internalType: "uint8",
+              name: "position",
+              type: "uint8",
+            },
+            {
+              internalType: "uint8",
+              name: "lastRankSaved",
+              type: "uint8",
+            },
+            {
+              internalType: "uint256",
+              name: "ref",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "roiIncome",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "levelIncome",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "autopoolIncome",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "rewardIncome",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "binaryIncome",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "totalWithdraw",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "registeredAt",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "purchaseWallet",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "lastROIDistributed",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "lastBinaryDistributed",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "lastRewardDistributed",
+              type: "uint256",
+            },
+            {
+              internalType: "string",
+              name: "name",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "email",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "phone",
+              type: "string",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "usersOldBinary",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "leftVolume",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "rightVolume",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "leftCarryForward",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "rightCarryForward",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "usersRefRankTotal",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "usersVolume",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "selfVolume",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "directVolume",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "leftVolume",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "rightVolume",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "levelIncome",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "weeklyRewardLastDist",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "weeklyTurnover",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "withdraw",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "xeenuxBurnt",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "xeenuxToBeBurned",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "xeenuxToken",
+          outputs: [
+            {
+              internalType: "contract IERC20Metadata",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "xeenuxTokenDecimals",
+          outputs: [
+            {
+              internalType: "uint8",
+              name: "",
+              type: "uint8",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {
+        DEFAULT_ADMIN_ROLE: "@openzeppelin/contracts/access/AccessControl.sol",
+        getRoleAdmin: "@openzeppelin/contracts/access/AccessControl.sol",
+        grantRole: "@openzeppelin/contracts/access/AccessControl.sol",
+        hasRole: "@openzeppelin/contracts/access/AccessControl.sol",
+        renounceRole: "@openzeppelin/contracts/access/AccessControl.sol",
+        revokeRole: "@openzeppelin/contracts/access/AccessControl.sol",
+        supportsInterface: "@openzeppelin/contracts/access/AccessControl.sol",
+      },
+    },
+  },
   31337: {
     USDT: {
       address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
@@ -789,7 +3996,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0xC32609C91d6B6b51D48f2611308FEf121B02041f",
+      address: "0x0165878A594ca255338adfa4d48449f69242Eb8F",
       abi: [
         {
           inputs: [

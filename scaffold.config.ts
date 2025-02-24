@@ -17,7 +17,7 @@ const getSupportedNetworks = () => {
         case "mainnet":
             return [chains.opBNB];
         case "testnet":
-            return [chains.bscTestnet];
+            return [chains.opBNBTestnet];
         case "local":
             return [chains.hardhat];
         default:
