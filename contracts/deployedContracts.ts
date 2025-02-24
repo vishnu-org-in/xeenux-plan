@@ -789,7 +789,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0xB1756Fe6A026B98cA55C884416a3d0CFD4BB72A5",
+      address: "0x723C2D9A865C46109d4e2DBDceA9Ba181a45Bd06",
       abi: [
         {
           inputs: [
@@ -2435,6 +2435,19 @@ const deployedContracts = {
             },
           ],
           stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bool",
+              name: "_allow",
+              type: "bool",
+            },
+          ],
+          name: "setAllowROIRoll",
+          outputs: [],
+          stateMutability: "nonpayable",
           type: "function",
         },
         {
