@@ -240,12 +240,12 @@ export function MainContent() {
                             )}{" "}
                             {tokenInfo?.symbol})
                         </span>
-                        <button
+                        {/* <button
                             className="py-1 px-2 text-sm rounded-[5px] bg-purple-500 flex justify-center items-center hover:!border-purple-500/50"
                             onClick={claimBinaryIncome}
                         >
                             Claim
-                        </button>
+                        </button> */}
                     </div>
                 }
                 content={<UserIncomes _type={5} />}
