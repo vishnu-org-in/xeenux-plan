@@ -789,7 +789,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0x7b3841F474c69293a240B8039e57d62a2A2e6dBD",
+      address: "0xB1756Fe6A026B98cA55C884416a3d0CFD4BB72A5",
       abi: [
         {
           inputs: [
@@ -3996,7 +3996,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+      address: "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
       abi: [
         {
           inputs: [
@@ -4043,6 +4043,11 @@ const deployedContracts = {
             },
           ],
           name: "AccessControlUnauthorizedAccount",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "ReentrancyGuardReentrantCall",
           type: "error",
         },
         {
