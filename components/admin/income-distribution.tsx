@@ -80,18 +80,18 @@ export function IncomeDistribution() {
     }, [incomeDistData]);
     return (
         <>
-            {/* <IncomeCard
-        name="ROI"
-        distributeAction={handleDistributeROI}
-        isLoading={isLoading}
-        targetDate={
-          new Date(
-            (Number(incomeDistData?.roiIncomeLastDist || 0) +
-              Number(incomeDistData?.allIncomeDistTime || 0)) *
-              1000,
-          )
-        }
-      /> */}
+            <IncomeCard
+                name="ROI"
+                distributeAction={handleDistributeROI}
+                isLoading={isLoading}
+                targetDate={
+                    new Date(
+                        (Number(incomeDistData?.roiIncomeLastDist || 0) +
+                            Number(incomeDistData?.allIncomeDistTime || 0)) *
+                            1000,
+                    )
+                }
+            />
             <IncomeCard
                 name="Weekly Reward"
                 distributeAction={handleDistributeWeeklyReward}
