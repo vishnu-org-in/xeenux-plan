@@ -789,7 +789,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0x723C2D9A865C46109d4e2DBDceA9Ba181a45Bd06",
+      address: "0x88BcBe4fF6C81311Cfb7B28deE3d515beE2619Ba",
       abi: [
         {
           inputs: [
@@ -2440,19 +2440,6 @@ const deployedContracts = {
         {
           inputs: [
             {
-              internalType: "bool",
-              name: "_allow",
-              type: "bool",
-            },
-          ],
-          name: "setAllowROIRoll",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
               internalType: "uint256",
               name: "_fee",
               type: "uint256",
@@ -4009,7 +3996,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
+      address: "0x70e0bA845a1A0F2DA3359C97E0285013525FFC49",
       abi: [
         {
           inputs: [
