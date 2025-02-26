@@ -242,7 +242,7 @@ export function Hero({}: HeroProps) {
                                     {tokenInfo?.symbol}
                                 </p>
                                 <p className="text-[10px] md:text-xs text-gray-400">
-                                    Purchase Wallet
+                                    Expense Wallet
                                 </p>
                             </div>
                         </div>

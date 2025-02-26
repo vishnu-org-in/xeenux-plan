@@ -789,7 +789,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0xcF4596093A152BccbBbA8f5d8dcCe08f8e23a83E",
+      address: "0x6f41E1c9670DdFCD245971c676473f044972316E",
       abi: [
         {
           inputs: [
@@ -2491,9 +2491,9 @@ const deployedContracts = {
         {
           inputs: [
             {
-              internalType: "uint256",
+              internalType: "uint8",
               name: "_fee",
-              type: "uint256",
+              type: "uint8",
             },
           ],
           name: "setBinaryFee",
@@ -4047,7 +4047,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0x9A676e781A523b5d0C0e43731313A708CB607508",
+      address: "0x0E801D84Fa97b50751Dbf25036d067dCf18858bF",
       abi: [
         {
           inputs: [
@@ -5749,9 +5749,9 @@ const deployedContracts = {
         {
           inputs: [
             {
-              internalType: "uint256",
+              internalType: "uint8",
               name: "_fee",
-              type: "uint256",
+              type: "uint8",
             },
           ],
           name: "setBinaryFee",
