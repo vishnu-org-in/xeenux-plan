@@ -80,7 +80,7 @@ export function IncomeDistribution() {
     }, [incomeDistData]);
     return (
         <>
-            <IncomeCard
+            {/* <IncomeCard
                 name="ROI"
                 distributeAction={handleDistributeROI}
                 isLoading={isLoading}
@@ -91,7 +91,7 @@ export function IncomeDistribution() {
                             1000,
                     )
                 }
-            />
+            /> */}
             <IncomeCard
                 name="Weekly Reward"
                 distributeAction={handleDistributeWeeklyReward}

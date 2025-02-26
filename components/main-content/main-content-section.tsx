@@ -8,6 +8,8 @@ interface MainContentSectionProps {
     title: ReactNode | string;
     content: ReactNode;
     id?: string;
+    triggerId?: string;
+
     className?: string;
 }
 
@@ -15,6 +17,7 @@ export function MainContentSection({
     title,
     content,
     id = "",
+    triggerId = "",
     className = "",
 }: MainContentSectionProps) {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -24,6 +27,7 @@ export function MainContentSection({
             <div
                 className="w-full p-4 flex items-center justify-between text-left"
                 onClick={() => setIsExpanded(!isExpanded)}
+                id={triggerId}
             >
                 {typeof title === "string" ? (
                     <h3 className="text-sm font-semibold text-gray-200">

@@ -789,7 +789,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0x88BcBe4fF6C81311Cfb7B28deE3d515beE2619Ba",
+      address: "0xcF4596093A152BccbBbA8f5d8dcCe08f8e23a83E",
       abi: [
         {
           inputs: [
@@ -1487,6 +1487,57 @@ const deployedContracts = {
                 },
               ],
               internalType: "struct XeenuxInvestment.TokenData",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_userId",
+              type: "uint256",
+            },
+          ],
+          name: "getUserActivePackage",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "package",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "ceilingLimit",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "earned",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "timestamp",
+                  type: "uint256",
+                },
+                {
+                  internalType: "bool",
+                  name: "isActive",
+                  type: "bool",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.UserPackageInfo",
               name: "",
               type: "tuple",
             },
@@ -3996,7 +4047,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     XeenuxInvestment: {
-      address: "0x70e0bA845a1A0F2DA3359C97E0285013525FFC49",
+      address: "0x9A676e781A523b5d0C0e43731313A708CB607508",
       abi: [
         {
           inputs: [
@@ -4694,6 +4745,57 @@ const deployedContracts = {
                 },
               ],
               internalType: "struct XeenuxInvestment.TokenData",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_userId",
+              type: "uint256",
+            },
+          ],
+          name: "getUserActivePackage",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "package",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "ceilingLimit",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "earned",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "timestamp",
+                  type: "uint256",
+                },
+                {
+                  internalType: "bool",
+                  name: "isActive",
+                  type: "bool",
+                },
+              ],
+              internalType: "struct XeenuxInvestment.UserPackageInfo",
               name: "",
               type: "tuple",
             },
