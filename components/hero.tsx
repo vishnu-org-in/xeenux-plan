@@ -62,7 +62,7 @@ export function Hero({}: HeroProps) {
     };
 
     return (
-        <div className="flex flex-col mb-6 space-y-4 w-full overflow-x-auto">
+        <div className="flex flex-col mb-6 space-y-4 w-full overflow-x-hidden">
             <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#4c51ff]/20 rounded-full blur-3xl" />
             <div className="flex md:flex-row flex-col justify-between md:items-center">
                 <h1 className="text-2xl">Dashboard</h1>
@@ -166,19 +166,19 @@ export function Hero({}: HeroProps) {
                             <div className="text-center mt-5 border border-purple-500/30 py-3 px-5 rounded-xl w-full">
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-400">Name:</span>
-                                    <span>{userInfo?.name}</span>
+                                    <span className="text-[10px] md:text-base">{userInfo?.name}</span>
                                 </div>
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-400">
                                         Email ID:
                                     </span>
-                                    <span>{userInfo?.email}</span>
+                                    <span className="text-[10px] md:text-base">{userInfo?.email}</span>
                                 </div>
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-400">
                                         Wallet Address
                                     </span>
-                                    <span>
+                                    <span className="text-[10px] md:text-base">
                                         {shortenAddress(userInfo?.acct || "")}
                                     </span>
                                 </div>
@@ -188,7 +188,7 @@ export function Hero({}: HeroProps) {
                 </div>
 
                 <div className="md:border-b md:border-r-0 border-b border-gray-400/50 w-full p-4  lg:p-4">
-                    <div className="flex md:flex-col items-start  lg:items-center gap-4">
+                    <div className="flex flex-col items-start  lg:items-center gap-4">
                         <div className="flex w-full flex-colx glass-card items-center gap-4 px-4 py-2 rounded-xl">
                             <div className="lg:p-2 p-2 rounded-full bg-blue-500/20">
                                 <DollarSign className="lg:w-3 lg:h-3 w-2 h-2 text-blue-500" />
@@ -286,7 +286,7 @@ export function Hero({}: HeroProps) {
                 </div>
 
                 <div className="md:border-b md:border-r-0 border-b border-gray-400/50 w-full p-4  lg:p-4">
-                    <div className="flex md:flex-col items-start  lg:items-center gap-4">
+                    <div className="flex flex-col items-start  lg:items-center gap-4">
                         <div className="flex w-full flex-colx glass-card items-center gap-4 px-4 py-2 rounded-xl">
                             <div className="lg:p-2 p-2 rounded-full bg-blue-500/20">
                                 <DollarSign className="lg:w-3 lg:h-3 w-2 h-2 text-blue-500" />
