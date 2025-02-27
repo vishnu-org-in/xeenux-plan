@@ -214,7 +214,7 @@ export function MainContent() {
                             {bigIntToString(
                                 pendingROI || 0n,
                                 tokenInfo?.decimals,
-                                5,
+                                0,
                             )}{" "}
                             {tokenInfo?.symbol})
                         </span>
@@ -237,7 +237,7 @@ export function MainContent() {
                             {bigIntToString(
                                 pendingBinary || 0n,
                                 tokenInfo?.decimals,
-                                5,
+                                0,
                             )}{" "}
                             {tokenInfo?.symbol})
                         </span>

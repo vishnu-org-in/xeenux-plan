@@ -116,7 +116,7 @@ export function Hero({}: HeroProps) {
                     </div>
                     <div className="w-full">
                         <p className="text-sm lg:text-sm font-bold">
-                            {bigIntToString(nextPrice || BigInt(0), 18, 5)}
+                            {bigIntToString(nextPrice || BigInt(0), 18, 0)}
                         </p>
                         <p className="text-[10px] md:text-xs text-gray-400">
                             Upcoming Xeenux price
@@ -198,7 +198,7 @@ export function Hero({}: HeroProps) {
                                     {bigIntToString(
                                         userTotalEarnings,
                                         tokenInfo?.decimals || 0,
-                                        5,
+                                        0,
                                     )}{" "}
                                     {tokenInfo?.symbol}
                                 </p>
@@ -219,7 +219,7 @@ export function Hero({}: HeroProps) {
                                     {bigIntToString(
                                         userVolumes?.selfVolume || BigInt(0),
                                         tokenInfo?.decimals || 0,
-                                        5,
+                                        0,
                                     )}{" "}
                                     {tokenInfo?.symbol}
                                 </p>
@@ -237,7 +237,7 @@ export function Hero({}: HeroProps) {
                                     {bigIntToString(
                                         userInfo?.purchaseWallet || BigInt(0),
                                         tokenInfo?.decimals || 0,
-                                        5,
+                                        0,
                                     )}{" "}
                                     {tokenInfo?.symbol}
                                 </p>
@@ -257,7 +257,7 @@ export function Hero({}: HeroProps) {
                                 {bigIntToString(
                                     userAvailableWithdraw,
                                     tokenInfo?.decimals || 0,
-                                    5,
+                                    0,
                                 )}{" "}
                                 {tokenInfo?.symbol}
                             </span>
@@ -296,7 +296,7 @@ export function Hero({}: HeroProps) {
                                     {bigIntToString(
                                         userAvailableWithdraw,
                                         tokenInfo?.decimals || 0,
-                                        5,
+                                        0,
                                     )}{" "}
                                     {tokenInfo?.symbol}
                                 </p>
@@ -315,7 +315,7 @@ export function Hero({}: HeroProps) {
                                     {bigIntToString(
                                         userInfo?.totalWithdraw || BigInt(0),
                                         tokenInfo?.decimals || 0,
-                                        5,
+                                        0,
                                     )}{" "}
                                     {tokenInfo?.symbol}
                                 </p>

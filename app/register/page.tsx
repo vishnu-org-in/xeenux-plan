@@ -28,7 +28,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { SwapSection } from "@/components/swap-section";
-import { b2f, strictEmailRegex } from "@/lib/utils";
+import { b2f, bigIntToString, strictEmailRegex } from "@/lib/utils";
 import { useContractData } from "@/context/contract";
 import { useUser } from "@/context/user";
 import { useRegister } from "@/hooks/use-register";
@@ -378,15 +378,12 @@ export default function RegisterPage() {
                                 </span>
                                 <span>
                                     {Number(packagePrice.xee) > 0
-                                        ? Number(
-                                              b2f(
-                                                  packagePrice.xee,
-                                                  Number(
-                                                      tokenInfo?.decimals || 0,
-                                                  ),
-                                              ),
+                                        ? bigIntToString(
+                                              packagePrice.xee,
+                                              tokenInfo?.decimals || 0,
+                                              0,
                                           )
-                                        : 0.0}{" "}
+                                        : "0"}{" "}
                                     {tokenInfo?.symbol}{" "}
                                 </span>
                             </div>

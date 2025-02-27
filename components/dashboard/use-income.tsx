@@ -79,6 +79,7 @@ export const UserIncomes: React.FC<{
                                     {bigIntToString(
                                         withdrawal.amount,
                                         tokenInfo?.decimals,
+                                        0,
                                     )}{" "}
                                     {tokenInfo?.symbol}
                                 </td>
