@@ -10,7 +10,7 @@ export default function DashboardPage() {
   return (
     // <div className="min-h-screen overflow-x-hidden">
     //   <Header />
-      <div className="container mx-auto py-8">
+      <div className="container mx-auto px-4 py-8 overflow-x-hidden">
         <Hero />
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="w-full lg:w-[30%]">

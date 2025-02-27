@@ -1,6 +1,6 @@
 'use client'
 
-import { Github, Twitter } from 'lucide-react'
+import { Facebook, Github, Instagram, Twitter, Send } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -31,17 +31,17 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-4 xeenux-glow">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/dashboard" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/user/dashboard" className="text-gray-400 hover:text-white transition-colors">
                   Dashboard
                 </Link>
               </li>
               <li>
-                <Link href="/packages" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="#" className="text-gray-400 hover:text-white transition-colors">
                   Packages
                 </Link>
               </li>
               <li>
-                <Link href="/rewards" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="#" className="text-gray-400 hover:text-white transition-colors">
                   Rewards
                 </Link>
               </li>
@@ -51,25 +51,47 @@ export function Footer() {
           {/* Social Links */}
           <div>
             <h3 className="text-lg font-semibold mb-4 xeenux-glow">Connect With Us</h3>
-            <div className="flex space-x-4">
-              <a href="https://twitter.com/xeenux" 
-                 className="glass-button p-2 hover:text-purple-400"
-                 target="_blank"
-                 rel="noopener noreferrer">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="https://discord.gg/xeenux" 
-                 className="glass-button p-2 hover:text-purple-400"
-                 target="_blank"
-                 rel="noopener noreferrer">
-                {/* <Discord className="w-5 h-5" /> */}
-              </a>
-              <a href="https://github.com/xeenux" 
-                 className="glass-button p-2 hover:text-purple-400"
-                 target="_blank"
-                 rel="noopener noreferrer">
-                <Github className="w-5 h-5" />
-              </a>
+            <div className="grid grid-cols-2 space-y-3">
+            <Link
+                href="https://x.com/xeenuxinfo?t=eYwfJYDsNOxdjbhqzvKX-A&s=09"
+                className=" rounded-full  transition-colors flex gap-2 items-center justify-start"
+              >
+
+                <Image src={require("../public/x.svg")} alt="refer" className="w-5 h-5 bg-white rounded-full p-1" />
+                <p className=" text-muted/80">X</p>
+              </Link>
+              <Link
+                href="https://t.me/xeenux"
+                className=" rounded-full  transition-colors flex gap-2 items-center justify-start"
+              >
+                <Send className="w-5 h-5 text-blue-400" />
+                <p className="text-sm text-muted/80">Telegram</p>
+              </Link>
+              <Link
+                href="https://discord.gg/YyVBcdNK"
+                className=" rounded-full  transition-colors flex gap-2 items-center justify-start"
+              >
+                <Image src={require("../public/images/discord.svg")} alt="refer" className="w-5 h-5" />
+                <p className="text-sm text-muted/80">Discord</p>
+
+              </Link>
+             
+              <Link
+                href="https://www.facebook.com/profile.php?id=61569716469203&mibextid=ZbWKwL"
+                className=" rounded-full  transition-colors flex gap-2 items-center justify-start"
+              >
+                <Facebook className="w-5 h-5 text-blue-500" />
+                <p className="text-sm text-muted/80">Facebook</p>
+
+              </Link>
+              <Link
+                href="https://www.instagram.com/xeenuxinfo?igsh=MWx3amRwMDRibDVvOQ=="
+                className=" rounded-full  transition-colors flex gap-2 items-center justify-start"
+              >
+                <Instagram className="w-5 h-5 text-red-400 " />
+                <p className="text-sm text-muted/80">Instagram</p>
+
+              </Link>
             </div>
           </div>
         </div>
