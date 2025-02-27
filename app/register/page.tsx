@@ -35,6 +35,7 @@ import { useRegister } from "@/hooks/use-register";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import { notification } from "@/utils/scaffold-eth";
+import { addOpBNBNetwork } from "@/lib/utils/add-network";
 
 // Country codes data
 const countryCodes = [
@@ -445,6 +446,17 @@ export default function RegisterPage() {
                                 {status === "reading-price" && (
                                     <>Processing...</>
                                 )}
+                            </Button>
+
+                            <Button
+                                type={isConnected ? "submit" : "button"}
+                                className={`bg-transparent border border-purple-500 rounded-xl h-12 font-semibold w-48 hover:bg-[#4834d480]`}
+                                disabled={status !== "idle"}
+                                onClick={addOpBNBNetwork}
+                            >
+
+                                Add opBNB Network
+                                
                             </Button>
                         </div>
                     </form>
