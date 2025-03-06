@@ -33,9 +33,9 @@ import { useContractData } from "@/context/contract";
 import { useUser } from "@/context/user";
 import { useRegister } from "@/hooks/use-register";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
-import { useAccount } from "wagmi";
+import { useAccount, useWalletClient } from "wagmi";
 import { notification } from "@/utils/scaffold-eth";
-import { addOpBNBNetwork } from "@/lib/utils/add-network";
+import { addOpBNBNetwork, addSupportedNetwork } from "@/lib/utils/add-network";
 
 // Country codes data
 const countryCodes = [
@@ -136,7 +136,17 @@ export default function RegisterPage() {
         package: 0,
         ref: 0,
     });
+    const { data: walletClient } = useWalletClient();
+    const { chain } = useAccount();
     const { openConnectModal } = useConnectModal();
+    const handleAddSupportedNetwork = async () => {
+        console.log({ chain, walletClient });
+        if (!isConnected) {
+            openConnectModal?.();
+            return;
+        }
+        await addSupportedNetwork(walletClient);
+    };
     useEffect(() => {
         // Access window object only after component mounts
         const params = new URLSearchParams(window.location.search);
@@ -446,14 +456,12 @@ export default function RegisterPage() {
                             </Button>
 
                             <Button
-                                type={isConnected ? "submit" : "button"}
+                                type={"button"}
                                 className={`bg-transparent border border-purple-500 rounded-xl h-12 font-semibold w-48 hover:bg-[#4834d480]`}
                                 disabled={status !== "idle"}
-                                onClick={addOpBNBNetwork}
+                                onClick={handleAddSupportedNetwork}
                             >
-
                                 Add opBNB Network
-                                
                             </Button>
                         </div>
                     </form>

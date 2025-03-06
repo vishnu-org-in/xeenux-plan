@@ -166,13 +166,17 @@ export function Hero({}: HeroProps) {
                             <div className="text-center mt-5 border border-purple-500/30 py-3 px-5 rounded-xl w-full">
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-400">Name:</span>
-                                    <span className="text-[10px] md:text-base">{userInfo?.name}</span>
+                                    <span className="text-[10px] md:text-base">
+                                        {userInfo?.name}
+                                    </span>
                                 </div>
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-400">
                                         Email ID:
                                     </span>
-                                    <span className="text-[10px] md:text-base">{userInfo?.email}</span>
+                                    <span className="text-[10px] md:text-base">
+                                        {userInfo?.email}
+                                    </span>
                                 </div>
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-400">
@@ -195,8 +199,22 @@ export function Hero({}: HeroProps) {
                             </div>
                             <div className="w-full">
                                 <p className="text-sm lg:text-sm font-bold">
-                                    {bigIntToString(
+                                    {/* {bigIntToString(
                                         userTotalEarnings,
+                                        tokenInfo?.decimals || 0,
+                                        0,
+                                    )}{" "}
+                                    {tokenInfo?.symbol} */}
+                                    {bigIntToString(
+                                        (userInfo?.roiIncome || BigInt(0)) +
+                                            (userInfo?.binaryIncome ||
+                                                BigInt(0)) +
+                                            (userInfo?.rewardIncome ||
+                                                BigInt(0)) +
+                                            (userInfo?.levelIncome ||
+                                                BigInt(0)) +
+                                            (userInfo?.autopoolIncome ||
+                                                BigInt(0)),
                                         tokenInfo?.decimals || 0,
                                         0,
                                     )}{" "}
