@@ -35,6 +35,9 @@ export function SwapDetails({
         <span className="text-gray-400">Price Impact</span>
         <span className="text-gray-200">{priceImpact}</span>
       </div>
+      <div className="flex justify-between ">
+      1% swap fees will be applicable on every exchange
+      </div>
     </div>
   );
 }
