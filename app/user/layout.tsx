@@ -5,5 +5,5 @@ export default function UserLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <ProtectedRoute>{children}</ProtectedRoute>;
+  return <ProtectedRoute>{children}</ProtectedRoute>; 
 }

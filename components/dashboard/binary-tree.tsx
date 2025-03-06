@@ -40,7 +40,7 @@ const BinaryTreeNode = ({
     if (userId === BigInt(0)) {
         return (
             <div className="flex flex-col items-center gap-4 py-4 w-full justify-center">
-                <Card className="py-4 border border-gray-600 bg-gray-800 shadow-md flex flex-col items-center gap-1 min-w-48 rounded-xl">
+                <Card className="py-4 border border-gray-600 bg-gray-800 shadow-md flex flex-col items-center gap-1 min-w-32 md:min-w-48 rounded-xl">
                     <h2 className="text-xs text-gray-400 font-semibold flex items-center gap-2">
                         <User size={12} /> Empty Node
                     </h2>
@@ -88,7 +88,7 @@ const BinaryTreeNode = ({
     return (
         <div className=" flex flex-col items-center gap-0 py-4 w-full justify-center rounded-full">
             {/* User Card */}
-            <Card className="relative py-4 border border-purple-500 bg-primary-900 shadow-md flex flex-col items-center gap-1 min-w-48 rounded-xl">
+            <Card className="relative py-4 border border-purple-500 bg-primary-900 shadow-md flex flex-col items-center gap-1 min-w-32 md:min-w-48 rounded-xl">
                 {/* <Image src="/images/xeenux.png" alt="Icon" width={30} height={30} /> */}
                 {isRoot && userId !== userInfo?.id && (
                     <button
