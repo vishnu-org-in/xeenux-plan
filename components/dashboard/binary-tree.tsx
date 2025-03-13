@@ -44,7 +44,7 @@ const BinaryTreeNode = ({
                     <h2 className="text-xs text-gray-400 font-semibold flex items-center gap-2">
                         <User size={12} /> Empty Node
                     </h2>
-                    <h3 className="text-sm text-gray-500 font-bold">No User</h3>
+                    {/* <h3 className="text-sm text-gray-500 font-bold">No User</h3> */}
                     <button className="text-xs text-purple-200 mt-2 flex items-center gap-1 rounded px-2 py-1">
                         EMPTY
                         <ChevronDown className="w-4 h-4 transition-transform" />

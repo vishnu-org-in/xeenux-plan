@@ -180,10 +180,18 @@ export function Hero({}: HeroProps) {
                                 </div>
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-400">
-                                        Wallet Address
+                                        Wallet Address:
                                     </span>
                                     <span className="text-[10px] md:text-base">
                                         {shortenAddress(userInfo?.acct || "")}
+                                    </span>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-gray-400">
+                                        Upline ID:
+                                    </span>
+                                    <span className="text-[10px] md:text-base text-primary underline">
+                                        {Number(userInfo?.ref) || "Null"}
                                     </span>
                                 </div>
                             </div>

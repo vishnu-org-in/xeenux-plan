@@ -358,6 +358,12 @@ export default function RegisterPage() {
                                         </div>
                                     </RadioGroup>
                                 </div>
+                                <div>
+                                    <span className="">UPLINE ID: </span>
+                                    <span className="text-primary underline">
+                                        {formData.ref}
+                                    </span>
+                                </div>
                             </div>
                             <SelectPackage
                                 value={formData.package}
